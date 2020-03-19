@@ -1,0 +1,1024 @@
+{
+    "info": {
+        "name": "json_api",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Device",
+            "description": "",
+            "item": [
+                {
+                    "name": "Device List",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/devices\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/devices",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Add Device",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"devices\",\n        \"attributes\": {\n            \"name\": \"string\",\n            \"createdAt\": \"datetime_immutable\",\n            \"updatedAt\": \"datetime\"\n        },\n        \"relationships\": {\n            \"room\": {\n                \"data\": {\n                    \"type\": \"rooms\",\n                    \"id\": \"1\"\n                }\n            },\n            \"measurements\": {\n                \"data\": [\n                    {\n                        \"type\": \"measurements\",\n                        \"id\": \"1\"\n                    }\n                ]\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/devices\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/devices",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Edit Device",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"devices\",\n        \"id\": \"1\",\n        \"attributes\": {\n            \"name\": \"string\",\n            \"createdAt\": \"datetime_immutable\",\n            \"updatedAt\": \"datetime\"\n        },\n        \"relationships\": {\n            \"room\": {\n                \"data\": {\n                    \"type\": \"rooms\",\n                    \"id\": \"1\"\n                }\n            },\n            \"measurements\": {\n                \"data\": [\n                    {\n                        \"type\": \"measurements\",\n                        \"id\": \"1\"\n                    }\n                ]\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/devices\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/devices",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Delete Device",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/devices\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/devices",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Device",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/devices\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/devices",
+                                "1"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Expense",
+            "description": "",
+            "item": [
+                {
+                    "name": "Expense List",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/expenses\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/expenses",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Add Expense",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"expenses\",\n        \"attributes\": {\n            \"name\": \"string\",\n            \"price\": \"float\",\n            \"dueDate\": \"datetime_immutable\",\n            \"createdAt\": \"datetime_immutable\",\n            \"updatedAt\": \"datetime\",\n            \"isResolved\": \"boolean\"\n        },\n        \"relationships\": {\n            \"recurringPayment\": {\n                \"data\": {\n                    \"type\": \"recurring_payments\",\n                    \"id\": \"1\"\n                }\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/expenses\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/expenses",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Edit Expense",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"expenses\",\n        \"id\": \"1\",\n        \"attributes\": {\n            \"name\": \"string\",\n            \"price\": \"float\",\n            \"dueDate\": \"datetime_immutable\",\n            \"createdAt\": \"datetime_immutable\",\n            \"updatedAt\": \"datetime\",\n            \"isResolved\": \"boolean\"\n        },\n        \"relationships\": {\n            \"recurringPayment\": {\n                \"data\": {\n                    \"type\": \"recurring_payments\",\n                    \"id\": \"1\"\n                }\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/expenses\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/expenses",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Delete Expense",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/expenses\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/expenses",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Expense",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/expenses\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/expenses",
+                                "1"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "GroceryItem",
+            "description": "",
+            "item": [
+                {
+                    "name": "GroceryItem List",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/grocery\/items\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/grocery\/items",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Add GroceryItem",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"grocery_items\",\n        \"attributes\": {\n            \"name\": \"string\",\n            \"description\": \"string\",\n            \"price\": \"float\",\n            \"createdAt\": \"datetime_immutable\",\n            \"updatedAt\": \"datetime\"\n        },\n        \"relationships\": {\n            \"shoppingListItems\": {\n                \"data\": [\n                    {\n                        \"type\": \"shopping_list_items\",\n                        \"id\": \"1\"\n                    }\n                ]\n            },\n            \"image\": {\n                \"data\": {\n                    \"type\": \"images\",\n                    \"id\": \"1\"\n                }\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/grocery\/items\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/grocery\/items",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Edit GroceryItem",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"grocery_items\",\n        \"id\": \"1\",\n        \"attributes\": {\n            \"name\": \"string\",\n            \"description\": \"string\",\n            \"price\": \"float\",\n            \"createdAt\": \"datetime_immutable\",\n            \"updatedAt\": \"datetime\"\n        },\n        \"relationships\": {\n            \"shoppingListItems\": {\n                \"data\": [\n                    {\n                        \"type\": \"shopping_list_items\",\n                        \"id\": \"1\"\n                    }\n                ]\n            },\n            \"image\": {\n                \"data\": {\n                    \"type\": \"images\",\n                    \"id\": \"1\"\n                }\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/grocery\/items\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/grocery\/items",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Delete GroceryItem",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/grocery\/items\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/grocery\/items",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get GroceryItem",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/grocery\/items\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/grocery\/items",
+                                "1"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Image",
+            "description": "",
+            "item": [
+                {
+                    "name": "Image List",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/images\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/images",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Add Image",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"images\",\n        \"attributes\": {\n            \"filename\": \"string\",\n            \"uuid\": \"string\",\n            \"createdAt\": \"datetime_immutable\",\n            \"updatedAt\": \"datetime\"\n        },\n        \"relationships\": {\n            \"groceryItem\": {\n                \"data\": {\n                    \"type\": \"grocery_items\",\n                    \"id\": \"1\"\n                }\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/images\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/images",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Edit Image",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"images\",\n        \"id\": \"1\",\n        \"attributes\": {\n            \"filename\": \"string\",\n            \"uuid\": \"string\",\n            \"createdAt\": \"datetime_immutable\",\n            \"updatedAt\": \"datetime\"\n        },\n        \"relationships\": {\n            \"groceryItem\": {\n                \"data\": {\n                    \"type\": \"grocery_items\",\n                    \"id\": \"1\"\n                }\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/images\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/images",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Delete Image",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/images\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/images",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Image",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/images\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/images",
+                                "1"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Measurement",
+            "description": "",
+            "item": [
+                {
+                    "name": "Measurement List",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/measurements\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/measurements",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Add Measurement",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"measurements\",\n        \"attributes\": {\n            \"name\": \"string\",\n            \"value\": \"integer\",\n            \"type\": \"string\",\n            \"createdAt\": \"datetime_immutable\",\n            \"updatedAt\": \"datetime\"\n        },\n        \"relationships\": {\n            \"device\": {\n                \"data\": {\n                    \"type\": \"devices\",\n                    \"id\": \"1\"\n                }\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/measurements\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/measurements",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Edit Measurement",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"measurements\",\n        \"id\": \"1\",\n        \"attributes\": {\n            \"name\": \"string\",\n            \"value\": \"integer\",\n            \"type\": \"string\",\n            \"createdAt\": \"datetime_immutable\",\n            \"updatedAt\": \"datetime\"\n        },\n        \"relationships\": {\n            \"device\": {\n                \"data\": {\n                    \"type\": \"devices\",\n                    \"id\": \"1\"\n                }\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/measurements\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/measurements",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Delete Measurement",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/measurements\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/measurements",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Measurement",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/measurements\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/measurements",
+                                "1"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "RecurringPayment",
+            "description": "",
+            "item": [
+                {
+                    "name": "RecurringPayment List",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/recurring\/payments\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/recurring\/payments",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Add RecurringPayment",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"recurring_payments\",\n        \"attributes\": {\n            \"name\": \"string\",\n            \"price\": \"float\",\n            \"createdAt\": \"datetime_immutable\",\n            \"updatedAt\": \"datetime\"\n        },\n        \"relationships\": {\n            \"expenses\": {\n                \"data\": [\n                    {\n                        \"type\": \"expenses\",\n                        \"id\": \"1\"\n                    }\n                ]\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/recurring\/payments\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/recurring\/payments",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Edit RecurringPayment",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"recurring_payments\",\n        \"id\": \"1\",\n        \"attributes\": {\n            \"name\": \"string\",\n            \"price\": \"float\",\n            \"createdAt\": \"datetime_immutable\",\n            \"updatedAt\": \"datetime\"\n        },\n        \"relationships\": {\n            \"expenses\": {\n                \"data\": [\n                    {\n                        \"type\": \"expenses\",\n                        \"id\": \"1\"\n                    }\n                ]\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/recurring\/payments\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/recurring\/payments",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Delete RecurringPayment",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/recurring\/payments\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/recurring\/payments",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get RecurringPayment",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/recurring\/payments\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/recurring\/payments",
+                                "1"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Room",
+            "description": "",
+            "item": [
+                {
+                    "name": "Room List",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/rooms\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/rooms",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Add Room",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"rooms\",\n        \"attributes\": {\n            \"name\": \"string\",\n            \"createdAt\": \"datetime_immutable\",\n            \"updatedAt\": \"datetime\"\n        },\n        \"relationships\": {\n            \"devices\": {\n                \"data\": [\n                    {\n                        \"type\": \"devices\",\n                        \"id\": \"1\"\n                    }\n                ]\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/rooms\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/rooms",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Edit Room",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"rooms\",\n        \"id\": \"1\",\n        \"attributes\": {\n            \"name\": \"string\",\n            \"createdAt\": \"datetime_immutable\",\n            \"updatedAt\": \"datetime\"\n        },\n        \"relationships\": {\n            \"devices\": {\n                \"data\": [\n                    {\n                        \"type\": \"devices\",\n                        \"id\": \"1\"\n                    }\n                ]\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/rooms\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/rooms",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Delete Room",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/rooms\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/rooms",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Room",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/rooms\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/rooms",
+                                "1"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "ShoppingListItem",
+            "description": "",
+            "item": [
+                {
+                    "name": "ShoppingListItem List",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/shopping\/list\/items\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/shopping\/list\/items",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Add ShoppingListItem",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"shopping_list_items\",\n        \"attributes\": {\n            \"quantity\": \"integer\",\n            \"createdAt\": \"datetime_immutable\",\n            \"updatedAt\": \"datetime\",\n            \"isDeleted\": \"boolean\"\n        },\n        \"relationships\": {\n            \"groceryItem\": {\n                \"data\": {\n                    \"type\": \"grocery_items\",\n                    \"id\": \"1\"\n                }\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/shopping\/list\/items\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/shopping\/list\/items",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Edit ShoppingListItem",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"shopping_list_items\",\n        \"id\": \"1\",\n        \"attributes\": {\n            \"quantity\": \"integer\",\n            \"createdAt\": \"datetime_immutable\",\n            \"updatedAt\": \"datetime\",\n            \"isDeleted\": \"boolean\"\n        },\n        \"relationships\": {\n            \"groceryItem\": {\n                \"data\": {\n                    \"type\": \"grocery_items\",\n                    \"id\": \"1\"\n                }\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/shopping\/list\/items\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/shopping\/list\/items",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Delete ShoppingListItem",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/shopping\/list\/items\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/shopping\/list\/items",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get ShoppingListItem",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/shopping\/list\/items\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/shopping\/list\/items",
+                                "1"
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

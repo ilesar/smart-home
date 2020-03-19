@@ -1,0 +1,2629 @@
+swagger: '2.0'
+info:
+  description: ''
+  version: 1.0.0
+  title: 'Swagger JsonApi'
+  termsOfService: 'http://swagger.io/terms/'
+  license:
+    name: 'Apache 2.0'
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: localhost
+schemes:
+  - https
+  - http
+paths:
+  /devices/:
+    get:
+      tags:
+        - devices
+      summary: 'Device List'
+      operationId: listDevice
+      produces:
+        - application/json
+      parameters: {  }
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: '/devices?page[number]=1&page[size]=100'
+                  first:
+                    type: string
+                    example: '/devices?page[number]=1&page[size]=100'
+                  last:
+                    type: string
+                    example: '/devices?page[number]=1&page[size]=100'
+                  prev:
+                    type: string
+                    example: 'null'
+                  next:
+                    type: string
+                    example: 'null'
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                      example: 12
+                    type:
+                      type: string
+                      example: devices
+                    attributes:
+                      $ref: '#/definitions/Device'
+                    relationships:
+                      properties:
+                        room:
+                          $ref: '#/definitions/Room_relation'
+                        measurements:
+                          type: array
+                          items:
+                            $ref: '#/definitions/Measurement_relation'
+    post:
+      tags:
+        - devices
+      summary: 'Add Device'
+      operationId: addDevice
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: addDevice
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: devices
+                  attributes:
+                    $ref: '#/definitions/Device'
+                  relationships:
+                    properties:
+                      room:
+                        $ref: '#/definitions/Room_relation'
+                      measurements:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Measurement_relation'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /devices
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: devices
+                  attributes:
+                    $ref: '#/definitions/Device'
+                  relationships:
+                    properties:
+                      room:
+                        $ref: '#/definitions/Room_relation'
+                      measurements:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Measurement_relation'
+  '/devices/{Device_id}':
+    patch:
+      tags:
+        - devices
+      summary: 'Edit Device'
+      operationId: editDevice
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: editDevice
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: devices
+                  attributes:
+                    $ref: '#/definitions/Device'
+                  relationships:
+                    properties:
+                      room:
+                        $ref: '#/definitions/Room_relation'
+                      measurements:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Measurement_relation'
+        -
+          name: Device_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /devices
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: devices
+                  attributes:
+                    $ref: '#/definitions/Device'
+                  relationships:
+                    properties:
+                      room:
+                        $ref: '#/definitions/Room_relation'
+                      measurements:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Measurement_relation'
+    delete:
+      tags:
+        - devices
+      summary: 'Delete Device'
+      operationId: deleteDevice
+      produces:
+        - application/json
+      parameters:
+        -
+          name: Device_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /devices
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: devices
+                  attributes:
+                    $ref: '#/definitions/Device'
+                  relationships:
+                    properties:
+                      room:
+                        $ref: '#/definitions/Room_relation'
+                      measurements:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Measurement_relation'
+    get:
+      tags:
+        - devices
+      summary: 'Get Device'
+      operationId: viewDevice
+      produces:
+        - application/json
+      parameters:
+        -
+          name: Device_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /devices
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: devices
+                  attributes:
+                    $ref: '#/definitions/Device'
+                  relationships:
+                    properties:
+                      room:
+                        $ref: '#/definitions/Room_relation'
+                      measurements:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Measurement_relation'
+  /expenses/:
+    get:
+      tags:
+        - expenses
+      summary: 'Expense List'
+      operationId: listExpense
+      produces:
+        - application/json
+      parameters: {  }
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: '/expenses?page[number]=1&page[size]=100'
+                  first:
+                    type: string
+                    example: '/expenses?page[number]=1&page[size]=100'
+                  last:
+                    type: string
+                    example: '/expenses?page[number]=1&page[size]=100'
+                  prev:
+                    type: string
+                    example: 'null'
+                  next:
+                    type: string
+                    example: 'null'
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                      example: 12
+                    type:
+                      type: string
+                      example: expenses
+                    attributes:
+                      $ref: '#/definitions/Expense'
+                    relationships:
+                      properties:
+                        recurringPayment:
+                          $ref: '#/definitions/RecurringPayment_relation'
+    post:
+      tags:
+        - expenses
+      summary: 'Add Expense'
+      operationId: addExpense
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: addExpense
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: expenses
+                  attributes:
+                    $ref: '#/definitions/Expense'
+                  relationships:
+                    properties:
+                      recurringPayment:
+                        $ref: '#/definitions/RecurringPayment_relation'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /expenses
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: expenses
+                  attributes:
+                    $ref: '#/definitions/Expense'
+                  relationships:
+                    properties:
+                      recurringPayment:
+                        $ref: '#/definitions/RecurringPayment_relation'
+  '/expenses/{Expense_id}':
+    patch:
+      tags:
+        - expenses
+      summary: 'Edit Expense'
+      operationId: editExpense
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: editExpense
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: expenses
+                  attributes:
+                    $ref: '#/definitions/Expense'
+                  relationships:
+                    properties:
+                      recurringPayment:
+                        $ref: '#/definitions/RecurringPayment_relation'
+        -
+          name: Expense_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /expenses
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: expenses
+                  attributes:
+                    $ref: '#/definitions/Expense'
+                  relationships:
+                    properties:
+                      recurringPayment:
+                        $ref: '#/definitions/RecurringPayment_relation'
+    delete:
+      tags:
+        - expenses
+      summary: 'Delete Expense'
+      operationId: deleteExpense
+      produces:
+        - application/json
+      parameters:
+        -
+          name: Expense_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /expenses
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: expenses
+                  attributes:
+                    $ref: '#/definitions/Expense'
+                  relationships:
+                    properties:
+                      recurringPayment:
+                        $ref: '#/definitions/RecurringPayment_relation'
+    get:
+      tags:
+        - expenses
+      summary: 'Get Expense'
+      operationId: viewExpense
+      produces:
+        - application/json
+      parameters:
+        -
+          name: Expense_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /expenses
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: expenses
+                  attributes:
+                    $ref: '#/definitions/Expense'
+                  relationships:
+                    properties:
+                      recurringPayment:
+                        $ref: '#/definitions/RecurringPayment_relation'
+  /grocery/items/:
+    get:
+      tags:
+        - grocery_items
+      summary: 'GroceryItem List'
+      operationId: listGroceryItem
+      produces:
+        - application/json
+      parameters: {  }
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: '/grocery/items?page[number]=1&page[size]=100'
+                  first:
+                    type: string
+                    example: '/grocery/items?page[number]=1&page[size]=100'
+                  last:
+                    type: string
+                    example: '/grocery/items?page[number]=1&page[size]=100'
+                  prev:
+                    type: string
+                    example: 'null'
+                  next:
+                    type: string
+                    example: 'null'
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                      example: 12
+                    type:
+                      type: string
+                      example: grocery_items
+                    attributes:
+                      $ref: '#/definitions/GroceryItem'
+                    relationships:
+                      properties:
+                        shoppingListItems:
+                          type: array
+                          items:
+                            $ref: '#/definitions/ShoppingListItem_relation'
+                        image:
+                          $ref: '#/definitions/Image_relation'
+    post:
+      tags:
+        - grocery_items
+      summary: 'Add GroceryItem'
+      operationId: addGroceryItem
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: addGroceryItem
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: grocery_items
+                  attributes:
+                    $ref: '#/definitions/GroceryItem'
+                  relationships:
+                    properties:
+                      shoppingListItems:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ShoppingListItem_relation'
+                      image:
+                        $ref: '#/definitions/Image_relation'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /grocery/items
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: grocery_items
+                  attributes:
+                    $ref: '#/definitions/GroceryItem'
+                  relationships:
+                    properties:
+                      shoppingListItems:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ShoppingListItem_relation'
+                      image:
+                        $ref: '#/definitions/Image_relation'
+  '/grocery/items/{GroceryItem_id}':
+    patch:
+      tags:
+        - grocery_items
+      summary: 'Edit GroceryItem'
+      operationId: editGroceryItem
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: editGroceryItem
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: grocery_items
+                  attributes:
+                    $ref: '#/definitions/GroceryItem'
+                  relationships:
+                    properties:
+                      shoppingListItems:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ShoppingListItem_relation'
+                      image:
+                        $ref: '#/definitions/Image_relation'
+        -
+          name: GroceryItem_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /grocery/items
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: grocery_items
+                  attributes:
+                    $ref: '#/definitions/GroceryItem'
+                  relationships:
+                    properties:
+                      shoppingListItems:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ShoppingListItem_relation'
+                      image:
+                        $ref: '#/definitions/Image_relation'
+    delete:
+      tags:
+        - grocery_items
+      summary: 'Delete GroceryItem'
+      operationId: deleteGroceryItem
+      produces:
+        - application/json
+      parameters:
+        -
+          name: GroceryItem_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /grocery/items
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: grocery_items
+                  attributes:
+                    $ref: '#/definitions/GroceryItem'
+                  relationships:
+                    properties:
+                      shoppingListItems:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ShoppingListItem_relation'
+                      image:
+                        $ref: '#/definitions/Image_relation'
+    get:
+      tags:
+        - grocery_items
+      summary: 'Get GroceryItem'
+      operationId: viewGroceryItem
+      produces:
+        - application/json
+      parameters:
+        -
+          name: GroceryItem_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /grocery/items
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: grocery_items
+                  attributes:
+                    $ref: '#/definitions/GroceryItem'
+                  relationships:
+                    properties:
+                      shoppingListItems:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ShoppingListItem_relation'
+                      image:
+                        $ref: '#/definitions/Image_relation'
+  /images/:
+    get:
+      tags:
+        - images
+      summary: 'Image List'
+      operationId: listImage
+      produces:
+        - application/json
+      parameters: {  }
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: '/images?page[number]=1&page[size]=100'
+                  first:
+                    type: string
+                    example: '/images?page[number]=1&page[size]=100'
+                  last:
+                    type: string
+                    example: '/images?page[number]=1&page[size]=100'
+                  prev:
+                    type: string
+                    example: 'null'
+                  next:
+                    type: string
+                    example: 'null'
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                      example: 12
+                    type:
+                      type: string
+                      example: images
+                    attributes:
+                      $ref: '#/definitions/Image'
+                    relationships:
+                      properties:
+                        groceryItem:
+                          $ref: '#/definitions/GroceryItem_relation'
+    post:
+      tags:
+        - images
+      summary: 'Add Image'
+      operationId: addImage
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: addImage
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: images
+                  attributes:
+                    $ref: '#/definitions/Image'
+                  relationships:
+                    properties:
+                      groceryItem:
+                        $ref: '#/definitions/GroceryItem_relation'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /images
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: images
+                  attributes:
+                    $ref: '#/definitions/Image'
+                  relationships:
+                    properties:
+                      groceryItem:
+                        $ref: '#/definitions/GroceryItem_relation'
+  '/images/{Image_id}':
+    patch:
+      tags:
+        - images
+      summary: 'Edit Image'
+      operationId: editImage
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: editImage
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: images
+                  attributes:
+                    $ref: '#/definitions/Image'
+                  relationships:
+                    properties:
+                      groceryItem:
+                        $ref: '#/definitions/GroceryItem_relation'
+        -
+          name: Image_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /images
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: images
+                  attributes:
+                    $ref: '#/definitions/Image'
+                  relationships:
+                    properties:
+                      groceryItem:
+                        $ref: '#/definitions/GroceryItem_relation'
+    delete:
+      tags:
+        - images
+      summary: 'Delete Image'
+      operationId: deleteImage
+      produces:
+        - application/json
+      parameters:
+        -
+          name: Image_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /images
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: images
+                  attributes:
+                    $ref: '#/definitions/Image'
+                  relationships:
+                    properties:
+                      groceryItem:
+                        $ref: '#/definitions/GroceryItem_relation'
+    get:
+      tags:
+        - images
+      summary: 'Get Image'
+      operationId: viewImage
+      produces:
+        - application/json
+      parameters:
+        -
+          name: Image_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /images
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: images
+                  attributes:
+                    $ref: '#/definitions/Image'
+                  relationships:
+                    properties:
+                      groceryItem:
+                        $ref: '#/definitions/GroceryItem_relation'
+  /measurements/:
+    get:
+      tags:
+        - measurements
+      summary: 'Measurement List'
+      operationId: listMeasurement
+      produces:
+        - application/json
+      parameters: {  }
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: '/measurements?page[number]=1&page[size]=100'
+                  first:
+                    type: string
+                    example: '/measurements?page[number]=1&page[size]=100'
+                  last:
+                    type: string
+                    example: '/measurements?page[number]=1&page[size]=100'
+                  prev:
+                    type: string
+                    example: 'null'
+                  next:
+                    type: string
+                    example: 'null'
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                      example: 12
+                    type:
+                      type: string
+                      example: measurements
+                    attributes:
+                      $ref: '#/definitions/Measurement'
+                    relationships:
+                      properties:
+                        device:
+                          $ref: '#/definitions/Device_relation'
+    post:
+      tags:
+        - measurements
+      summary: 'Add Measurement'
+      operationId: addMeasurement
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: addMeasurement
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: measurements
+                  attributes:
+                    $ref: '#/definitions/Measurement'
+                  relationships:
+                    properties:
+                      device:
+                        $ref: '#/definitions/Device_relation'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /measurements
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: measurements
+                  attributes:
+                    $ref: '#/definitions/Measurement'
+                  relationships:
+                    properties:
+                      device:
+                        $ref: '#/definitions/Device_relation'
+  '/measurements/{Measurement_id}':
+    patch:
+      tags:
+        - measurements
+      summary: 'Edit Measurement'
+      operationId: editMeasurement
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: editMeasurement
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: measurements
+                  attributes:
+                    $ref: '#/definitions/Measurement'
+                  relationships:
+                    properties:
+                      device:
+                        $ref: '#/definitions/Device_relation'
+        -
+          name: Measurement_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /measurements
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: measurements
+                  attributes:
+                    $ref: '#/definitions/Measurement'
+                  relationships:
+                    properties:
+                      device:
+                        $ref: '#/definitions/Device_relation'
+    delete:
+      tags:
+        - measurements
+      summary: 'Delete Measurement'
+      operationId: deleteMeasurement
+      produces:
+        - application/json
+      parameters:
+        -
+          name: Measurement_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /measurements
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: measurements
+                  attributes:
+                    $ref: '#/definitions/Measurement'
+                  relationships:
+                    properties:
+                      device:
+                        $ref: '#/definitions/Device_relation'
+    get:
+      tags:
+        - measurements
+      summary: 'Get Measurement'
+      operationId: viewMeasurement
+      produces:
+        - application/json
+      parameters:
+        -
+          name: Measurement_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /measurements
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: measurements
+                  attributes:
+                    $ref: '#/definitions/Measurement'
+                  relationships:
+                    properties:
+                      device:
+                        $ref: '#/definitions/Device_relation'
+  /recurring/payments/:
+    get:
+      tags:
+        - recurring_payments
+      summary: 'RecurringPayment List'
+      operationId: listRecurringPayment
+      produces:
+        - application/json
+      parameters: {  }
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: '/recurring/payments?page[number]=1&page[size]=100'
+                  first:
+                    type: string
+                    example: '/recurring/payments?page[number]=1&page[size]=100'
+                  last:
+                    type: string
+                    example: '/recurring/payments?page[number]=1&page[size]=100'
+                  prev:
+                    type: string
+                    example: 'null'
+                  next:
+                    type: string
+                    example: 'null'
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                      example: 12
+                    type:
+                      type: string
+                      example: recurring_payments
+                    attributes:
+                      $ref: '#/definitions/RecurringPayment'
+                    relationships:
+                      properties:
+                        expenses:
+                          type: array
+                          items:
+                            $ref: '#/definitions/Expense_relation'
+    post:
+      tags:
+        - recurring_payments
+      summary: 'Add RecurringPayment'
+      operationId: addRecurringPayment
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: addRecurringPayment
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: recurring_payments
+                  attributes:
+                    $ref: '#/definitions/RecurringPayment'
+                  relationships:
+                    properties:
+                      expenses:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Expense_relation'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /recurring/payments
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: recurring_payments
+                  attributes:
+                    $ref: '#/definitions/RecurringPayment'
+                  relationships:
+                    properties:
+                      expenses:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Expense_relation'
+  '/recurring/payments/{RecurringPayment_id}':
+    patch:
+      tags:
+        - recurring_payments
+      summary: 'Edit RecurringPayment'
+      operationId: editRecurringPayment
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: editRecurringPayment
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: recurring_payments
+                  attributes:
+                    $ref: '#/definitions/RecurringPayment'
+                  relationships:
+                    properties:
+                      expenses:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Expense_relation'
+        -
+          name: RecurringPayment_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /recurring/payments
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: recurring_payments
+                  attributes:
+                    $ref: '#/definitions/RecurringPayment'
+                  relationships:
+                    properties:
+                      expenses:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Expense_relation'
+    delete:
+      tags:
+        - recurring_payments
+      summary: 'Delete RecurringPayment'
+      operationId: deleteRecurringPayment
+      produces:
+        - application/json
+      parameters:
+        -
+          name: RecurringPayment_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /recurring/payments
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: recurring_payments
+                  attributes:
+                    $ref: '#/definitions/RecurringPayment'
+                  relationships:
+                    properties:
+                      expenses:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Expense_relation'
+    get:
+      tags:
+        - recurring_payments
+      summary: 'Get RecurringPayment'
+      operationId: viewRecurringPayment
+      produces:
+        - application/json
+      parameters:
+        -
+          name: RecurringPayment_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /recurring/payments
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: recurring_payments
+                  attributes:
+                    $ref: '#/definitions/RecurringPayment'
+                  relationships:
+                    properties:
+                      expenses:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Expense_relation'
+  /rooms/:
+    get:
+      tags:
+        - rooms
+      summary: 'Room List'
+      operationId: listRoom
+      produces:
+        - application/json
+      parameters: {  }
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: '/rooms?page[number]=1&page[size]=100'
+                  first:
+                    type: string
+                    example: '/rooms?page[number]=1&page[size]=100'
+                  last:
+                    type: string
+                    example: '/rooms?page[number]=1&page[size]=100'
+                  prev:
+                    type: string
+                    example: 'null'
+                  next:
+                    type: string
+                    example: 'null'
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                      example: 12
+                    type:
+                      type: string
+                      example: rooms
+                    attributes:
+                      $ref: '#/definitions/Room'
+                    relationships:
+                      properties:
+                        devices:
+                          type: array
+                          items:
+                            $ref: '#/definitions/Device_relation'
+    post:
+      tags:
+        - rooms
+      summary: 'Add Room'
+      operationId: addRoom
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: addRoom
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: rooms
+                  attributes:
+                    $ref: '#/definitions/Room'
+                  relationships:
+                    properties:
+                      devices:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Device_relation'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /rooms
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: rooms
+                  attributes:
+                    $ref: '#/definitions/Room'
+                  relationships:
+                    properties:
+                      devices:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Device_relation'
+  '/rooms/{Room_id}':
+    patch:
+      tags:
+        - rooms
+      summary: 'Edit Room'
+      operationId: editRoom
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: editRoom
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: rooms
+                  attributes:
+                    $ref: '#/definitions/Room'
+                  relationships:
+                    properties:
+                      devices:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Device_relation'
+        -
+          name: Room_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /rooms
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: rooms
+                  attributes:
+                    $ref: '#/definitions/Room'
+                  relationships:
+                    properties:
+                      devices:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Device_relation'
+    delete:
+      tags:
+        - rooms
+      summary: 'Delete Room'
+      operationId: deleteRoom
+      produces:
+        - application/json
+      parameters:
+        -
+          name: Room_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /rooms
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: rooms
+                  attributes:
+                    $ref: '#/definitions/Room'
+                  relationships:
+                    properties:
+                      devices:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Device_relation'
+    get:
+      tags:
+        - rooms
+      summary: 'Get Room'
+      operationId: viewRoom
+      produces:
+        - application/json
+      parameters:
+        -
+          name: Room_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /rooms
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: rooms
+                  attributes:
+                    $ref: '#/definitions/Room'
+                  relationships:
+                    properties:
+                      devices:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Device_relation'
+  /shopping/list/items/:
+    get:
+      tags:
+        - shopping_list_items
+      summary: 'ShoppingListItem List'
+      operationId: listShoppingListItem
+      produces:
+        - application/json
+      parameters: {  }
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: '/shopping/list/items?page[number]=1&page[size]=100'
+                  first:
+                    type: string
+                    example: '/shopping/list/items?page[number]=1&page[size]=100'
+                  last:
+                    type: string
+                    example: '/shopping/list/items?page[number]=1&page[size]=100'
+                  prev:
+                    type: string
+                    example: 'null'
+                  next:
+                    type: string
+                    example: 'null'
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                      example: 12
+                    type:
+                      type: string
+                      example: shopping_list_items
+                    attributes:
+                      $ref: '#/definitions/ShoppingListItem'
+                    relationships:
+                      properties:
+                        groceryItem:
+                          $ref: '#/definitions/GroceryItem_relation'
+    post:
+      tags:
+        - shopping_list_items
+      summary: 'Add ShoppingListItem'
+      operationId: addShoppingListItem
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: addShoppingListItem
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: shopping_list_items
+                  attributes:
+                    $ref: '#/definitions/ShoppingListItem'
+                  relationships:
+                    properties:
+                      groceryItem:
+                        $ref: '#/definitions/GroceryItem_relation'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /shopping/list/items
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: shopping_list_items
+                  attributes:
+                    $ref: '#/definitions/ShoppingListItem'
+                  relationships:
+                    properties:
+                      groceryItem:
+                        $ref: '#/definitions/GroceryItem_relation'
+  '/shopping/list/items/{ShoppingListItem_id}':
+    patch:
+      tags:
+        - shopping_list_items
+      summary: 'Edit ShoppingListItem'
+      operationId: editShoppingListItem
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: editShoppingListItem
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: shopping_list_items
+                  attributes:
+                    $ref: '#/definitions/ShoppingListItem'
+                  relationships:
+                    properties:
+                      groceryItem:
+                        $ref: '#/definitions/GroceryItem_relation'
+        -
+          name: ShoppingListItem_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /shopping/list/items
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: shopping_list_items
+                  attributes:
+                    $ref: '#/definitions/ShoppingListItem'
+                  relationships:
+                    properties:
+                      groceryItem:
+                        $ref: '#/definitions/GroceryItem_relation'
+    delete:
+      tags:
+        - shopping_list_items
+      summary: 'Delete ShoppingListItem'
+      operationId: deleteShoppingListItem
+      produces:
+        - application/json
+      parameters:
+        -
+          name: ShoppingListItem_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /shopping/list/items
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: shopping_list_items
+                  attributes:
+                    $ref: '#/definitions/ShoppingListItem'
+                  relationships:
+                    properties:
+                      groceryItem:
+                        $ref: '#/definitions/GroceryItem_relation'
+    get:
+      tags:
+        - shopping_list_items
+      summary: 'Get ShoppingListItem'
+      operationId: viewShoppingListItem
+      produces:
+        - application/json
+      parameters:
+        -
+          name: ShoppingListItem_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /shopping/list/items
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: shopping_list_items
+                  attributes:
+                    $ref: '#/definitions/ShoppingListItem'
+                  relationships:
+                    properties:
+                      groceryItem:
+                        $ref: '#/definitions/GroceryItem_relation'
+securityDefinitions:
+  api_key:
+    type: apiKey
+    name: api_key
+    in: header
+definitions:
+  Device:
+    type: object
+    properties:
+      name:
+        type: string
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+  Room_relation:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - rooms
+        example: rooms
+      id:
+        type: integer
+        minimum: 1
+        description: 'Room ID'
+        example: 69
+  Measurement_relation:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - measurements
+        example: measurements
+      id:
+        type: integer
+        minimum: 1
+        description: 'Measurement ID'
+        example: 76
+  Expense:
+    type: object
+    properties:
+      name:
+        type: string
+      price:
+        type: number
+        format: float
+      dueDate:
+        type: string
+        format: date-time
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+      isResolved:
+        type: boolean
+  RecurringPayment_relation:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - recurring_payments
+        example: recurring_payments
+      id:
+        type: integer
+        minimum: 1
+        description: 'RecurringPayment ID'
+        example: 69
+  GroceryItem:
+    type: object
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      price:
+        type: number
+        format: float
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+  ShoppingListItem_relation:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - shopping_list_items
+        example: shopping_list_items
+      id:
+        type: integer
+        minimum: 1
+        description: 'ShoppingListItem ID'
+        example: 69
+  Image_relation:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - images
+        example: images
+      id:
+        type: integer
+        minimum: 1
+        description: 'Image ID'
+        example: 76
+  Image:
+    type: object
+    properties:
+      filename:
+        type: string
+      uuid:
+        type: string
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+  Measurement:
+    type: object
+    properties:
+      name:
+        type: string
+      value:
+        type: integer
+        format: int32
+      type:
+        type: string
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+  RecurringPayment:
+    type: object
+    properties:
+      name:
+        type: string
+      price:
+        type: number
+        format: float
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+  Expense_relation:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - expenses
+        example: expenses
+      id:
+        type: integer
+        minimum: 1
+        description: 'Expense ID'
+        example: 69
+  Room:
+    type: object
+    properties:
+      name:
+        type: string
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+  Device_relation:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - devices
+        example: devices
+      id:
+        type: integer
+        minimum: 1
+        description: 'Device ID'
+        example: 69
+  ShoppingListItem:
+    type: object
+    properties:
+      quantity:
+        type: integer
+        format: int32
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+      isDeleted:
+        type: boolean
+  GroceryItem_relation:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - grocery_items
+        example: grocery_items
+      id:
+        type: integer
+        minimum: 1
+        description: 'GroceryItem ID'
+        example: 69
+externalDocs:
+  description: 'Find out more about Swagger'
+  url: 'http://swagger.io'

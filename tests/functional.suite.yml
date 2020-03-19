@@ -1,0 +1,24 @@
+actor: FunctionalTester
+coverage:
+    enabled: true
+    include:
+        - src/Controller/*
+modules:
+    enabled:
+        - Symfony:
+              part: Services
+        - Asserts
+        - REST
+        - Doctrine2:
+              - depends: Symfony
+              - cleanup: true
+        - \App\Tests\Helper\Functional
+    config:
+        Symfony:
+            app_path: 'src'
+            environment: 'test'
+        REST:
+            depends: Symfony
+            url: '/api'
+        Doctrine2:
+            depends: Symfony
