@@ -23,7 +23,17 @@ class MqttService
     {
         $this->mqttClient = $mqttClient;
 
+        pcntl_signal(SIGINT, function (int $signal, $info) use ($mqtt) {
+            $mqtt->interrupt();
+        });
+
         $this->mqttClient->connect();
+    }
+
+    public function run()
+    {
+        $this->mqttClient->loop(true);
+        $this->mqttClient->close();
     }
 
     public function addTopicListener(string $topic, Closure $callback)
