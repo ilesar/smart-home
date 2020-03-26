@@ -33,3 +33,11 @@ services:
             $host: '%mqtt.server.host%'
             $port: '%mqtt.server.port%'
             $clientId: '%mqtt.client.id%'
+
+    App\Grocery\GroceryService:
+        arguments:
+            $warehouses:
+                - '@App\Grocery\Model\Warehouse\KonzumWarehouse'
+                - '@App\Grocery\Model\Warehouse\LidlWarehouse'
+                - '@App\Grocery\Model\Warehouse\PlodineWarehouse'
+                - '@App\Grocery\Model\Warehouse\KauflandWarehouse'

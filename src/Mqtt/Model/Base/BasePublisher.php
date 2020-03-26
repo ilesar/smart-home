@@ -42,8 +42,8 @@ class BasePublisher
         $this->mqttService = $mqttService;
     }
 
-    public function publishMessage(string $topic, string $message): void
+    public function publishMessage(string $message): void
     {
-        $this->getMqttService()->sendMessage($topic, $message);
+        $this->mqttService->sendMessage($message);
     }
 }

@@ -189,6 +189,9 @@
     "php-mqtt/client": {
         "version": "v0.1.2"
     },
+    "php-webdriver/webdriver": {
+        "version": "1.8.2"
+    },
     "phpdocumentor/reflection-common": {
         "version": "2.0.0"
     },
@@ -314,6 +317,9 @@
             "config/packages/sensio_framework_extra.yaml"
         ]
     },
+    "symfony/browser-kit": {
+        "version": "v5.0.5"
+    },
     "symfony/cache": {
         "version": "v5.0.5"
     },
@@ -343,6 +349,9 @@
         "version": "v5.0.5"
     },
     "symfony/doctrine-bridge": {
+        "version": "v5.0.5"
+    },
+    "symfony/dom-crawler": {
         "version": "v5.0.5"
     },
     "symfony/dotenv": {
@@ -395,6 +404,12 @@
             "src/Kernel.php"
         ]
     },
+    "symfony/http-client": {
+        "version": "v5.0.5"
+    },
+    "symfony/http-client-contracts": {
+        "version": "v2.0.1"
+    },
     "symfony/http-foundation": {
         "version": "v5.0.5"
     },
@@ -418,6 +433,9 @@
     },
     "symfony/orm-pack": {
         "version": "v1.0.8"
+    },
+    "symfony/panther": {
+        "version": "v0.7.1"
     },
     "symfony/polyfill-intl-idn": {
         "version": "v1.14.0"
