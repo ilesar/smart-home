@@ -43,7 +43,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"data\": {\n        \"type\": \"devices\",\n        \"attributes\": {\n            \"name\": \"string\",\n            \"createdAt\": \"datetime_immutable\",\n            \"updatedAt\": \"datetime\"\n        },\n        \"relationships\": {\n            \"room\": {\n                \"data\": {\n                    \"type\": \"rooms\",\n                    \"id\": \"1\"\n                }\n            },\n            \"measurements\": {\n                \"data\": [\n                    {\n                        \"type\": \"measurements\",\n                        \"id\": \"1\"\n                    }\n                ]\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"data\": {\n        \"type\": \"devices\",\n        \"attributes\": {\n            \"name\": \"string\",\n            \"createdAt\": \"datetime_immutable\",\n            \"updatedAt\": \"datetime\"\n        },\n        \"relationships\": {\n            \"room\": {\n                \"data\": {\n                    \"type\": \"rooms\",\n                    \"id\": \"1\"\n                }\n            },\n            \"measurements\": {\n                \"data\": [\n                    {\n                        \"type\": \"measurements\",\n                        \"id\": \"1\"\n                    }\n                ]\n            },\n            \"configuration\": {\n                \"data\": {\n                    \"type\": \"configurations\",\n                    \"id\": \"1\"\n                }\n            }\n        }\n    }\n}"
                         },
                         "url": {
                             "raw": "{{host}}\/devices\/",
@@ -69,7 +69,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"data\": {\n        \"type\": \"devices\",\n        \"id\": \"1\",\n        \"attributes\": {\n            \"name\": \"string\",\n            \"createdAt\": \"datetime_immutable\",\n            \"updatedAt\": \"datetime\"\n        },\n        \"relationships\": {\n            \"room\": {\n                \"data\": {\n                    \"type\": \"rooms\",\n                    \"id\": \"1\"\n                }\n            },\n            \"measurements\": {\n                \"data\": [\n                    {\n                        \"type\": \"measurements\",\n                        \"id\": \"1\"\n                    }\n                ]\n            }\n        }\n    }\n}"
+                            "raw": "{\n    \"data\": {\n        \"type\": \"devices\",\n        \"id\": \"1\",\n        \"attributes\": {\n            \"name\": \"string\",\n            \"createdAt\": \"datetime_immutable\",\n            \"updatedAt\": \"datetime\"\n        },\n        \"relationships\": {\n            \"room\": {\n                \"data\": {\n                    \"type\": \"rooms\",\n                    \"id\": \"1\"\n                }\n            },\n            \"measurements\": {\n                \"data\": [\n                    {\n                        \"type\": \"measurements\",\n                        \"id\": \"1\"\n                    }\n                ]\n            },\n            \"configuration\": {\n                \"data\": {\n                    \"type\": \"configurations\",\n                    \"id\": \"1\"\n                }\n            }\n        }\n    }\n}"
                         },
                         "url": {
                             "raw": "{{host}}\/devices\/1",
@@ -1013,6 +1013,387 @@
                             ],
                             "path": [
                                 "\/shopping\/list\/items",
+                                "1"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "ConfigurationItem",
+            "description": "",
+            "item": [
+                {
+                    "name": "ConfigurationItem List",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/configuration\/items\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/configuration\/items",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Add ConfigurationItem",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"configuration_items\",\n        \"attributes\": {\n            \"name\": \"string\",\n            \"description\": \"string\",\n            \"inputType\": \"string\",\n            \"outputFormat\": \"string\"\n        },\n        \"relationships\": {\n            \"configuration\": {\n                \"data\": {\n                    \"type\": \"configurations\",\n                    \"id\": \"1\"\n                }\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/configuration\/items\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/configuration\/items",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Edit ConfigurationItem",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"configuration_items\",\n        \"id\": \"1\",\n        \"attributes\": {\n            \"name\": \"string\",\n            \"description\": \"string\",\n            \"inputType\": \"string\",\n            \"outputFormat\": \"string\"\n        },\n        \"relationships\": {\n            \"configuration\": {\n                \"data\": {\n                    \"type\": \"configurations\",\n                    \"id\": \"1\"\n                }\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/configuration\/items\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/configuration\/items",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Delete ConfigurationItem",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/configuration\/items\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/configuration\/items",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get ConfigurationItem",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/configuration\/items\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/configuration\/items",
+                                "1"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Configuration",
+            "description": "",
+            "item": [
+                {
+                    "name": "Configuration List",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/configurations\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/configurations",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Add Configuration",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"configurations\",\n        \"attributes\": [],\n        \"relationships\": {\n            \"items\": {\n                \"data\": [\n                    {\n                        \"type\": \"configuration_items\",\n                        \"id\": \"1\"\n                    }\n                ]\n            },\n            \"templates\": {\n                \"data\": [\n                    {\n                        \"type\": \"configuration_templates\",\n                        \"id\": \"1\"\n                    }\n                ]\n            },\n            \"device\": {\n                \"data\": {\n                    \"type\": \"devices\",\n                    \"id\": \"1\"\n                }\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/configurations\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/configurations",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Edit Configuration",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"configurations\",\n        \"id\": \"1\",\n        \"attributes\": [],\n        \"relationships\": {\n            \"items\": {\n                \"data\": [\n                    {\n                        \"type\": \"configuration_items\",\n                        \"id\": \"1\"\n                    }\n                ]\n            },\n            \"templates\": {\n                \"data\": [\n                    {\n                        \"type\": \"configuration_templates\",\n                        \"id\": \"1\"\n                    }\n                ]\n            },\n            \"device\": {\n                \"data\": {\n                    \"type\": \"devices\",\n                    \"id\": \"1\"\n                }\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/configurations\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/configurations",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Delete Configuration",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/configurations\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/configurations",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Configuration",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/configurations\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/configurations",
+                                "1"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "ConfigurationTemplate",
+            "description": "",
+            "item": [
+                {
+                    "name": "ConfigurationTemplate List",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/configuration\/templates\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/configuration\/templates",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Add ConfigurationTemplate",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"configuration_templates\",\n        \"attributes\": [],\n        \"relationships\": {\n            \"configuration\": {\n                \"data\": {\n                    \"type\": \"configurations\",\n                    \"id\": \"1\"\n                }\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/configuration\/templates\/",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/configuration\/templates",
+                                ""
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Edit ConfigurationTemplate",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"data\": {\n        \"type\": \"configuration_templates\",\n        \"id\": \"1\",\n        \"attributes\": [],\n        \"relationships\": {\n            \"configuration\": {\n                \"data\": {\n                    \"type\": \"configurations\",\n                    \"id\": \"1\"\n                }\n            }\n        }\n    }\n}"
+                        },
+                        "url": {
+                            "raw": "{{host}}\/configuration\/templates\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/configuration\/templates",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Delete ConfigurationTemplate",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/configuration\/templates\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/configuration\/templates",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get ConfigurationTemplate",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": "",
+                        "url": {
+                            "raw": "{{host}}\/configuration\/templates\/1",
+                            "host": [
+                                "{{host}}"
+                            ],
+                            "path": [
+                                "\/configuration\/templates",
                                 "1"
                             ]
                         }

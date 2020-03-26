@@ -98,6 +98,16 @@ class DeviceResourceTransformer extends AbstractResource
                     )
                     ->omitDataWhenNotIncluded();
             },
+            'configuration' => function (Device $device) {
+                return ToOneRelationship::create()
+                    ->setDataAsCallable(
+                        function () use ($device) {
+                            return $device->getConfiguration();
+                        },
+                        new ConfigurationResourceTransformer()
+                    )
+                    ->omitDataWhenNotIncluded();
+            },
         ];
     }
 }

@@ -12,322 +12,6 @@ schemes:
   - https
   - http
 paths:
-  /devices/:
-    get:
-      tags:
-        - devices
-      summary: 'Device List'
-      operationId: listDevice
-      produces:
-        - application/json
-      parameters: {  }
-      responses:
-        200:
-          description: 'successful operation'
-          schema:
-            type: object
-            properties:
-              jsonapi:
-                type: object
-                properties:
-                  version:
-                    type: string
-                    example: '1.0'
-              links:
-                type: object
-                properties:
-                  self:
-                    type: string
-                    example: '/devices?page[number]=1&page[size]=100'
-                  first:
-                    type: string
-                    example: '/devices?page[number]=1&page[size]=100'
-                  last:
-                    type: string
-                    example: '/devices?page[number]=1&page[size]=100'
-                  prev:
-                    type: string
-                    example: 'null'
-                  next:
-                    type: string
-                    example: 'null'
-              data:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: integer
-                      format: int64
-                      example: 12
-                    type:
-                      type: string
-                      example: devices
-                    attributes:
-                      $ref: '#/definitions/Device'
-                    relationships:
-                      properties:
-                        room:
-                          $ref: '#/definitions/Room_relation'
-                        measurements:
-                          type: array
-                          items:
-                            $ref: '#/definitions/Measurement_relation'
-    post:
-      tags:
-        - devices
-      summary: 'Add Device'
-      operationId: addDevice
-      produces:
-        - application/json
-      parameters:
-        -
-          in: body
-          name: body
-          description: addDevice
-          required: true
-          schema:
-            type: object
-            properties:
-              data:
-                type: object
-                properties:
-                  type:
-                    type: string
-                    example: devices
-                  attributes:
-                    $ref: '#/definitions/Device'
-                  relationships:
-                    properties:
-                      room:
-                        $ref: '#/definitions/Room_relation'
-                      measurements:
-                        type: array
-                        items:
-                          $ref: '#/definitions/Measurement_relation'
-      responses:
-        200:
-          description: 'successful operation'
-          schema:
-            type: object
-            properties:
-              jsonapi:
-                type: object
-                properties:
-                  version:
-                    type: string
-                    example: '1.0'
-              links:
-                type: object
-                properties:
-                  self:
-                    type: string
-                    example: /devices
-              data:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                    format: int64
-                    example: 12
-                  type:
-                    type: string
-                    example: devices
-                  attributes:
-                    $ref: '#/definitions/Device'
-                  relationships:
-                    properties:
-                      room:
-                        $ref: '#/definitions/Room_relation'
-                      measurements:
-                        type: array
-                        items:
-                          $ref: '#/definitions/Measurement_relation'
-  '/devices/{Device_id}':
-    patch:
-      tags:
-        - devices
-      summary: 'Edit Device'
-      operationId: editDevice
-      produces:
-        - application/json
-      parameters:
-        -
-          in: body
-          name: body
-          description: editDevice
-          required: true
-          schema:
-            type: object
-            properties:
-              data:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                    format: int64
-                    example: 12
-                  type:
-                    type: string
-                    example: devices
-                  attributes:
-                    $ref: '#/definitions/Device'
-                  relationships:
-                    properties:
-                      room:
-                        $ref: '#/definitions/Room_relation'
-                      measurements:
-                        type: array
-                        items:
-                          $ref: '#/definitions/Measurement_relation'
-        -
-          name: Device_id
-          in: path
-          required: true
-          type: integer
-          format: int64
-      responses:
-        200:
-          description: 'successful operation'
-          schema:
-            type: object
-            properties:
-              jsonapi:
-                type: object
-                properties:
-                  version:
-                    type: string
-                    example: '1.0'
-              links:
-                type: object
-                properties:
-                  self:
-                    type: string
-                    example: /devices
-              data:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                    format: int64
-                    example: 12
-                  type:
-                    type: string
-                    example: devices
-                  attributes:
-                    $ref: '#/definitions/Device'
-                  relationships:
-                    properties:
-                      room:
-                        $ref: '#/definitions/Room_relation'
-                      measurements:
-                        type: array
-                        items:
-                          $ref: '#/definitions/Measurement_relation'
-    delete:
-      tags:
-        - devices
-      summary: 'Delete Device'
-      operationId: deleteDevice
-      produces:
-        - application/json
-      parameters:
-        -
-          name: Device_id
-          in: path
-          required: true
-          type: integer
-          format: int64
-      responses:
-        200:
-          description: 'successful operation'
-          schema:
-            type: object
-            properties:
-              jsonapi:
-                type: object
-                properties:
-                  version:
-                    type: string
-                    example: '1.0'
-              links:
-                type: object
-                properties:
-                  self:
-                    type: string
-                    example: /devices
-              data:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                    format: int64
-                    example: 12
-                  type:
-                    type: string
-                    example: devices
-                  attributes:
-                    $ref: '#/definitions/Device'
-                  relationships:
-                    properties:
-                      room:
-                        $ref: '#/definitions/Room_relation'
-                      measurements:
-                        type: array
-                        items:
-                          $ref: '#/definitions/Measurement_relation'
-    get:
-      tags:
-        - devices
-      summary: 'Get Device'
-      operationId: viewDevice
-      produces:
-        - application/json
-      parameters:
-        -
-          name: Device_id
-          in: path
-          required: true
-          type: integer
-          format: int64
-      responses:
-        200:
-          description: 'successful operation'
-          schema:
-            type: object
-            properties:
-              jsonapi:
-                type: object
-                properties:
-                  version:
-                    type: string
-                    example: '1.0'
-              links:
-                type: object
-                properties:
-                  self:
-                    type: string
-                    example: /devices
-              data:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                    format: int64
-                    example: 12
-                  type:
-                    type: string
-                    example: devices
-                  attributes:
-                    $ref: '#/definitions/Device'
-                  relationships:
-                    properties:
-                      room:
-                        $ref: '#/definitions/Room_relation'
-                      measurements:
-                        type: array
-                        items:
-                          $ref: '#/definitions/Measurement_relation'
   /expenses/:
     get:
       tags:
@@ -2400,49 +2084,1262 @@ paths:
                     properties:
                       groceryItem:
                         $ref: '#/definitions/GroceryItem_relation'
+  /configurations/:
+    get:
+      tags:
+        - configurations
+      summary: 'Configuration List'
+      operationId: listConfiguration
+      produces:
+        - application/json
+      parameters: {  }
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: '/configurations?page[number]=1&page[size]=100'
+                  first:
+                    type: string
+                    example: '/configurations?page[number]=1&page[size]=100'
+                  last:
+                    type: string
+                    example: '/configurations?page[number]=1&page[size]=100'
+                  prev:
+                    type: string
+                    example: 'null'
+                  next:
+                    type: string
+                    example: 'null'
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                      example: 12
+                    type:
+                      type: string
+                      example: configurations
+                    attributes:
+                      $ref: '#/definitions/Configuration'
+                    relationships:
+                      properties:
+                        items:
+                          type: array
+                          items:
+                            $ref: '#/definitions/ConfigurationItem_relation'
+                        templates:
+                          type: array
+                          items:
+                            $ref: '#/definitions/ConfigurationTemplate_relation'
+                        device:
+                          $ref: '#/definitions/Device_relation'
+    post:
+      tags:
+        - configurations
+      summary: 'Add Configuration'
+      operationId: addConfiguration
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: addConfiguration
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: configurations
+                  attributes:
+                    $ref: '#/definitions/Configuration'
+                  relationships:
+                    properties:
+                      items:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ConfigurationItem_relation'
+                      templates:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ConfigurationTemplate_relation'
+                      device:
+                        $ref: '#/definitions/Device_relation'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /configurations
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: configurations
+                  attributes:
+                    $ref: '#/definitions/Configuration'
+                  relationships:
+                    properties:
+                      items:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ConfigurationItem_relation'
+                      templates:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ConfigurationTemplate_relation'
+                      device:
+                        $ref: '#/definitions/Device_relation'
+  '/configurations/{Configuration_id}':
+    patch:
+      tags:
+        - configurations
+      summary: 'Edit Configuration'
+      operationId: editConfiguration
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: editConfiguration
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: configurations
+                  attributes:
+                    $ref: '#/definitions/Configuration'
+                  relationships:
+                    properties:
+                      items:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ConfigurationItem_relation'
+                      templates:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ConfigurationTemplate_relation'
+                      device:
+                        $ref: '#/definitions/Device_relation'
+        -
+          name: Configuration_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /configurations
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: configurations
+                  attributes:
+                    $ref: '#/definitions/Configuration'
+                  relationships:
+                    properties:
+                      items:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ConfigurationItem_relation'
+                      templates:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ConfigurationTemplate_relation'
+                      device:
+                        $ref: '#/definitions/Device_relation'
+    delete:
+      tags:
+        - configurations
+      summary: 'Delete Configuration'
+      operationId: deleteConfiguration
+      produces:
+        - application/json
+      parameters:
+        -
+          name: Configuration_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /configurations
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: configurations
+                  attributes:
+                    $ref: '#/definitions/Configuration'
+                  relationships:
+                    properties:
+                      items:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ConfigurationItem_relation'
+                      templates:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ConfigurationTemplate_relation'
+                      device:
+                        $ref: '#/definitions/Device_relation'
+    get:
+      tags:
+        - configurations
+      summary: 'Get Configuration'
+      operationId: viewConfiguration
+      produces:
+        - application/json
+      parameters:
+        -
+          name: Configuration_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /configurations
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: configurations
+                  attributes:
+                    $ref: '#/definitions/Configuration'
+                  relationships:
+                    properties:
+                      items:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ConfigurationItem_relation'
+                      templates:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ConfigurationTemplate_relation'
+                      device:
+                        $ref: '#/definitions/Device_relation'
+  /configuration/templates/:
+    get:
+      tags:
+        - configuration_templates
+      summary: 'ConfigurationTemplate List'
+      operationId: listConfigurationTemplate
+      produces:
+        - application/json
+      parameters: {  }
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: '/configuration/templates?page[number]=1&page[size]=100'
+                  first:
+                    type: string
+                    example: '/configuration/templates?page[number]=1&page[size]=100'
+                  last:
+                    type: string
+                    example: '/configuration/templates?page[number]=1&page[size]=100'
+                  prev:
+                    type: string
+                    example: 'null'
+                  next:
+                    type: string
+                    example: 'null'
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                      example: 12
+                    type:
+                      type: string
+                      example: configuration_templates
+                    attributes:
+                      $ref: '#/definitions/ConfigurationTemplate'
+                    relationships:
+                      properties:
+                        configuration:
+                          $ref: '#/definitions/Configuration_relation'
+    post:
+      tags:
+        - configuration_templates
+      summary: 'Add ConfigurationTemplate'
+      operationId: addConfigurationTemplate
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: addConfigurationTemplate
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: configuration_templates
+                  attributes:
+                    $ref: '#/definitions/ConfigurationTemplate'
+                  relationships:
+                    properties:
+                      configuration:
+                        $ref: '#/definitions/Configuration_relation'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /configuration/templates
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: configuration_templates
+                  attributes:
+                    $ref: '#/definitions/ConfigurationTemplate'
+                  relationships:
+                    properties:
+                      configuration:
+                        $ref: '#/definitions/Configuration_relation'
+  '/configuration/templates/{ConfigurationTemplate_id}':
+    patch:
+      tags:
+        - configuration_templates
+      summary: 'Edit ConfigurationTemplate'
+      operationId: editConfigurationTemplate
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: editConfigurationTemplate
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: configuration_templates
+                  attributes:
+                    $ref: '#/definitions/ConfigurationTemplate'
+                  relationships:
+                    properties:
+                      configuration:
+                        $ref: '#/definitions/Configuration_relation'
+        -
+          name: ConfigurationTemplate_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /configuration/templates
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: configuration_templates
+                  attributes:
+                    $ref: '#/definitions/ConfigurationTemplate'
+                  relationships:
+                    properties:
+                      configuration:
+                        $ref: '#/definitions/Configuration_relation'
+    delete:
+      tags:
+        - configuration_templates
+      summary: 'Delete ConfigurationTemplate'
+      operationId: deleteConfigurationTemplate
+      produces:
+        - application/json
+      parameters:
+        -
+          name: ConfigurationTemplate_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /configuration/templates
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: configuration_templates
+                  attributes:
+                    $ref: '#/definitions/ConfigurationTemplate'
+                  relationships:
+                    properties:
+                      configuration:
+                        $ref: '#/definitions/Configuration_relation'
+    get:
+      tags:
+        - configuration_templates
+      summary: 'Get ConfigurationTemplate'
+      operationId: viewConfigurationTemplate
+      produces:
+        - application/json
+      parameters:
+        -
+          name: ConfigurationTemplate_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /configuration/templates
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: configuration_templates
+                  attributes:
+                    $ref: '#/definitions/ConfigurationTemplate'
+                  relationships:
+                    properties:
+                      configuration:
+                        $ref: '#/definitions/Configuration_relation'
+  /devices/:
+    get:
+      tags:
+        - devices
+      summary: 'Device List'
+      operationId: listDevice
+      produces:
+        - application/json
+      parameters: {  }
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: '/devices?page[number]=1&page[size]=100'
+                  first:
+                    type: string
+                    example: '/devices?page[number]=1&page[size]=100'
+                  last:
+                    type: string
+                    example: '/devices?page[number]=1&page[size]=100'
+                  prev:
+                    type: string
+                    example: 'null'
+                  next:
+                    type: string
+                    example: 'null'
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                      example: 12
+                    type:
+                      type: string
+                      example: devices
+                    attributes:
+                      $ref: '#/definitions/Device'
+                    relationships:
+                      properties:
+                        room:
+                          $ref: '#/definitions/Room_relation'
+                        measurements:
+                          type: array
+                          items:
+                            $ref: '#/definitions/Measurement_relation'
+                        configuration:
+                          $ref: '#/definitions/Configuration_relation'
+    post:
+      tags:
+        - devices
+      summary: 'Add Device'
+      operationId: addDevice
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: addDevice
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: devices
+                  attributes:
+                    $ref: '#/definitions/Device'
+                  relationships:
+                    properties:
+                      room:
+                        $ref: '#/definitions/Room_relation'
+                      measurements:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Measurement_relation'
+                      configuration:
+                        $ref: '#/definitions/Configuration_relation'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /devices
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: devices
+                  attributes:
+                    $ref: '#/definitions/Device'
+                  relationships:
+                    properties:
+                      room:
+                        $ref: '#/definitions/Room_relation'
+                      measurements:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Measurement_relation'
+                      configuration:
+                        $ref: '#/definitions/Configuration_relation'
+  '/devices/{Device_id}':
+    patch:
+      tags:
+        - devices
+      summary: 'Edit Device'
+      operationId: editDevice
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: editDevice
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: devices
+                  attributes:
+                    $ref: '#/definitions/Device'
+                  relationships:
+                    properties:
+                      room:
+                        $ref: '#/definitions/Room_relation'
+                      measurements:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Measurement_relation'
+                      configuration:
+                        $ref: '#/definitions/Configuration_relation'
+        -
+          name: Device_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /devices
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: devices
+                  attributes:
+                    $ref: '#/definitions/Device'
+                  relationships:
+                    properties:
+                      room:
+                        $ref: '#/definitions/Room_relation'
+                      measurements:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Measurement_relation'
+                      configuration:
+                        $ref: '#/definitions/Configuration_relation'
+    delete:
+      tags:
+        - devices
+      summary: 'Delete Device'
+      operationId: deleteDevice
+      produces:
+        - application/json
+      parameters:
+        -
+          name: Device_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /devices
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: devices
+                  attributes:
+                    $ref: '#/definitions/Device'
+                  relationships:
+                    properties:
+                      room:
+                        $ref: '#/definitions/Room_relation'
+                      measurements:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Measurement_relation'
+                      configuration:
+                        $ref: '#/definitions/Configuration_relation'
+    get:
+      tags:
+        - devices
+      summary: 'Get Device'
+      operationId: viewDevice
+      produces:
+        - application/json
+      parameters:
+        -
+          name: Device_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /devices
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: devices
+                  attributes:
+                    $ref: '#/definitions/Device'
+                  relationships:
+                    properties:
+                      room:
+                        $ref: '#/definitions/Room_relation'
+                      measurements:
+                        type: array
+                        items:
+                          $ref: '#/definitions/Measurement_relation'
+                      configuration:
+                        $ref: '#/definitions/Configuration_relation'
+  /configuration/items/:
+    get:
+      tags:
+        - configuration_items
+      summary: 'ConfigurationItem List'
+      operationId: listConfigurationItem
+      produces:
+        - application/json
+      parameters: {  }
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: '/configuration/items?page[number]=1&page[size]=100'
+                  first:
+                    type: string
+                    example: '/configuration/items?page[number]=1&page[size]=100'
+                  last:
+                    type: string
+                    example: '/configuration/items?page[number]=1&page[size]=100'
+                  prev:
+                    type: string
+                    example: 'null'
+                  next:
+                    type: string
+                    example: 'null'
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                      example: 12
+                    type:
+                      type: string
+                      example: configuration_items
+                    attributes:
+                      $ref: '#/definitions/ConfigurationItem'
+                    relationships:
+                      properties:
+                        configuration:
+                          $ref: '#/definitions/Configuration_relation'
+    post:
+      tags:
+        - configuration_items
+      summary: 'Add ConfigurationItem'
+      operationId: addConfigurationItem
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: addConfigurationItem
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: configuration_items
+                  attributes:
+                    $ref: '#/definitions/ConfigurationItem'
+                  relationships:
+                    properties:
+                      configuration:
+                        $ref: '#/definitions/Configuration_relation'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /configuration/items
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: configuration_items
+                  attributes:
+                    $ref: '#/definitions/ConfigurationItem'
+                  relationships:
+                    properties:
+                      configuration:
+                        $ref: '#/definitions/Configuration_relation'
+  '/configuration/items/{ConfigurationItem_id}':
+    patch:
+      tags:
+        - configuration_items
+      summary: 'Edit ConfigurationItem'
+      operationId: editConfigurationItem
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: editConfigurationItem
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: configuration_items
+                  attributes:
+                    $ref: '#/definitions/ConfigurationItem'
+                  relationships:
+                    properties:
+                      configuration:
+                        $ref: '#/definitions/Configuration_relation'
+        -
+          name: ConfigurationItem_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /configuration/items
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: configuration_items
+                  attributes:
+                    $ref: '#/definitions/ConfigurationItem'
+                  relationships:
+                    properties:
+                      configuration:
+                        $ref: '#/definitions/Configuration_relation'
+    delete:
+      tags:
+        - configuration_items
+      summary: 'Delete ConfigurationItem'
+      operationId: deleteConfigurationItem
+      produces:
+        - application/json
+      parameters:
+        -
+          name: ConfigurationItem_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /configuration/items
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: configuration_items
+                  attributes:
+                    $ref: '#/definitions/ConfigurationItem'
+                  relationships:
+                    properties:
+                      configuration:
+                        $ref: '#/definitions/Configuration_relation'
+    get:
+      tags:
+        - configuration_items
+      summary: 'Get ConfigurationItem'
+      operationId: viewConfigurationItem
+      produces:
+        - application/json
+      parameters:
+        -
+          name: ConfigurationItem_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /configuration/items
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: configuration_items
+                  attributes:
+                    $ref: '#/definitions/ConfigurationItem'
+                  relationships:
+                    properties:
+                      configuration:
+                        $ref: '#/definitions/Configuration_relation'
 securityDefinitions:
   api_key:
     type: apiKey
     name: api_key
     in: header
 definitions:
-  Device:
-    type: object
-    properties:
-      name:
-        type: string
-      createdAt:
-        type: string
-        format: date-time
-      updatedAt:
-        type: string
-        format: date-time
-  Room_relation:
-    type: object
-    properties:
-      type:
-        type: string
-        enum:
-          - rooms
-        example: rooms
-      id:
-        type: integer
-        minimum: 1
-        description: 'Room ID'
-        example: 69
-  Measurement_relation:
-    type: object
-    properties:
-      type:
-        type: string
-        enum:
-          - measurements
-        example: measurements
-      id:
-        type: integer
-        minimum: 1
-        description: 'Measurement ID'
-        example: 76
   Expense:
     type: object
     properties:
@@ -2584,19 +3481,6 @@ definitions:
       updatedAt:
         type: string
         format: date-time
-  Device_relation:
-    type: object
-    properties:
-      type:
-        type: string
-        enum:
-          - devices
-        example: devices
-      id:
-        type: integer
-        minimum: 1
-        description: 'Device ID'
-        example: 69
   ShoppingListItem:
     type: object
     properties:
@@ -2623,6 +3507,112 @@ definitions:
         type: integer
         minimum: 1
         description: 'GroceryItem ID'
+        example: 69
+  Configuration:
+    type: object
+    properties: {  }
+  ConfigurationItem_relation:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - configuration_items
+        example: configuration_items
+      id:
+        type: integer
+        minimum: 1
+        description: 'ConfigurationItem ID'
+        example: 69
+  ConfigurationTemplate_relation:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - configuration_templates
+        example: configuration_templates
+      id:
+        type: integer
+        minimum: 1
+        description: 'ConfigurationTemplate ID'
+        example: 76
+  Device_relation:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - devices
+        example: devices
+      id:
+        type: integer
+        minimum: 1
+        description: 'Device ID'
+        example: 71
+  ConfigurationTemplate:
+    type: object
+    properties: {  }
+  Device:
+    type: object
+    properties:
+      name:
+        type: string
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+  Room_relation:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - rooms
+        example: rooms
+      id:
+        type: integer
+        minimum: 1
+        description: 'Room ID'
+        example: 69
+  Measurement_relation:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - measurements
+        example: measurements
+      id:
+        type: integer
+        minimum: 1
+        description: 'Measurement ID'
+        example: 76
+  ConfigurationItem:
+    type: object
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      inputType:
+        type: string
+      outputFormat:
+        type: string
+  Configuration_relation:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - configurations
+        example: configurations
+      id:
+        type: integer
+        minimum: 1
+        description: 'Configuration ID'
         example: 69
 externalDocs:
   description: 'Find out more about Swagger'

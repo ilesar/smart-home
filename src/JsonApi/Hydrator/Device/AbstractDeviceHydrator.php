@@ -122,6 +122,22 @@ abstract class AbstractDeviceHydrator extends AbstractHydrator
                     $device->addMeasurement($measurement);
                 }
             },
+            'configuration' => function (Device $device, ToOneRelationship $configuration, $data, $relationshipName) {
+                $this->validateRelationType($configuration, ['configurations']);
+
+                $association = null;
+                $identifier = $configuration->getResourceIdentifier();
+                if ($identifier) {
+                    $association = $this->objectManager->getRepository('App\Entity\Configuration')
+                        ->find($identifier->getId());
+
+                    if (is_null($association)) {
+                        throw new InvalidRelationshipValueException($relationshipName, [$identifier->getId()]);
+                    }
+                }
+
+                $device->setConfiguration($association);
+            },
         ];
     }
 }

@@ -37,6 +37,11 @@ class Device
      */
     private $measurements;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Configuration", inversedBy="device", cascade={"persist", "remove"})
+     */
+    private $configuration;
+
     public function __construct()
     {
         $this->measurements = new ArrayCollection();
@@ -98,6 +103,18 @@ class Device
                 $measurement->setDevice(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getConfiguration(): ?Configuration
+    {
+        return $this->configuration;
+    }
+
+    public function setConfiguration(?Configuration $configuration): self
+    {
+        $this->configuration = $configuration;
 
         return $this;
     }

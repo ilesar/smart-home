@@ -12,6 +12,7 @@ use App\Repository\DeviceRepository;
 use Paknahad\JsonApiBundle\Controller\Controller;
 use Paknahad\JsonApiBundle\Helper\ResourceCollection;
 use Psr\Http\Message\ResponseInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -98,7 +99,7 @@ class DeviceController extends Controller
     /**
      * @Route("/{id}", name="devices_delete", methods="DELETE")
      */
-    public function delete(Device $device): ResponseInterface
+    public function delete(Request $request, Device $device): ResponseInterface
     {
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($device);
