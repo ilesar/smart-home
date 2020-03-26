@@ -28,7 +28,7 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    App\Service\MqttService:
+    PhpMqtt\Client\MQTTClient:
         arguments:
             $host: '%mqtt.server.host%'
             $port: '%mqtt.server.port%'
