@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Mqtt\Model;
+namespace App\Mqtt\Model\Publisher;
 
 use App\Mqtt\Enum\MqttTopic;
 use App\Mqtt\Interfaces\TopicPublisherInterface;

@@ -19,7 +19,6 @@ class GroceryService
     public function refreshWarehouses()
     {
         foreach ($this->warehouses as $warehouse) {
-            echo $warehouse->getName().PHP_EOL;
             $warehouse->refresh();
         }
     }

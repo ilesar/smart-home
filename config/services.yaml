@@ -41,3 +41,10 @@ services:
                 - '@App\Grocery\Model\Warehouse\LidlWarehouse'
                 - '@App\Grocery\Model\Warehouse\PlodineWarehouse'
                 - '@App\Grocery\Model\Warehouse\KauflandWarehouse'
+
+    App\Service\MqttWorkerService:
+        arguments:
+            $subscribers:
+                - '@App\Mqtt\Model\Subscriber\RegistrationSubscriber'
+                - '@App\Mqtt\Model\Subscriber\ConfigurationSubscriber'
+                - '@App\Mqtt\Model\Subscriber\MeasurementSubscriber'

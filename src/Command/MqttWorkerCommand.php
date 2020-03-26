@@ -2,12 +2,7 @@
 
 namespace App\Command;
 
-use App\Mqtt\Interfaces\TopicSubscriberInterface;
-use App\Mqtt\Model\ConfigurationSubscriber;
-use App\Mqtt\Model\MeasurementSubscriber;
-use App\Mqtt\Model\RegistrationSubscriber;
-use App\Mqtt\MqttService;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\MqttWorkerService;
 use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,26 +12,15 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class MqttWorkerCommand extends Command
 {
     protected static $defaultName = 'core:mqtt';
-    /**
-     * @var MqttService
-     */
-    private $mqttService;
 
     /**
-     * @var TopicSubscriberInterface[]
+     * @var MqttWorkerService
      */
-    private $subscribers = [];
+    private $mqttWorkerService;
 
-    public function __construct(MqttService $mqttService, EntityManagerInterface $entityManager)
+    public function __construct(MqttWorkerService $mqttWorkerService)
     {
-        parent::__construct();
-        $this->mqttService = $mqttService;
-
-        $this->subscribers = $subscribers = [
-            new RegistrationSubscriber($mqttService, $entityManager),
-            new ConfigurationSubscriber($mqttService, $entityManager),
-            new MeasurementSubscriber($mqttService, $entityManager),
-        ];
+        $this->mqttWorkerService = $mqttWorkerService;
     }
 
     protected function configure()
@@ -49,13 +33,11 @@ class MqttWorkerCommand extends Command
         $inputOutput = new SymfonyStyle($input, $output);
 
         try {
-            foreach ($this->subscribers as $subscriber) {
-                $this->mqttService->addTopicListener($subscriber);
-            }
-
-            $this->mqttService->run();
+            $this->mqttWorkerService->run();
         } catch (Exception $exception) {
             $inputOutput->error($exception->getMessage());
+
+            return 1;
         }
 
         $inputOutput->success('You have a new command! Now make it your own! Pass --help to see your options.');
