@@ -23,8 +23,8 @@ class MqttService
     {
         $this->mqttClient = $mqttClient;
 
-        pcntl_signal(SIGINT, function (int $signal, $info) use ($mqtt) {
-            $mqtt->interrupt();
+        pcntl_signal(SIGINT, function (int $signal, $info) use ($mqttClient) {
+            $mqttClient->interrupt();
         });
 
         $this->mqttClient->connect();
