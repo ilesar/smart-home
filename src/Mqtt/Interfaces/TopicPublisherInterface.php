@@ -6,5 +6,5 @@ interface TopicPublisherInterface
 {
     public function getTopic(): string;
 
-    public function publishMessage(string $topic, string $message): void;
+    public function publishMessage(string $message): void;
 }

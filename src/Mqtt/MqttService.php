@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Service;
+namespace App\Mqtt;
 
 use App\Exception\TopicSubscriptionException;
 use App\Exception\TopicUnsubscriptionException;
-use Closure;
+use App\Mqtt\Interfaces\TopicPublisherInterface;
+use App\Mqtt\Interfaces\TopicSubscriberInterface;
 use PhpMqtt\Client\MQTTClient;
 
 class MqttService
@@ -36,30 +37,32 @@ class MqttService
         $this->mqttClient->close();
     }
 
-    public function addTopicListener(string $topic, Closure $callback)
+    public function addTopicListener(TopicSubscriberInterface $subscriber)
     {
+        $topic = $subscriber->getTopic();
+
         if (true === in_array($topic, $this->subscribedTopics)) {
             throw new TopicSubscriptionException($topic);
         }
 
-        $this->mqttClient->subscribe($topic, function ($topic, $message) use ($callback) {
-            $callback($topic, $message);
+        $this->mqttClient->subscribe($topic, function ($topic, $message) use ($subscriber) {
+            $subscriber->onMessageReceived($topic, $message);
         }, 0);
     }
 
-    public function removeTopicListener(string $topic, Closure $callback)
+    public function removeTopicListener(TopicSubscriberInterface $subscriber)
     {
+        $topic = $subscriber->getTopic();
+
         if (false === in_array($topic, $this->subscribedTopics)) {
             throw new TopicUnsubscriptionException($topic);
         }
 
-        $this->mqttClient->subscribe($topic, function ($topic, $message) use ($callback) {
-            $callback($topic, $message);
-        }, 0);
+        $this->mqttClient->unsubscribe($topic);
     }
 
-    public function sendMessage(string $topic, string $message)
+    public function sendMessage(TopicPublisherInterface $publisher, $message)
     {
-        $this->mqttClient->publish($topic, $message, 0);
+        $publisher->publishMessage($message);
     }
 }

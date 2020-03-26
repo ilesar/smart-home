@@ -17,7 +17,7 @@ class ConfigurationTemplateFixtures extends Fixture implements DependentFixtureI
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getDependencies()
     {

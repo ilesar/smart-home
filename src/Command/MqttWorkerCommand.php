@@ -6,7 +6,7 @@ use App\Mqtt\Interfaces\TopicSubscriberInterface;
 use App\Mqtt\Model\ConfigurationSubscriber;
 use App\Mqtt\Model\MeasurementSubscriber;
 use App\Mqtt\Model\RegistrationSubscriber;
-use App\Service\MqttService;
+use App\Mqtt\MqttService;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\Console\Command\Command;
@@ -50,9 +50,7 @@ class MqttWorkerCommand extends Command
 
         try {
             foreach ($this->subscribers as $subscriber) {
-                $this->mqttService->addTopicListener($subscriber->getTopic(), function ($topic, $message) use ($subscriber) {
-                    $subscriber->onMessageReceived($topic, $message);
-                });
+                $this->mqttService->addTopicListener($subscriber);
             }
 
             $this->mqttService->run();
