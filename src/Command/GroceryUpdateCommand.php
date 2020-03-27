@@ -3,10 +3,9 @@
 namespace App\Command;
 
 use App\Grocery\GroceryService;
+use Exception;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -34,7 +33,12 @@ class GroceryUpdateCommand extends Command
     {
         $inputOutput = new SymfonyStyle($input, $output);
 
-        $this->groceryService->refreshWarehouses();
+        try {
+            $this->groceryService->refreshWarehouses();
+        } catch (Exception $exception) {
+            $inputOutput->error($exception->getMessage());
+            throw $exception;
+        }
 
         $inputOutput->success('All warehouses updated');
 

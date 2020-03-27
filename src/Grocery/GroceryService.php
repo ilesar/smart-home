@@ -19,7 +19,9 @@ class GroceryService
     public function refreshWarehouses()
     {
         foreach ($this->warehouses as $warehouse) {
+            $warehouse->open();
             $warehouse->refresh();
+            $warehouse->close();
         }
     }
 }

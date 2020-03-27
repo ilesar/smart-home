@@ -9,7 +9,6 @@ use App\Mqtt\Model\ConfigurationSubscriber;
 use App\Mqtt\Model\MeasurementSubscriber;
 use App\Mqtt\Model\RegistrationSubscriber;
 use App\Mqtt\MqttService;
-use Doctrine\ORM\EntityManagerInterface;
 
 class MqttWorkerService
 {

@@ -14,4 +14,14 @@ class KauflandWarehouse extends BaseWarehouse implements WarehouseInterface
     {
         // TODO: Implement refresh() method.
     }
+
+    public function open(): void
+    {
+        // TODO: Implement open() method.
+    }
+
+    public function close(): void
+    {
+        // TODO: Implement close() method.
+    }
 }
