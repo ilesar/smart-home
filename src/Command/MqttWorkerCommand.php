@@ -20,6 +20,7 @@ class MqttWorkerCommand extends Command
 
     public function __construct(MqttWorkerService $mqttWorkerService)
     {
+        parent::__construct();
         $this->mqttWorkerService = $mqttWorkerService;
     }
 

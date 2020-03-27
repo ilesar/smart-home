@@ -48,3 +48,8 @@ services:
                 - '@App\Mqtt\Model\Subscriber\RegistrationSubscriber'
                 - '@App\Mqtt\Model\Subscriber\ConfigurationSubscriber'
                 - '@App\Mqtt\Model\Subscriber\MeasurementSubscriber'
+
+    App\Proxy\ProxyService:
+        arguments:
+            $proxySources:
+                - '@App\Proxy\Model\ClarketmProxySource'
