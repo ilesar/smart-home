@@ -10,7 +10,7 @@ class WebInventoryService
 
     public function __construct()
     {
-        $this->scraper = Client::createChromeClient('/usr/local/bin/chromedriver', [
+        $this->scraper = Client::createChromeClient(null, [
             '--disable-gpu',
             '--headless',
             '--window-size=1200x1100',
@@ -20,6 +20,7 @@ class WebInventoryService
             '--disable-web-security',
             '--start-maximized',
             '--ignore-certificate-errors',
+//            '--proxy-server=socks://127.0.0.1:9050'
         ], [], 'https://www.konzum.hr');
     }
 
