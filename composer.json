@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-pcntl": "*",
+        "doctrine/annotations": "^1.8",
         "paknahad/jsonapi-bundle": "^4.1",
         "php-mqtt/client": "^0.1.2",
         "symfony/console": "5.0.*",
@@ -14,6 +15,7 @@
         "symfony/framework-bundle": "5.0.*",
         "symfony/orm-pack": "^1.0",
         "symfony/panther": "^0.7.1",
+        "symfony/validator": "5.0.*",
         "symfony/yaml": "5.0.*"
     },
     "require-dev": {

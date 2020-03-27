@@ -3,14 +3,12 @@
 namespace App\Proxy\Model;
 
 use App\Entity\ProxyServer;
-use App\Exception\MethodNotImplementedException;
 use App\Proxy\Interfaces\ProxySourceInterface;
 use App\Proxy\Model\Base\BaseProxySource;
 
-class ClarketmProxySource extends BaseProxySource implements ProxySourceInterface
+class A2uProxySource extends BaseProxySource implements ProxySourceInterface
 {
-    protected const PROXY_SOURCE = 'https://raw.githubusercontent.com/clarketm/proxy-list/master/proxy-list.txt';
-
+    protected const PROXY_SOURCE = 'https://raw.githubusercontent.com/a2u/free-proxy-list/master/free-proxy-list.txt';
 
     protected function getProxyUrl(): string
     {

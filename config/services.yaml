@@ -17,7 +17,7 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/*'
-        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php,Client}'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -53,3 +53,8 @@ services:
         arguments:
             $proxySources:
                 - '@App\Proxy\Model\ClarketmProxySource'
+                - '@App\Proxy\Model\A2uProxySource'
+                - '@App\Proxy\Model\OpsxcqProxySource'
+                - '@App\Proxy\Model\UsProxyProxySource'
+
+    App\Client\ProxySourceClient: '@eight_points_guzzle.client.proxy_source'

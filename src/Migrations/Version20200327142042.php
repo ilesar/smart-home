@@ -10,17 +10,17 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200326153245 extends AbstractMigration
+final class Version20200327142042 extends AbstractMigration
 {
-    public function getDescription(): string
+    public function getDescription() : string
     {
         return '';
     }
 
-    public function up(Schema $schema): void
+    public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('CREATE TABLE room (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL COMMENT \'(DC2Type:datetime_immutable)\', updated_at DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE configuration (id INT AUTO_INCREMENT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -29,6 +29,7 @@ final class Version20200326153245 extends AbstractMigration
         $this->addSql('CREATE TABLE configuration_item (id INT AUTO_INCREMENT NOT NULL, configuration_id INT NOT NULL, name VARCHAR(255) NOT NULL, description VARCHAR(255) DEFAULT NULL, input_type VARCHAR(255) NOT NULL, output_format VARCHAR(255) NOT NULL, INDEX IDX_7A48531973F32DD8 (configuration_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE configuration_template (id INT AUTO_INCREMENT NOT NULL, configuration_id INT NOT NULL, INDEX IDX_F685A89873F32DD8 (configuration_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE measurement (id INT AUTO_INCREMENT NOT NULL, device_id INT NOT NULL, name VARCHAR(255) NOT NULL, value INT NOT NULL, type VARCHAR(255) NOT NULL, created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL COMMENT \'(DC2Type:datetime_immutable)\', updated_at DATETIME NOT NULL, INDEX IDX_2CE0D81194A4C7D4 (device_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE proxy_server (id INT AUTO_INCREMENT NOT NULL, host VARCHAR(255) NOT NULL, port VARCHAR(255) NOT NULL, attempts INT NOT NULL, is_blacklisted TINYINT(1) NOT NULL, blacklisted_at DATETIME DEFAULT NULL, is_whitelisted TINYINT(1) NOT NULL, whitelisted_at DATETIME DEFAULT NULL, created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL COMMENT \'(DC2Type:datetime_immutable)\', updated_at DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE device (id INT AUTO_INCREMENT NOT NULL, room_id INT DEFAULT NULL, configuration_id INT DEFAULT NULL, name VARCHAR(255) NOT NULL, created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL COMMENT \'(DC2Type:datetime_immutable)\', updated_at DATETIME NOT NULL, INDEX IDX_92FB68E54177093 (room_id), UNIQUE INDEX UNIQ_92FB68E73F32DD8 (configuration_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE shopping_list_item (id INT AUTO_INCREMENT NOT NULL, grocery_item_id INT NOT NULL, quantity INT NOT NULL, created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL COMMENT \'(DC2Type:datetime_immutable)\', updated_at DATETIME NOT NULL, is_dleted TINYINT(1) NOT NULL, INDEX IDX_4FB1C224FF98F97E (grocery_item_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE recurring_payment (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, price DOUBLE PRECISION NOT NULL, created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL COMMENT \'(DC2Type:datetime_immutable)\', updated_at DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -43,10 +44,10 @@ final class Version20200326153245 extends AbstractMigration
         $this->addSql('ALTER TABLE shopping_list_item ADD CONSTRAINT FK_4FB1C224FF98F97E FOREIGN KEY (grocery_item_id) REFERENCES grocery_item (id)');
     }
 
-    public function down(Schema $schema): void
+    public function down(Schema $schema) : void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE device DROP FOREIGN KEY FK_92FB68E54177093');
         $this->addSql('ALTER TABLE configuration_item DROP FOREIGN KEY FK_7A48531973F32DD8');
@@ -63,6 +64,7 @@ final class Version20200326153245 extends AbstractMigration
         $this->addSql('DROP TABLE configuration_item');
         $this->addSql('DROP TABLE configuration_template');
         $this->addSql('DROP TABLE measurement');
+        $this->addSql('DROP TABLE proxy_server');
         $this->addSql('DROP TABLE device');
         $this->addSql('DROP TABLE shopping_list_item');
         $this->addSql('DROP TABLE recurring_payment');

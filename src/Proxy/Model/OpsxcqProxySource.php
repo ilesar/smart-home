@@ -7,9 +7,9 @@ use App\Exception\MethodNotImplementedException;
 use App\Proxy\Interfaces\ProxySourceInterface;
 use App\Proxy\Model\Base\BaseProxySource;
 
-class ClarketmProxySource extends BaseProxySource implements ProxySourceInterface
+class OpsxcqProxySource extends BaseProxySource implements ProxySourceInterface
 {
-    protected const PROXY_SOURCE = 'https://raw.githubusercontent.com/clarketm/proxy-list/master/proxy-list.txt';
+    protected const PROXY_SOURCE = 'https://raw.githubusercontent.com/opsxcq/proxy-list/master/list.txt';
 
 
     protected function getProxyUrl(): string

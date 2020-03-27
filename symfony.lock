@@ -117,6 +117,18 @@
     "doctrine/reflection": {
         "version": "v1.1.0"
     },
+    "eightpoints/guzzle-bundle": {
+        "version": "7.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "7.0",
+            "ref": "7babb21a3928e44e485391907e3abc346804e0d2"
+        },
+        "files": [
+            "config/packages/eight_points_guzzle.yaml"
+        ]
+    },
     "friendsofphp/php-cs-fixer": {
         "version": "2.2",
         "recipe": {
@@ -128,6 +140,12 @@
         "files": [
             ".php_cs.dist"
         ]
+    },
+    "guzzlehttp/guzzle": {
+        "version": "6.5.2"
+    },
+    "guzzlehttp/promises": {
+        "version": "v1.3.1"
     },
     "guzzlehttp/psr7": {
         "version": "1.6.1"
@@ -365,6 +383,9 @@
     },
     "symfony/event-dispatcher-contracts": {
         "version": "v2.0.1"
+    },
+    "symfony/expression-language": {
+        "version": "v5.0.5"
     },
     "symfony/filesystem": {
         "version": "v5.0.5"

@@ -7,9 +7,9 @@ use App\Exception\MethodNotImplementedException;
 use App\Proxy\Interfaces\ProxySourceInterface;
 use App\Proxy\Model\Base\BaseProxySource;
 
-class ClarketmProxySource extends BaseProxySource implements ProxySourceInterface
+class UsProxyProxySource extends BaseProxySource implements ProxySourceInterface
 {
-    protected const PROXY_SOURCE = 'https://raw.githubusercontent.com/clarketm/proxy-list/master/proxy-list.txt';
+    protected const PROXY_SOURCE = 'https://www.us-proxy.org/';
 
 
     protected function getProxyUrl(): string
@@ -20,7 +20,7 @@ class ClarketmProxySource extends BaseProxySource implements ProxySourceInterfac
     protected function parseProxyList(string $rawProxyList): array
     {
         $newProxyList = [];
-        preg_match_all('/(\b(?:\d{1,3}\.){3}\d{1,3}\b):([0-9]+)/', $rawProxyList, $matches, PREG_OFFSET_CAPTURE);
+        preg_match_all('/(\b(?:\d{1,3}\.){3}\d{1,3}\b)<\/td><td>(\d+)/', $rawProxyList, $matches, PREG_OFFSET_CAPTURE);
 
         $proxyCount = count($matches[0]);
 

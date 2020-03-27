@@ -62,6 +62,9 @@ class ProxyService
         }
     }
 
+    /**
+     * @param ProxyServer[] $proxyList
+     */
     private function saveNewProxies($proxyList): void
     {
         foreach ($proxyList as $proxyServer) {
