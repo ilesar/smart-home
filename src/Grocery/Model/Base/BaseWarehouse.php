@@ -56,4 +56,14 @@ class BaseWarehouse
     {
         $this->inventoryService = $inventoryService;
     }
+
+    public function open(): void
+    {
+        $this->getInventoryService()->open();
+    }
+
+    public function close(): void
+    {
+        $this->getInventoryService()->close();
+    }
 }

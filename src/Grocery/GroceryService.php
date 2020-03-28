@@ -20,7 +20,7 @@ class GroceryService
     {
         foreach ($this->warehouses as $warehouse) {
             $warehouse->open();
-            $warehouse->refresh();
+            $warehouse->refreshStock();
             $warehouse->close();
         }
     }

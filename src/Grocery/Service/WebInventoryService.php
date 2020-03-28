@@ -8,7 +8,7 @@ class WebInventoryService
 {
     private $scraper;
 
-    public function __construct()
+    public function open()
     {
         $this->scraper = Client::createChromeClient(null, [
             '--disable-gpu',

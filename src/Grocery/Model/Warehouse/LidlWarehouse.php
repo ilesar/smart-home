@@ -10,18 +10,8 @@ use App\Grocery\Model\Base\BaseWarehouse;
 class LidlWarehouse extends BaseWarehouse implements WarehouseInterface
 {
 
-    public function refresh(): void
+    public function refreshStock(): void
     {
         // TODO: Implement refresh() method.
-    }
-
-    public function open(): void
-    {
-        // TODO: Implement open() method.
-    }
-
-    public function close(): void
-    {
-        // TODO: Implement close() method.
     }
 }
