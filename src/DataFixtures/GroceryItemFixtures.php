@@ -19,14 +19,14 @@ class GroceryItemFixtures extends Fixture
 
     public function load(\Doctrine\Persistence\ObjectManager $manager)
     {
-        foreach (self::GROCERY_ITEMS as $itemName => $itemPrice) {
-            $groceryItem = new GroceryItem();
-            $groceryItem->setName($itemName);
-            $groceryItem->setPrice($itemPrice);
-
-            $manager->persist($groceryItem);
-        }
-
-        $manager->flush();
+//        foreach (self::GROCERY_ITEMS as $itemName => $itemPrice) {
+//            $groceryItem = new GroceryItem();
+//            $groceryItem->setName($itemName);
+//            $groceryItem->setPrice($itemPrice);
+//
+//            $manager->persist($groceryItem);
+//        }
+//
+//        $manager->flush();
     }
 }

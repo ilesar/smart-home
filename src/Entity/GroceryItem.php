@@ -47,6 +47,11 @@ class GroceryItem
      */
     private $image;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $source;
+
     public function __construct()
     {
         $this->shoppingListItems = new ArrayCollection();
@@ -132,6 +137,18 @@ class GroceryItem
     public function setImage(?Image $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getSource(): ?string
+    {
+        return $this->source;
+    }
+
+    public function setSource(string $source): self
+    {
+        $this->source = $source;
 
         return $this;
     }

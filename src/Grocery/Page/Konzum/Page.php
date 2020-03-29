@@ -2,27 +2,29 @@
 
 namespace App\Grocery\Page\Konzum;
 
+use App\Grocery\Service\WebInventoryService;
 use Exception;
+use Facebook\WebDriver\Exception\TimeoutException;
 use Facebook\WebDriver\WebDriverBy;
 use Facebook\WebDriver\WebDriverElement;
 use Symfony\Component\Panther\Client;
 
 abstract class Page
 {
-    /**
-     * @var Client
-     */
-    private $client;
-
     protected static $name = null;
 
     protected static $url = null;
 
     protected static $waitForSelectorOnInit = null;
+    /**
+     * @var WebInventoryService
+     */
+    private $webService;
 
-    public function __construct(Client $client)
+    public function __construct(WebInventoryService $webService)
     {
-        $this->client = $client;
+        sleep(5);
+        $this->webService = $webService;
         $this->open();
     }
 
@@ -32,36 +34,45 @@ abstract class Page
             throw new Exception(sprintf('Url not set for page (%s)', get_class($this)));
         }
 
-        $this->client->request('GET', static::$url);
-
         echo static::$url.PHP_EOL;
 
-        if (static::$waitForSelectorOnInit) {
-            $this->client->waitFor(static::$waitForSelectorOnInit);
+        try {
+            $this->getClient()->request('GET', static::$url);
+
+            if (static::$waitForSelectorOnInit) {
+                $this->getClient()->waitFor(static::$waitForSelectorOnInit);
+            }
+        } catch (TimeoutException $exception) {
+            $this->webService->blacklistCurrentClient();
+            $this->refreshClient();
+            $this->open();
+            return;
         }
+
+
     }
 
     public function clickElement(string $selector, int $secondsToWait = 0)
     {
-        $element = $this->client->findElement(WebDriverBy::cssSelector($selector));
+        $element = $this->getClient()->findElement(WebDriverBy::cssSelector($selector));
         $element->click();
 
         echo 'Click element'.PHP_EOL;
 
         if ($secondsToWait > 0) {
-            $this->client->wait($secondsToWait);
+            $this->getClient()->wait($secondsToWait);
         }
     }
 
     public function scrollToElement(string $selector)
     {
         echo 'scroll to element'.PHP_EOL;
-        $this->client->executeScript($this->getScrollScriptForSelector($selector));
+        $this->getClient()->executeScript($this->getScrollScriptForSelector($selector));
     }
 
     public function takeScreenshot(string $fileName = 'webdriver_screenshot'): void
     {
-        $this->client->takeScreenshot(sprintf('%s.png', $fileName));
+        $this->getClient()->takeScreenshot(sprintf('%s.png', $fileName));
     }
 
     private function getScrollScriptForSelector(string $selector)
@@ -73,7 +84,13 @@ abstract class Page
 
     public function getClient(): Client
     {
-        return $this->client;
+        return $this->webService->getClient();
+    }
+
+    public function refreshClient(): void
+    {
+        echo 'REFRESHING CLIENT'.PHP_EOL;
+        $this->webService->open();
     }
 
     /**

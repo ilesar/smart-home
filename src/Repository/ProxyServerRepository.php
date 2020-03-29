@@ -30,7 +30,9 @@ class ProxyServerRepository extends ServiceEntityRepository
 
     public function findProxyWithLeastAttempts(): ?ProxyServer
     {
-        return $this->findOneBy([], [
+        return $this->findOneBy([
+            'isBlacklisted' => false,
+        ], [
             'attempts' => 'asc',
         ]);
     }

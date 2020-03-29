@@ -2,6 +2,7 @@
 
 namespace App\Grocery\Page\Konzum;
 
+use App\Grocery\Service\WebInventoryService;
 use App\Grocery\ValueObject\KonzumCategory;
 use App\Grocery\ValueObject\KonzumProduct;
 use App\Grocery\ValueObject\KonzumSubcategory;
@@ -12,17 +13,18 @@ class SubcategoryPage extends Page
 {
     public const SUBCATEGORIES_SELECTOR = '#content-start > section > div > div > div.col-12.col-md-12.col-lg-10 h1.f-weight-bold.color-blue-dark > a';
     public const PRODUCTS_SELECTOR = '#content-start > section > div > div > div.col-12.col-md-12.col-lg-10 > div.product-list.product-list--md-5.js-product-layout-container.product-list--grid > article';
+    public const NEXT_PAGE_BUTTON_SELECTOR = '#content-start > section > div > div > div.col-12.col-md-12.col-lg-10 > div.product-pagination > div > div:nth-child(2) > ul > li:last-child > a';
 
     /**
      * @var Client
      */
     private $client;
 
-    public function __construct(Client $client, KonzumSubcategory $konzumSubcategory)
+    public function __construct(WebInventoryService $webInventoryService, KonzumSubcategory $konzumSubcategory)
     {
         static::$url = $konzumSubcategory->getLink().'?sort%5B%5D=&per_page=100';
         static::$name = $konzumSubcategory->getName();
-        parent::__construct($client);
+        parent::__construct($webInventoryService);
     }
 
     /**
@@ -74,5 +76,10 @@ class SubcategoryPage extends Page
         }
 
         return $productObjects;
+    }
+
+    public function getNextPageLink()
+    {
+        return $this->getElementBySelector(self::NEXT_PAGE_BUTTON_SELECTOR)->getAttribute('href');
     }
 }

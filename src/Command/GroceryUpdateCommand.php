@@ -3,7 +3,6 @@
 namespace App\Command;
 
 use App\Grocery\GroceryService;
-use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -31,13 +30,10 @@ class GroceryUpdateCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        set_time_limit(0);
         $inputOutput = new SymfonyStyle($input, $output);
 
-        try {
-            $this->groceryService->refreshWarehouses();
-        } catch (Exception $exception) {
-            $inputOutput->error($exception->getMessage());
-        }
+        $this->groceryService->refreshWarehouses();
 
         $inputOutput->success('All warehouses updated');
 

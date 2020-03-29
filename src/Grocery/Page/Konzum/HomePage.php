@@ -20,16 +20,6 @@ class HomePage extends Page
     protected static $waitForSelectorOnInit = self::CATEGORY_EXPAND_BUTTON_SELECTOR;
 
     /**
-     * @var Client
-     */
-    private $client;
-
-    public function __construct(Client $client)
-    {
-        parent::__construct($client);
-    }
-
-    /**
      * @return KonzumCategory[]
      */
     public function getCategoryObjects(): array
