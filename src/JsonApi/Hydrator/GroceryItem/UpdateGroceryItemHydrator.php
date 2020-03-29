@@ -30,6 +30,9 @@ class UpdateGroceryItemHydrator extends AbstractGroceryItemHydrator
             'updatedAt' => function (GroceryItem $groceryItem, $attribute, $data, $attributeName) {
                 $groceryItem->setUpdatedAt(new \DateTime($attribute));
             },
+            'source' => function (GroceryItem $groceryItem, $attribute, $data, $attributeName) {
+                $groceryItem->setSource($attribute);
+            },
         ];
     }
 }

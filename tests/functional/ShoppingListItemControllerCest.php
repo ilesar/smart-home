@@ -1,13 +1,13 @@
 <?php namespace App\Tests;
 use Codeception\Util\HttpCode;
 
-class GroceryItemControllerCest
+class ShoppingListItemControllerCest
 {
-    public function tryToGetGroceryItems(FunctionalTester $I)
+    public function tryToGetShoppingItems(FunctionalTester $I)
     {
         $I->amLoggedAsAdmin();
 
-        $I->sendGET('/grocery/items');
+        $I->sendGET('/shopping/list/items');
         $I->seeResponseCodeIs(HttpCode::OK);
     }
 
