@@ -84,7 +84,8 @@
         ],
         "db:import": [
             "bin/console import:products",
-            "bin/console import:proxies"
+            "bin/console import:proxies",
+            "bin/console import:users"
         ],
         "product:icons": [
             "bin/console product:icons"

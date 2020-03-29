@@ -27,18 +27,26 @@ class FunctionalTester extends Actor
 {
     use _generated\FunctionalTesterActions;
 
-    public function amLoggedAs(string $username): void
+    public function amLoggedAsAdmin(): void
     {
         /** @var User $user */
-        $user = $this->grabUserByUsername($username);
+        $user = $this->grabUserByEmail('ivan.lesar.pmf+smarthome@gmail.com');
         $token = $this->grabJWTManager()->create($user);
         $this->amBearerAuthenticated($token);
     }
 
-    public function grabUserByUsername(string $username)
+    public function amLoggedAs(string $email): void
+    {
+        /** @var User $user */
+        $user = $this->grabUserByEmail($email);
+        $token = $this->grabJWTManager()->create($user);
+        $this->amBearerAuthenticated($token);
+    }
+
+    public function grabUserByEmail(string $email)
     {
         return $this->grabEntityFromRepository(User::class, [
-            'username' => $username,
+            'email' => $email,
         ]);
     }
 
