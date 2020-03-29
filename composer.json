@@ -20,6 +20,11 @@
     },
     "require-dev": {
         "codeception/codeception": "^4.0",
+        "codeception/module-asserts": "^1.1",
+        "codeception/module-doctrine2": "^1.0",
+        "codeception/module-phpbrowser": "^1.0",
+        "codeception/module-rest": "^1.2",
+        "codeception/module-symfony": "^1.0",
         "doctrine/doctrine-fixtures-bundle": "^3.3",
         "friendsofphp/php-cs-fixer": "^2.16",
         "phootwork/collection": "^2.0",
@@ -76,6 +81,10 @@
         "db:migrate": [
             "bin/console doctrine:migrations:migrate --allow-no-migration --no-interaction"
         ],
+        "db:import": [
+            "bin/console import:products",
+            "bin/console import:proxies"
+        ],
         "product:icons": [
             "bin/console product:icons"
         ],
@@ -83,7 +92,8 @@
             "@db:drop",
             "@db:create",
             "@db:migrate",
-            "@db:fixtures"
+            "@db:fixtures",
+            "@db:import"
         ],
         "db:fixtures": [
             "bin/console doctrine:fixtures:load --no-interaction --append"
