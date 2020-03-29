@@ -11,15 +11,6 @@ class GroceryItemControllerCest
         $I->seeResponseCodeIs(HttpCode::OK);
     }
 
-    // tests
-    public function tryToGetOneGroceryItem(FunctionalTester $I)
-    {
-        $I->amLoggedAsAdmin();
-
-        $I->sendGET('/grocery/items/1');
-        $I->seeResponseCodeIs(HttpCode::OK);
-    }
-
     public function tryToCreateGroceryItem(FunctionalTester $I)
     {
         $I->amLoggedAsAdmin();

@@ -11,112 +11,184 @@ class ShoppingListItemControllerCest
         $I->seeResponseCodeIs(HttpCode::OK);
     }
 
-    // tests
-    public function tryToGetOneGroceryItem(FunctionalTester $I)
-    {
-        $I->amLoggedAsAdmin();
-
-        $I->sendGET('/grocery/items/1');
-        $I->seeResponseCodeIs(HttpCode::OK);
-    }
-
-    public function tryToCreateGroceryItem(FunctionalTester $I)
+    public function tryToCreateShoppingListItem(FunctionalTester $I)
     {
         $I->amLoggedAsAdmin();
 
         $params = [
             'data' => [
-                'type' => 'grocery_items',
+                'type' => 'shopping_list_items',
                 'attributes' => [
-                    'name' => 'Test name',
-                    'source' => 'test',
-                    'price' => 100.10,
+                    'quantity' => 5,
+                ],
+                'relationships' => [
+                    'groceryItem' => [
+                        'data' => [
+                            'type' => 'grocery_items',
+                            'id' => '1',
+                        ],
+                    ],
                 ],
             ],
         ];
 
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->haveHttpHeader('Accept', 'application/json');
-        $I->sendPOST('/grocery/items/', $params);
+        $I->sendPOST('/shopping/list/items/', $params);
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $responseData = $I->grabDataFromResponseByJsonPath('$.data.id');
 
-        $I->sendGET('/grocery/items/'.$responseData[0]);
+        $I->sendGET('/shopping/list/items/'.$responseData[0]);
         $I->seeResponseCodeIs(HttpCode::OK);
     }
 
-    public function tryToCreateGroceryItemWithoutName(FunctionalTester $I)
+    public function tryToCreateShoppingListItemWithoutGroceryItem(FunctionalTester $I)
     {
         $I->amLoggedAsAdmin();
 
         $params = [
             'data' => [
-                'type' => 'grocery_items',
+                'type' => 'shopping_list_items',
                 'attributes' => [
-                    'source' => 'test',
-                    'price' => 100.10,
+                    'quantity' => 10,
                 ],
             ],
         ];
 
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->haveHttpHeader('Accept', 'application/json');
-        $I->sendPOST('/grocery/items/', $params);
+        $I->sendPOST('/shopping/list/items/', $params);
         $I->seeResponseCodeIs(HttpCode::UNPROCESSABLE_ENTITY);
     }
 
-    public function tryToEditGroceryItem(FunctionalTester $I)
+    public function tryToEditShoppingListItem(FunctionalTester $I)
     {
         $I->amLoggedAsAdmin();
 
         $params = [
             'data' => [
-                'type' => 'grocery_items',
-                'id' => '1',
+                'type' => 'shopping_list_items',
                 'attributes' => [
-                    'description' => 'Test description',
+                    'quantity' => 5,
+                ],
+                'relationships' => [
+                    'groceryItem' => [
+                        'data' => [
+                            'type' => 'grocery_items',
+                            'id' => '1',
+                        ],
+                    ],
                 ],
             ],
         ];
 
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->haveHttpHeader('Accept', 'application/json');
-        $I->sendPATCH('/grocery/items/1', $params);
+        $I->sendPOST('/shopping/list/items/', $params);
         $I->seeResponseCodeIs(HttpCode::OK);
 
-        $I->sendGET('/grocery/items/1');
-        $responseData = $I->grabDataFromResponseByJsonPath('$.data..description');
-        $I->assertEquals('Test description', $responseData[0]);
-    }
-
-    public function tryToEditPriceAsNegativeNumber(FunctionalTester $I)
-    {
-        $I->amLoggedAsAdmin();
+        $responseData = $I->grabDataFromResponseByJsonPath('$.data.id');
+        $createdId = $responseData[0];
 
         $params = [
             'data' => [
-                'type' => 'grocery_items',
-                'id' => '1',
+                'type' => 'shopping_list_items',
+                'id' => (string) $createdId,
                 'attributes' => [
-                    'price' => -100.10,
+                    'quantity' => 4,
                 ],
             ],
         ];
 
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->haveHttpHeader('Accept', 'application/json');
-        $I->sendPATCH('/grocery/items/1', $params);
-        $I->seeResponseCodeIs(HttpCode::UNPROCESSABLE_ENTITY);
+        $I->sendPATCH('/shopping/list/items/'.$createdId, $params);
+        $resp = $I->grabResponse();
+        $I->seeResponseCodeIs(HttpCode::OK);
+
+        $I->sendGET('/shopping/list/items/'.$createdId);
+        $responseData = $I->grabDataFromResponseByJsonPath('$.data..quantity');
+        $I->assertEquals(4, $responseData[0]);
     }
 
-    public function tryToDeleteGroceryItem(FunctionalTester $I)
+    public function tryToEditQuantityAsNegativeNumber(FunctionalTester $I)
     {
         $I->amLoggedAsAdmin();
 
+        $params = [
+            'data' => [
+                'type' => 'shopping_list_items',
+                'attributes' => [
+                    'quantity' => 5,
+                ],
+                'relationships' => [
+                    'groceryItem' => [
+                        'data' => [
+                            'type' => 'grocery_items',
+                            'id' => '1',
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->haveHttpHeader('Accept', 'application/json');
-        $I->sendDELETE('/grocery/items/1');
+        $I->sendPOST('/shopping/list/items/', $params);
+        $I->seeResponseCodeIs(HttpCode::OK);
+
+        $responseData = $I->grabDataFromResponseByJsonPath('$.data.id');
+        $createdId = $responseData[0];
+
+        $params = [
+            'data' => [
+                'type' => 'shopping_list_items',
+                'id' => (string) $createdId,
+                'attributes' => [
+                    'quantity' => -100,
+                ],
+            ],
+        ];
+
+        $I->haveHttpHeader('Content-Type', 'application/json');
+        $I->haveHttpHeader('Accept', 'application/json');
+        $I->sendPATCH('/shopping/list/items/'.$createdId, $params);
+        $I->seeResponseCodeIs(HttpCode::UNPROCESSABLE_ENTITY);
+    }
+
+    public function tryToDeleteShoppingListItem(FunctionalTester $I)
+    {
+        $I->amLoggedAsAdmin();
+
+        $params = [
+            'data' => [
+                'type' => 'shopping_list_items',
+                'attributes' => [
+                    'quantity' => 5,
+                ],
+                'relationships' => [
+                    'groceryItem' => [
+                        'data' => [
+                            'type' => 'grocery_items',
+                            'id' => '1',
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        $I->haveHttpHeader('Content-Type', 'application/json');
+        $I->haveHttpHeader('Accept', 'application/json');
+        $I->sendPOST('/shopping/list/items/', $params);
+        $I->seeResponseCodeIs(HttpCode::OK);
+
+        $responseData = $I->grabDataFromResponseByJsonPath('$.data.id');
+        $createdId = $responseData[0];
+
+        $I->haveHttpHeader('Content-Type', 'application/json');
+        $I->haveHttpHeader('Accept', 'application/json');
+        $I->sendDELETE('/shopping/list/items/'.$createdId);
         $I->seeResponseCodeIs(HttpCode::NO_CONTENT);
     }
 }

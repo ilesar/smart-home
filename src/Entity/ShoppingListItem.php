@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Entity\Traits\DeletableTrait;
 use App\Entity\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ShoppingListItemRepository")
@@ -26,11 +27,13 @@ class ShoppingListItem
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\GroceryItem", inversedBy="shoppingListItems")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull()
      */
     private $groceryItem;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Positive()
      */
     private $quantity;
 
