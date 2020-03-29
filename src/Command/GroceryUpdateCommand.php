@@ -37,7 +37,6 @@ class GroceryUpdateCommand extends Command
             $this->groceryService->refreshWarehouses();
         } catch (Exception $exception) {
             $inputOutput->error($exception->getMessage());
-            throw $exception;
         }
 
         $inputOutput->success('All warehouses updated');

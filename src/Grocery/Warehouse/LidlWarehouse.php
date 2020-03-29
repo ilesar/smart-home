@@ -1,13 +1,12 @@
 <?php
 
 
-namespace App\Grocery\Model\Warehouse;
+namespace App\Grocery\Warehouse;
 
 
 use App\Grocery\Interfaces\WarehouseInterface;
-use App\Grocery\Model\Base\BaseWarehouse;
 
-class PlodineWarehouse extends BaseWarehouse implements WarehouseInterface
+class LidlWarehouse extends BaseWarehouse implements WarehouseInterface
 {
 
     public function refreshStock(): void

@@ -1,11 +1,12 @@
 <?php
 
 
-namespace App\Grocery\Model\Base;
+namespace App\Grocery\Warehouse;
 
 
 use App\Grocery\Service\WebInventoryService;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Panther\Client;
 
 class BaseWarehouse
 {
@@ -66,4 +67,14 @@ class BaseWarehouse
     {
         $this->getInventoryService()->close();
     }
+
+    /**
+     * @return Client
+     */
+    public function getClient(): Client
+    {
+        return $this->getInventoryService()->getClient();
+    }
+
+
 }

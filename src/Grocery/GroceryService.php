@@ -3,6 +3,7 @@
 namespace App\Grocery;
 
 use App\Grocery\Interfaces\WarehouseInterface;
+use Exception;
 
 class GroceryService
 {
@@ -20,8 +21,16 @@ class GroceryService
     {
         foreach ($this->warehouses as $warehouse) {
             $warehouse->open();
-            $warehouse->refreshStock();
-            $warehouse->close();
+
+            try {
+                $warehouse->refreshStock();
+            } catch (Exception $exception) {
+                throw $exception;
+            } finally {
+                $warehouse->close();
+            }
+
+
         }
     }
 }

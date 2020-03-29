@@ -1,11 +1,10 @@
 <?php
 
 
-namespace App\Grocery\Model\Warehouse;
+namespace App\Grocery\Warehouse;
 
 
 use App\Grocery\Interfaces\WarehouseInterface;
-use App\Grocery\Model\Base\BaseWarehouse;
 
 class KauflandWarehouse extends BaseWarehouse implements WarehouseInterface
 {

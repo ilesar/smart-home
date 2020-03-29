@@ -37,10 +37,10 @@ services:
     App\Grocery\GroceryService:
         arguments:
             $warehouses:
-                - '@App\Grocery\Model\Warehouse\KonzumWarehouse'
-                - '@App\Grocery\Model\Warehouse\LidlWarehouse'
-                - '@App\Grocery\Model\Warehouse\PlodineWarehouse'
-                - '@App\Grocery\Model\Warehouse\KauflandWarehouse'
+                - '@App\Grocery\Warehouse\KonzumWarehouse'
+#                - '@App\Grocery\Warehouse\LidlWarehouse'
+#                - '@App\Grocery\Warehouse\PlodineWarehouse'
+#                - '@App\Grocery\Warehouse\KauflandWarehouse'
 
     App\Service\MqttWorkerService:
         arguments:

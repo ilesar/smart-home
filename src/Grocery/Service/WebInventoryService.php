@@ -3,17 +3,18 @@
 namespace App\Grocery\Service;
 
 use Symfony\Component\Panther\Client;
+use Symfony\Component\Panther\DomCrawler\Crawler;
 
 class WebInventoryService
 {
-    private $scraper;
+    private $client;
 
-    public function open()
+    public function open(): void
     {
-        $this->scraper = Client::createChromeClient(null, [
+        $this->client = Client::createChromeClient(null, [
             '--disable-gpu',
             '--headless',
-            '--window-size=1200x1100',
+            '--window-size=1920x1080',
             '--no-sandbox',
             '--disable-popup-blocking',
             '--disable-application-cache',
@@ -21,22 +22,19 @@ class WebInventoryService
             '--start-maximized',
             '--ignore-certificate-errors',
 //            '--proxy-server=socks://127.0.0.1:9050'
-        ], [], 'https://www.konzum.hr');
+        ]);
     }
 
-    public function getPage(string $url, string $waitToAppearSelector)
+    public function close(): void
     {
-        $page = $this->scraper->request('GET', $url);
-
-        if ($waitToAppearSelector) {
-            $this->scraper->waitFor($waitToAppearSelector);
-        }
-
-        return $page;
+        $this->client->close();
     }
 
-    public function close()
+    /**
+     * @return mixed
+     */
+    public function getClient(): Client
     {
-        $this->scraper->close();
+        return $this->client;
     }
 }
