@@ -1,0 +1,29 @@
+security:
+    encoders:
+        App\Entity\User: bcrypt
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        api:
+            pattern: ^/api
+            anonymous: true
+            stateless: true
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        - { path: ^/api/auth/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/validate/product-form, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/passwords/request-reset, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/passwords/reset, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api, roles: ROLE_USER }

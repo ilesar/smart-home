@@ -7,6 +7,7 @@ parameters:
     mqtt.server.host: '%env(resolve:MQTT_SERVER_HOST)%'
     mqtt.server.port: '%env(resolve:MQTT_SERVER_PORT)%'
     mqtt.client.id: '%env(resolve:MQTT_CLIENT_ID)%'
+    jwt.ttl: '%env(resolve:JWT_TTL)%'
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -58,3 +59,12 @@ services:
                 - '@App\Proxy\Model\UsProxyProxySource'
 
     App\Client\ProxySourceClient: '@eight_points_guzzle.client.proxy_source'
+
+    App\Security\JsonWebTokenGenerator:
+        arguments:
+            $ttl: '%jwt.ttl%'
+
+    app.event_listener.jwt_created_listener:
+        class: App\EventListener\JwtCreatedEventListener
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }
