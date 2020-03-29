@@ -6,7 +6,7 @@ class GroceryItemControllerCest
     // tests
     public function tryToGetGroceryItems(FunctionalTester $I)
     {
-//        $I->amLoggedAsAdmin();
+        $I->amLoggedAsAdmin();
 
         $I->sendGET('/grocery/items');
         $I->seeResponseCodeIs(HttpCode::OK);
