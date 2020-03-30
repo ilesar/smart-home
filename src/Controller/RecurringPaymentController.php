@@ -98,8 +98,14 @@ class RecurringPaymentController extends Controller
     /**
      * @Route("/{id}", name="recurring_payments_delete", methods="DELETE")
      */
-    public function delete(RecurringPayment $recurringPayment): ResponseInterface
+    public function delete(RecurringPayment $recurringPayment, ValidatorInterface $validator): ResponseInterface
     {
+        /** @var ConstraintViolationList $errors */
+        $errors = $validator->validate($recurringPayment, null, ['deleteScenario']);
+        if ($errors->count() > 0) {
+            return $this->validationErrorResponse($errors);
+        }
+
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($recurringPayment);
         $entityManager->flush();

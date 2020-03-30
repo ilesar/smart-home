@@ -6,10 +6,13 @@ use App\Entity\Traits\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator\Constraint as CustomAssert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RecurringPaymentRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @CustomAssert\HasExpenseConstraint(groups={"deleteScenario"})
  */
 class RecurringPayment
 {
@@ -24,11 +27,14 @@ class RecurringPayment
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $name;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
+     * @Assert\Positive()
      */
     private $price;
 

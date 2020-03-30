@@ -6,6 +6,7 @@ use App\Entity\Traits\ResolvableTrait;
 use App\Entity\Traits\TimestampableTrait;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ExpenseRepository")
@@ -26,12 +27,14 @@ class Expense
 
     /**
      * @ORM\Column(name="due_date", type="datetime_immutable")
+     * @Assert\NotBlank()
      */
     private $dueDate;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\RecurringPayment", inversedBy="expenses")
      * @ORM\JoinColumn(nullable=false)
+     *
      */
     private $recurringPayment;
 

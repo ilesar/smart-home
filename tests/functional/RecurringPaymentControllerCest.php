@@ -1,26 +1,25 @@
 <?php namespace App\Tests;
 use Codeception\Util\HttpCode;
 
-class GroceryItemControllerCest
+class RecurringPaymentControllerCest
 {
-    public function tryToGetGroceryItems(FunctionalTester $I)
+    public function tryToGetRecurringPayments(FunctionalTester $I)
     {
         $I->amLoggedAsAdmin();
 
-        $I->sendGET('/grocery/items');
+        $I->sendGET('/recurring/payments');
         $I->seeResponseCodeIs(HttpCode::OK);
     }
 
-    public function tryToCreateGroceryItem(FunctionalTester $I)
+    public function tryToCreateRecurringPayment(FunctionalTester $I)
     {
         $I->amLoggedAsAdmin();
 
         $params = [
             'data' => [
-                'type' => 'grocery_items',
+                'type' => 'recurring_payments',
                 'attributes' => [
                     'name' => 'Test name',
-                    'source' => 'test',
                     'price' => 100.10,
                 ],
             ],
@@ -28,24 +27,23 @@ class GroceryItemControllerCest
 
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->haveHttpHeader('Accept', 'application/json');
-        $I->sendPOST('/grocery/items/', $params);
+        $I->sendPOST('/recurring/payments/', $params);
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $responseData = $I->grabDataFromResponseByJsonPath('$.data.id');
 
-        $I->sendGET('/grocery/items/'.$responseData[0]);
+        $I->sendGET('/recurring/payments/'.$responseData[0]);
         $I->seeResponseCodeIs(HttpCode::OK);
     }
 
-    public function tryToCreateGroceryItemWithoutName(FunctionalTester $I)
+    public function tryToCreateRecurringPaymentWithoutName(FunctionalTester $I)
     {
         $I->amLoggedAsAdmin();
 
         $params = [
             'data' => [
-                'type' => 'grocery_items',
+                'type' => 'recurring_payments',
                 'attributes' => [
-                    'source' => 'test',
                     'price' => 100.10,
                 ],
             ],
@@ -53,72 +51,51 @@ class GroceryItemControllerCest
 
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->haveHttpHeader('Accept', 'application/json');
-        $I->sendPOST('/grocery/items/', $params);
+        $I->sendPOST('/recurring/payments/', $params);
         $I->seeResponseCodeIs(HttpCode::UNPROCESSABLE_ENTITY);
     }
 
-    public function tryToCreateGroceryItemWithoutPrice(FunctionalTester $I)
+    public function tryToCreateRecurringPaymentWithoutPrice(FunctionalTester $I)
     {
         $I->amLoggedAsAdmin();
 
         $params = [
             'data' => [
-                'type' => 'grocery_items',
+                'type' => 'recurring_payments',
                 'attributes' => [
                     'name' => 'Test name',
-                    'source' => 'test',
                 ],
             ],
         ];
 
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->haveHttpHeader('Accept', 'application/json');
-        $I->sendPOST('/grocery/items/', $params);
+        $I->sendPOST('/recurring/payments/', $params);
         $I->seeResponseCodeIs(HttpCode::UNPROCESSABLE_ENTITY);
     }
 
-    public function tryToCreateGroceryItemWithoutSource(FunctionalTester $I)
+    public function tryToEditRecurringPaymentWithNoExpenses(FunctionalTester $I)
     {
         $I->amLoggedAsAdmin();
 
         $params = [
             'data' => [
-                'type' => 'grocery_items',
-                'attributes' => [
-                    'name' => 'Test name',
-                    'price' => 100.10,
-                ],
-            ],
-        ];
-
-        $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->haveHttpHeader('Accept', 'application/json');
-        $I->sendPOST('/grocery/items/', $params);
-        $I->seeResponseCodeIs(HttpCode::UNPROCESSABLE_ENTITY);
-    }
-
-    public function tryToEditGroceryItem(FunctionalTester $I)
-    {
-        $I->amLoggedAsAdmin();
-
-        $params = [
-            'data' => [
-                'type' => 'grocery_items',
+                'type' => 'recurring_payments',
                 'id' => '1',
                 'attributes' => [
-                    'description' => 'Test description',
+                    'name' => 'Test name',
                 ],
             ],
         ];
 
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->haveHttpHeader('Accept', 'application/json');
-        $I->sendPATCH('/grocery/items/1', $params);
+        $I->sendPATCH('/recurring/payments/1', $params);
         $I->seeResponseCodeIs(HttpCode::OK);
 
-        $I->sendGET('/grocery/items/1');
-        $responseData = $I->grabDataFromResponseByJsonPath('$.data..description');
-        $I->assertEquals('Test description', $responseData[0]);
+        $I->sendGET('/recurring/payments/1');
+        $responseData = $I->grabDataFromResponseByJsonPath('$.data..name');
+        $I->assertEquals('Test name', $responseData[0]);
     }
 
     public function tryToEditPriceAsNegativeNumber(FunctionalTester $I)
@@ -127,7 +104,7 @@ class GroceryItemControllerCest
 
         $params = [
             'data' => [
-                'type' => 'grocery_items',
+                'type' => 'recurring_payments',
                 'id' => '1',
                 'attributes' => [
                     'price' => -100.10,
@@ -137,17 +114,27 @@ class GroceryItemControllerCest
 
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->haveHttpHeader('Accept', 'application/json');
-        $I->sendPATCH('/grocery/items/1', $params);
+        $I->sendPATCH('/recurring/payments/1', $params);
         $I->seeResponseCodeIs(HttpCode::UNPROCESSABLE_ENTITY);
     }
 
-    public function tryToDeleteGroceryItem(FunctionalTester $I)
+    public function tryToDeleteRecurringPayment(FunctionalTester $I)
     {
         $I->amLoggedAsAdmin();
 
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->haveHttpHeader('Accept', 'application/json');
-        $I->sendDELETE('/grocery/items/1');
+        $I->sendDELETE('/recurring/payments/1');
         $I->seeResponseCodeIs(HttpCode::NO_CONTENT);
+    }
+
+    public function tryToDeleteRecurringPaymentWithAddedExpenses(FunctionalTester $I)
+    {
+        $I->amLoggedAsAdmin();
+
+        $I->haveHttpHeader('Content-Type', 'application/json');
+        $I->haveHttpHeader('Accept', 'application/json');
+        $I->sendDELETE('/recurring/payments/2');
+        $I->seeResponseCodeIs(HttpCode::UNPROCESSABLE_ENTITY);
     }
 }
