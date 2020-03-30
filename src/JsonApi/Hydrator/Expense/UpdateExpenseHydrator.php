@@ -3,6 +3,7 @@
 namespace App\JsonApi\Hydrator\Expense;
 
 use App\Entity\Expense;
+use DateTimeImmutable;
 
 /**
  * Update Expense Hydrator.
@@ -15,14 +16,8 @@ class UpdateExpenseHydrator extends AbstractExpenseHydrator
     protected function getAttributeHydrator($expense): array
     {
         return [
-            'name' => function (Expense $expense, $attribute, $data, $attributeName) {
-                $expense->setName($attribute);
-            },
-            'price' => function (Expense $expense, $attribute, $data, $attributeName) {
-                $expense->setPrice($attribute);
-            },
             'dueDate' => function (Expense $expense, $attribute, $data, $attributeName) {
-                $expense->setDueDate(new \DateTime($attribute));
+                $expense->setDueDate(new DateTimeImmutable($attribute));
             },
             'createdAt' => function (Expense $expense, $attribute, $data, $attributeName) {
                 $expense->setCreatedAt(new \DateTime($attribute));

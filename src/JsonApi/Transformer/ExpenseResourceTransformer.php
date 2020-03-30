@@ -51,12 +51,6 @@ class ExpenseResourceTransformer extends AbstractResource
     public function getAttributes($expense): array
     {
         return [
-            'name' => function (Expense $expense) {
-                return $expense->getName();
-            },
-            'price' => function (Expense $expense) {
-                return $expense->getPrice();
-            },
             'dueDate' => function (Expense $expense) {
                 return $expense->getDueDate()->format(DATE_ATOM);
             },

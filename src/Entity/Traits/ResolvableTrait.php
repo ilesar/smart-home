@@ -24,4 +24,12 @@ trait ResolvableTrait
     {
         return $this->isResolved;
     }
+
+    /**
+     * @param bool $isResolved
+     */
+    public function setIsResolved(bool $isResolved): void
+    {
+        $this->isResolved = $isResolved;
+    }
 }

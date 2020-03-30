@@ -12,7 +12,10 @@ use App\Repository\ExpenseRepository;
 use Paknahad\JsonApiBundle\Controller\Controller;
 use Paknahad\JsonApiBundle\Helper\ResourceCollection;
 use Psr\Http\Message\ResponseInterface;
+use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Exception\MethodNotAllowedException;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use WoohooLabs\Yin\JsonApi\Exception\DefaultExceptionFactory;
@@ -38,30 +41,6 @@ class ExpenseController extends Controller
     }
 
     /**
-     * @Route("/", name="expenses_new", methods="POST")
-     */
-    public function new(ValidatorInterface $validator, DefaultExceptionFactory $exceptionFactory): ResponseInterface
-    {
-        $entityManager = $this->getDoctrine()->getManager();
-
-        $expense = $this->jsonApi()->hydrate(new CreateExpenseHydrator($entityManager, $exceptionFactory), new Expense());
-
-        /** @var ConstraintViolationList $errors */
-        $errors = $validator->validate($expense);
-        if ($errors->count() > 0) {
-            return $this->validationErrorResponse($errors);
-        }
-
-        $entityManager->persist($expense);
-        $entityManager->flush();
-
-        return $this->jsonApi()->respond()->ok(
-            new ExpenseDocument(new ExpenseResourceTransformer()),
-            $expense
-        );
-    }
-
-    /**
      * @Route("/{id}", name="expenses_show", methods="GET")
      */
     public function show(Expense $expense): ResponseInterface
@@ -70,40 +49,5 @@ class ExpenseController extends Controller
             new ExpenseDocument(new ExpenseResourceTransformer()),
             $expense
         );
-    }
-
-    /**
-     * @Route("/{id}", name="expenses_edit", methods="PATCH")
-     */
-    public function edit(Expense $expense, ValidatorInterface $validator, DefaultExceptionFactory $exceptionFactory): ResponseInterface
-    {
-        $entityManager = $this->getDoctrine()->getManager();
-
-        $expense = $this->jsonApi()->hydrate(new UpdateExpenseHydrator($entityManager, $exceptionFactory), $expense);
-
-        /** @var ConstraintViolationList $errors */
-        $errors = $validator->validate($expense);
-        if ($errors->count() > 0) {
-            return $this->validationErrorResponse($errors);
-        }
-
-        $entityManager->flush();
-
-        return $this->jsonApi()->respond()->ok(
-            new ExpenseDocument(new ExpenseResourceTransformer()),
-            $expense
-        );
-    }
-
-    /**
-     * @Route("/{id}", name="expenses_delete", methods="DELETE")
-     */
-    public function delete(Expense $expense): ResponseInterface
-    {
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($expense);
-        $entityManager->flush();
-
-        return $this->jsonApi()->respond()->genericSuccess(204);
     }
 }

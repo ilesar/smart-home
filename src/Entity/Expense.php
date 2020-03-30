@@ -34,7 +34,7 @@ class Expense
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\RecurringPayment", inversedBy="expenses")
      * @ORM\JoinColumn(nullable=false)
-     *
+     * @Assert\NotBlank()
      */
     private $recurringPayment;
 
