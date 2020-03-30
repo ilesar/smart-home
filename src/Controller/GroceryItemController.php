@@ -101,7 +101,7 @@ class GroceryItemController extends Controller
     public function delete(GroceryItem $groceryItem): ResponseInterface
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($groceryItem);
+        $groceryItem->delete();
         $entityManager->flush();
 
         return $this->jsonApi()->respond()->genericSuccess(204);

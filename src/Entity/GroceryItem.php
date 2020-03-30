@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\DeletableTrait;
 use App\Entity\Traits\TimestampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -15,6 +16,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class GroceryItem
 {
     use TimestampableTrait;
+
+    use DeletableTrait;
 
     /**
      * @ORM\Id()

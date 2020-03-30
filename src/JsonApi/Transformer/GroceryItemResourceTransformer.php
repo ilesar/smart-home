@@ -67,6 +67,9 @@ class GroceryItemResourceTransformer extends AbstractResource
             'updatedAt' => function (GroceryItem $groceryItem) {
                 return $groceryItem->getUpdatedAt()->format(DATE_ATOM);
             },
+            'isDeleted' => function (GroceryItem $shoppingListItem) {
+                return $shoppingListItem->getIsDeleted();
+            },
         ];
     }
 

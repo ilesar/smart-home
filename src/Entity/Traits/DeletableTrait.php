@@ -11,7 +11,7 @@ trait DeletableTrait
     /**
      * @var bool
      *
-     * @ORM\Column(name="is_dleted", type="boolean")
+     * @ORM\Column(name="is_deleted", type="boolean")
      */
     private $isDeleted = false;
 

@@ -16,8 +16,6 @@ class ShoppingListItem
 {
     use TimestampableTrait;
 
-    use DeletableTrait;
-
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
