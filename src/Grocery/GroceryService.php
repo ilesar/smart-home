@@ -29,8 +29,21 @@ class GroceryService
             } finally {
                 $warehouse->close();
             }
+        }
+    }
 
+    public function fetchImagesForProducts()
+    {
+        foreach ($this->warehouses as $warehouse) {
+            $warehouse->open();
 
+            try {
+                $warehouse->fetchImagesForStock();
+            } catch (Exception $exception) {
+                throw $exception;
+            } finally {
+                $warehouse->close();
+            }
         }
     }
 }

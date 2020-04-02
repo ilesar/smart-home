@@ -5,6 +5,7 @@ namespace App\Grocery\Warehouse;
 
 
 use App\Grocery\Service\WebInventoryService;
+use App\Service\ConfigurationService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Panther\Client;
 
@@ -18,12 +19,17 @@ class BaseWarehouse
      * @var WebInventoryService
      */
     private $inventoryService;
+    /**
+     * @var ConfigurationService
+     */
+    private $configuration;
 
-    public function __construct(EntityManagerInterface $entityManager, WebInventoryService $inventoryService)
+    public function __construct(EntityManagerInterface $entityManager, WebInventoryService $inventoryService, ConfigurationService $configuration)
     {
 
         $this->entityManager = $entityManager;
         $this->inventoryService = $inventoryService;
+        $this->configuration = $configuration;
     }
 
     /**
@@ -74,6 +80,14 @@ class BaseWarehouse
     public function getClient(): Client
     {
         return $this->getInventoryService()->getClient();
+    }
+
+    /**
+     * @return ConfigurationService
+     */
+    public function getConfiguration(): ConfigurationService
+    {
+        return $this->configuration;
     }
 
 

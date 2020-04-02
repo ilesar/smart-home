@@ -7,7 +7,7 @@ namespace App\Entity;
 use App\Entity\Traits\TimestampableTrait;
 use App\Entity\Traits\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
@@ -26,9 +26,9 @@ class Image
     private $id;
 
     /**
-     * @var UploadedFile|null
+     * @var File|null
      */
-    private $uploadedFile;
+    private $file;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -55,14 +55,14 @@ class Image
         $this->filename = $filename;
     }
 
-    public function setUploadedFile(?UploadedFile $uploadedFile): void
+    public function setFile(?File $file): void
     {
-        $this->uploadedFile = $uploadedFile;
+        $this->file = $file;
     }
 
-    public function getUploadedFile(): ?UploadedFile
+    public function getFile(): ?File
     {
-        return $this->uploadedFile;
+        return $this->file;
     }
 
     public function getGroceryItem(): ?GroceryItem

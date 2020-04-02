@@ -51,7 +51,7 @@ class ImageResourceTransformer extends AbstractResource
     public function getAttributes($image): array
     {
         return [
-            'filename' => function (Image $image) {
+            'image' => function (Image $image) {
                 return $image->getFilename();
             },
             'uuid' => function (Image $image) {

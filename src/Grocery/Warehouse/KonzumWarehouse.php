@@ -3,12 +3,15 @@
 namespace App\Grocery\Warehouse;
 
 use App\Entity\GroceryItem;
+use App\Entity\Image;
 use App\Grocery\Interfaces\WarehouseInterface;
 use App\Grocery\Page\Konzum\CategoryPage;
 use App\Grocery\Page\Konzum\HomePage;
 use App\Grocery\Page\Konzum\SubcategoryPage;
 use App\Grocery\ValueObject\KonzumSubcategory;
 use App\Repository\GroceryItemRepository;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\File;
 
 class KonzumWarehouse extends BaseWarehouse implements WarehouseInterface
 {
@@ -53,7 +56,6 @@ class KonzumWarehouse extends BaseWarehouse implements WarehouseInterface
 
     private function parseProductList(SubcategoryPage $productPage)
     {
-        // TODO: parse product with pagination
         $productPage->takeScreenshot();
         $productObjects = $productPage->getProductObjects();
 
@@ -86,5 +88,34 @@ class KonzumWarehouse extends BaseWarehouse implements WarehouseInterface
             $nextPageSubcategory = new KonzumSubcategory('otherpage', $nextPageLink);
             $this->parseProductList(new SubcategoryPage($this->getInventoryService(), $nextPageSubcategory));
         }
+    }
+
+    public function fetchImagesForStock(): void
+    {
+        $entityManager = $this->getEntityManager();
+        /** @var GroceryItemRepository $groceryRepository */
+        $groceryRepository = $entityManager->getRepository(GroceryItem::class);
+
+        $groceryItem = $groceryRepository->findOneBy([]);
+
+        $filesystem = new Filesystem();
+        $downloadedFilePath = dirname(__DIR__).'/slika.jpeg';
+        $filesystem->copy($groceryItem->getSource(), $downloadedFilePath);
+
+        $file = new File(dirname(__DIR__).'/slika.jpeg');
+        $hashedFileName = vsprintf('%s.%s', [
+            sha1(random_bytes(20)),
+            $file->guessExtension(),
+        ]);
+
+        $file->move($this->getConfiguration()->getGroceryImagePath(), $hashedFileName);
+
+        $image = new Image();
+        $image->setFile($file);
+        $image->setFilename($hashedFileName);
+        $groceryItem->setImage($image);
+
+        $entityManager->persist($image);
+        $entityManager->flush();
     }
 }

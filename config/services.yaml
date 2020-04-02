@@ -7,6 +7,7 @@ parameters:
     mqtt.server.host: '%env(resolve:MQTT_SERVER_HOST)%'
     mqtt.server.port: '%env(resolve:MQTT_SERVER_PORT)%'
     mqtt.client.id: '%env(resolve:MQTT_CLIENT_ID)%'
+    grocery.image.path: '%env(resolve:GROCERY_IMAGES_PATH)%'
     jwt.ttl: '%env(resolve:JWT_TTL)%'
 services:
     # default configuration for services in *this* file
@@ -34,6 +35,11 @@ services:
             $host: '%mqtt.server.host%'
             $port: '%mqtt.server.port%'
             $clientId: '%mqtt.client.id%'
+
+    App\Service\FileUploadService:
+        arguments:
+            $uploadPath: '%grocery.image.path%'
+
 
     App\Grocery\GroceryService:
         arguments:
@@ -68,3 +74,9 @@ services:
         class: App\EventListener\JwtCreatedEventListener
         tags:
             - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }
+
+    app.event_listener.file_upload_listener:
+        class: App\EventListener\FileUploadListener
+        arguments: []
+        tags:
+            - { name: doctrine.orm.entity_listener, lazy: true }

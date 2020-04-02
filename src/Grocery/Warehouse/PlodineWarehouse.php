@@ -13,4 +13,9 @@ class PlodineWarehouse extends BaseWarehouse implements WarehouseInterface
     {
         // TODO: Implement refresh() method.
     }
+
+    public function fetchImagesForStock(): void
+    {
+        // TODO: Implement fetchImagesForStock() method.
+    }
 }
