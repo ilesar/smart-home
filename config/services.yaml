@@ -8,6 +8,7 @@ parameters:
     mqtt.server.port: '%env(resolve:MQTT_SERVER_PORT)%'
     mqtt.client.id: '%env(resolve:MQTT_CLIENT_ID)%'
     grocery.image.path: '%env(resolve:GROCERY_IMAGES_PATH)%'
+    global.static.url: '%env(resolve:STATIC_URL)%'
     jwt.ttl: '%env(resolve:JWT_TTL)%'
 services:
     # default configuration for services in *this* file

@@ -7,6 +7,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 class ConfigurationService
 {
     private const GROCERY_IMAGE_PATH = 'grocery.image.path';
+    private const STATIC_URL = 'global.static.url';
     /**
      * @var ParameterBagInterface
      */
@@ -19,6 +20,18 @@ class ConfigurationService
 
     public function getGroceryImagePath()
     {
-        return $this->params->get(self::GROCERY_IMAGE_PATH);
+        return vsprintf('%s/%s', [
+            $this->params->get(self::GROCERY_IMAGE_PATH),
+            'grocery/images',
+        ]);
+    }
+
+    public function getImagesStaticUrl(string $imageFilename)
+    {
+        return vsprintf('%s/%s/%s', [
+            $this->params->get(self::STATIC_URL),
+            'grocery/images',
+            $imageFilename,
+        ]);
     }
 }

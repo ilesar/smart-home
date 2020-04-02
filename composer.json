@@ -10,6 +10,7 @@
         "lexik/jwt-authentication-bundle": "^2.6",
         "nelmio/cors-bundle": "^2.0",
         "paknahad/jsonapi-bundle": "^4.1",
+        "paknahad/jsonapi-querifier-bundle": "^0.2.1",
         "php-mqtt/client": "^0.1.2",
         "ramsey/uuid": "^4.0",
         "symfony/console": "5.0.*",

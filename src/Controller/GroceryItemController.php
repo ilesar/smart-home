@@ -25,14 +25,14 @@ class GroceryItemController extends Controller
     /**
      * @Route("/", name="grocery_items_index", methods="GET")
      */
-    public function index(GroceryItemRepository $groceryItemRepository, ResourceCollection $resourceCollection): ResponseInterface
+    public function index(GroceryItemRepository $groceryItemRepository, ResourceCollection $resourceCollection, GroceryItemResourceTransformer $groceryItemResourceTransformer): ResponseInterface
     {
         $resourceCollection->setRepository($groceryItemRepository);
 
         $resourceCollection->handleIndexRequest();
 
         return $this->jsonApi()->respond()->ok(
-            new GroceryItemsDocument(new GroceryItemResourceTransformer()),
+            new GroceryItemsDocument($groceryItemResourceTransformer),
             $resourceCollection
         );
     }
@@ -40,7 +40,7 @@ class GroceryItemController extends Controller
     /**
      * @Route("/", name="grocery_items_new", methods="POST")
      */
-    public function new(ValidatorInterface $validator, DefaultExceptionFactory $exceptionFactory): ResponseInterface
+    public function new(ValidatorInterface $validator, DefaultExceptionFactory $exceptionFactory, GroceryItemResourceTransformer $groceryItemResourceTransformer): ResponseInterface
     {
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -56,7 +56,7 @@ class GroceryItemController extends Controller
         $entityManager->flush();
 
         return $this->jsonApi()->respond()->ok(
-            new GroceryItemDocument(new GroceryItemResourceTransformer()),
+            new GroceryItemDocument($groceryItemResourceTransformer),
             $groceryItem
         );
     }
@@ -64,10 +64,10 @@ class GroceryItemController extends Controller
     /**
      * @Route("/{id}", name="grocery_items_show", methods="GET")
      */
-    public function show(GroceryItem $groceryItem): ResponseInterface
+    public function show(GroceryItem $groceryItem, GroceryItemResourceTransformer $groceryItemResourceTransformer): ResponseInterface
     {
         return $this->jsonApi()->respond()->ok(
-            new GroceryItemDocument(new GroceryItemResourceTransformer()),
+            new GroceryItemDocument($groceryItemResourceTransformer),
             $groceryItem
         );
     }
@@ -75,7 +75,7 @@ class GroceryItemController extends Controller
     /**
      * @Route("/{id}", name="grocery_items_edit", methods="PATCH")
      */
-    public function edit(GroceryItem $groceryItem, ValidatorInterface $validator, DefaultExceptionFactory $exceptionFactory): ResponseInterface
+    public function edit(GroceryItem $groceryItem, ValidatorInterface $validator, DefaultExceptionFactory $exceptionFactory, GroceryItemResourceTransformer $groceryItemResourceTransformer): ResponseInterface
     {
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -90,7 +90,7 @@ class GroceryItemController extends Controller
         $entityManager->flush();
 
         return $this->jsonApi()->respond()->ok(
-            new GroceryItemDocument(new GroceryItemResourceTransformer()),
+            new GroceryItemDocument($groceryItemResourceTransformer),
             $groceryItem
         );
     }

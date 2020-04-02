@@ -3,6 +3,7 @@
 namespace App\JsonApi\Transformer;
 
 use App\Entity\GroceryItem;
+use App\Service\ConfigurationService;
 use WoohooLabs\Yin\JsonApi\Schema\Link\Link;
 use WoohooLabs\Yin\JsonApi\Schema\Link\ResourceLinks;
 use WoohooLabs\Yin\JsonApi\Schema\Relationship\ToManyRelationship;
@@ -14,6 +15,16 @@ use WoohooLabs\Yin\JsonApi\Schema\Resource\AbstractResource;
  */
 class GroceryItemResourceTransformer extends AbstractResource
 {
+    /**
+     * @var ConfigurationService
+     */
+    private $configuration;
+
+    public function __construct(ConfigurationService $configuration)
+    {
+        $this->configuration = $configuration;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -103,7 +114,7 @@ class GroceryItemResourceTransformer extends AbstractResource
                         function () use ($groceryItem) {
                             return $groceryItem->getImage();
                         },
-                        new ImageResourceTransformer()
+                        new ImageResourceTransformer($this->configuration)
                     )
                     ->omitDataWhenNotIncluded();
             },
