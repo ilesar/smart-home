@@ -71,6 +71,9 @@ class ShoppingListItemResourceTransformer extends AbstractResource
             'updatedAt' => function (ShoppingListItem $shoppingListItem) {
                 return $shoppingListItem->getUpdatedAt()->format(DATE_ATOM);
             },
+            'isResolved' => function (ShoppingListItem $shoppingListItem) {
+                return $shoppingListItem->getIsResolved();
+            },
         ];
     }
 

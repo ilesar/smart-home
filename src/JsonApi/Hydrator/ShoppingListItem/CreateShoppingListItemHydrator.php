@@ -2,6 +2,7 @@
 
 namespace App\JsonApi\Hydrator\ShoppingListItem;
 
+use App\Entity\Expense;
 use App\Entity\ShoppingListItem;
 
 /**
@@ -26,6 +27,9 @@ class CreateShoppingListItemHydrator extends AbstractShoppingListItemHydrator
             },
             'isDeleted' => function (ShoppingListItem $shoppingListItem, $attribute, $data, $attributeName) {
                 $shoppingListItem->setIsDeleted($attribute);
+            },
+            'isResolved' => function (ShoppingListItem $shoppingListItem, $attribute, $data, $attributeName) {
+                $shoppingListItem->setIsResolved($attribute);
             },
         ];
     }

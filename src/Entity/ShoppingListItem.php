@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\Traits\DeletableTrait;
+use App\Entity\Traits\ResolvableTrait;
 use App\Entity\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Routing\Exception\MethodNotAllowedException;
@@ -15,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class ShoppingListItem
 {
     use TimestampableTrait;
-
+    use ResolvableTrait;
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
