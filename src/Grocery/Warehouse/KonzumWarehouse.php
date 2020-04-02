@@ -96,26 +96,44 @@ class KonzumWarehouse extends BaseWarehouse implements WarehouseInterface
         /** @var GroceryItemRepository $groceryRepository */
         $groceryRepository = $entityManager->getRepository(GroceryItem::class);
 
-        $groceryItem = $groceryRepository->findOneBy([]);
+        $groceryItems = $groceryRepository->findAll();
+        $counter = 0;
+        $count = count($groceryItems);
 
-        $filesystem = new Filesystem();
-        $downloadedFilePath = dirname(__DIR__).'/slika.jpeg';
-        $filesystem->copy($groceryItem->getSource(), $downloadedFilePath);
+        foreach ($groceryItems as $groceryItem) {
+            ++$counter;
+            if ($groceryItem->getImage()) {
+//                echo $groceryItem->getName().' [SKIP]'.PHP_EOL;
+                continue;
+            }
 
-        $file = new File(dirname(__DIR__).'/slika.jpeg');
-        $hashedFileName = vsprintf('%s.%s', [
-            sha1(random_bytes(20)),
-            $file->guessExtension(),
-        ]);
+            try {
+                $filesystem = new Filesystem();
+                $downloadedFilePath = dirname(__DIR__).'/slika.jpeg';
+                $filesystem->copy($groceryItem->getSource(), $downloadedFilePath);
 
-        $file->move($this->getConfiguration()->getGroceryImagePath(), $hashedFileName);
+                $file = new File(dirname(__DIR__).'/slika.jpeg');
+                $hashedFileName = vsprintf('%s.%s', [
+                    sha1(random_bytes(20)),
+                    $file->guessExtension(),
+                ]);
 
-        $image = new Image();
-        $image->setFile($file);
-        $image->setFilename($hashedFileName);
-        $groceryItem->setImage($image);
+                $file->move($this->getConfiguration()->getGroceryImagePath(), $hashedFileName);
 
-        $entityManager->persist($image);
-        $entityManager->flush();
+                $image = new Image();
+                $image->setFile($file);
+                $image->setFilename($hashedFileName);
+                $groceryItem->setImage($image);
+
+                $entityManager->persist($image);
+                $entityManager->flush();
+            } catch (\Exception $e) {
+                echo $groceryItem->getName().' [ERROR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!]'.PHP_EOL;
+                continue;
+            }
+
+            echo round($counter / $count * 100, 4).'%'.' '.$groceryItem->getName().' [DONE] '.PHP_EOL;
+//            sleep(1);
+        }
     }
 }

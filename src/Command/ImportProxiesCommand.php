@@ -26,7 +26,7 @@ class ImportProxiesCommand extends Command
     protected function configure()
     {
         $this
-            ->setDescription('Import Konzum products');
+            ->setDescription('Import proxies');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

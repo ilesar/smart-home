@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -34,7 +35,12 @@ class ImportProductsCommand extends Command
         $inputOutput = new SymfonyStyle($input, $output);
 
         $seedFile = file_get_contents(__DIR__.'/Seed/KonzumProducts.sql');
-        $this->entityManager->getConnection()->exec($seedFile);
+
+        try {
+            $this->entityManager->getConnection()->exec($seedFile);
+        } catch (Exception $e) {
+            dd('test');
+        }
 
         $inputOutput->success('Products imported');
 
