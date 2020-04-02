@@ -25,14 +25,14 @@ class ShoppingListItemController extends Controller
     /**
      * @Route("/", name="shopping_list_items_index", methods="GET")
      */
-    public function index(ShoppingListItemRepository $shoppingListItemRepository, ResourceCollection $resourceCollection): ResponseInterface
+    public function index(ShoppingListItemRepository $shoppingListItemRepository, ResourceCollection $resourceCollection, ShoppingListItemResourceTransformer $shoppingListItemResourceTransformer): ResponseInterface
     {
         $resourceCollection->setRepository($shoppingListItemRepository);
 
         $resourceCollection->handleIndexRequest();
 
         return $this->jsonApi()->respond()->ok(
-            new ShoppingListItemsDocument(new ShoppingListItemResourceTransformer()),
+            new ShoppingListItemsDocument($shoppingListItemResourceTransformer),
             $resourceCollection
         );
     }
@@ -40,7 +40,7 @@ class ShoppingListItemController extends Controller
     /**
      * @Route("/", name="shopping_list_items_new", methods="POST")
      */
-    public function new(ValidatorInterface $validator, DefaultExceptionFactory $exceptionFactory): ResponseInterface
+    public function new(ValidatorInterface $validator, DefaultExceptionFactory $exceptionFactory, ShoppingListItemResourceTransformer $shoppingListItemResourceTransformer): ResponseInterface
     {
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -56,7 +56,7 @@ class ShoppingListItemController extends Controller
         $entityManager->flush();
 
         return $this->jsonApi()->respond()->ok(
-            new ShoppingListItemDocument(new ShoppingListItemResourceTransformer()),
+            new ShoppingListItemDocument($shoppingListItemResourceTransformer),
             $shoppingListItem
         );
     }
@@ -64,10 +64,10 @@ class ShoppingListItemController extends Controller
     /**
      * @Route("/{id}", name="shopping_list_items_show", methods="GET")
      */
-    public function show(ShoppingListItem $shoppingListItem): ResponseInterface
+    public function show(ShoppingListItem $shoppingListItem, ShoppingListItemResourceTransformer $shoppingListItemResourceTransformer): ResponseInterface
     {
         return $this->jsonApi()->respond()->ok(
-            new ShoppingListItemDocument(new ShoppingListItemResourceTransformer()),
+            new ShoppingListItemDocument($shoppingListItemResourceTransformer),
             $shoppingListItem
         );
     }
@@ -75,7 +75,7 @@ class ShoppingListItemController extends Controller
     /**
      * @Route("/{id}", name="shopping_list_items_edit", methods="PATCH")
      */
-    public function edit(ShoppingListItem $shoppingListItem, ValidatorInterface $validator, DefaultExceptionFactory $exceptionFactory): ResponseInterface
+    public function edit(ShoppingListItem $shoppingListItem, ValidatorInterface $validator, DefaultExceptionFactory $exceptionFactory, ShoppingListItemResourceTransformer $shoppingListItemResourceTransformer): ResponseInterface
     {
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -90,7 +90,7 @@ class ShoppingListItemController extends Controller
         $entityManager->flush();
 
         return $this->jsonApi()->respond()->ok(
-            new ShoppingListItemDocument(new ShoppingListItemResourceTransformer()),
+            new ShoppingListItemDocument($shoppingListItemResourceTransformer),
             $shoppingListItem
         );
     }

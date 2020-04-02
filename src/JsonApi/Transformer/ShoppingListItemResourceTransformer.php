@@ -3,6 +3,7 @@
 namespace App\JsonApi\Transformer;
 
 use App\Entity\ShoppingListItem;
+use App\Service\ConfigurationService;
 use WoohooLabs\Yin\JsonApi\Schema\Link\Link;
 use WoohooLabs\Yin\JsonApi\Schema\Link\ResourceLinks;
 use WoohooLabs\Yin\JsonApi\Schema\Relationship\ToOneRelationship;
@@ -13,6 +14,16 @@ use WoohooLabs\Yin\JsonApi\Schema\Resource\AbstractResource;
  */
 class ShoppingListItemResourceTransformer extends AbstractResource
 {
+    /**
+     * @var ConfigurationService
+     */
+    private $configuration;
+
+    public function __construct(ConfigurationService $configuration)
+    {
+        $this->configuration = $configuration;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -83,7 +94,7 @@ class ShoppingListItemResourceTransformer extends AbstractResource
                         function () use ($shoppingListItem) {
                             return $shoppingListItem->getGroceryItem();
                         },
-                        new GroceryItemResourceTransformer()
+                        new GroceryItemResourceTransformer($this->configuration)
                     )
                     ->omitDataWhenNotIncluded();
             },

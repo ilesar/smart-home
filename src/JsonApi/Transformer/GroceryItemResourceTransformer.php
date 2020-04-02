@@ -104,7 +104,7 @@ class GroceryItemResourceTransformer extends AbstractResource
                         function () use ($groceryItem) {
                             return $groceryItem->getShoppingListItems();
                         },
-                        new ShoppingListItemResourceTransformer()
+                        new ShoppingListItemResourceTransformer($this->configuration)
                     )
                     ->omitDataWhenNotIncluded();
             },
