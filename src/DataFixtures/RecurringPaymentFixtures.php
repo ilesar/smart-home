@@ -45,6 +45,7 @@ class RecurringPaymentFixtures extends Fixture
             $payment->setPrice($paymentData['price']);
             $payment->setPeriod($paymentData['period']);
             $payment->setActivationTime($paymentData['activation_time']);
+            $payment->setPaymentTag($paymentData['icon']);
 
             $manager->persist($payment);
             $this->addReference($paymentName, $payment);
@@ -66,57 +67,67 @@ class RecurringPaymentFixtures extends Fixture
                 'price' => 1600.0,
                 'period' => 'month',
                 'activation_time' => $this->createMonthlyMoment(5),
+                'icon' => 'car',
             ],
             self::RENT => [
                 'price' => 3000.0,
                 'period' => 'month',
                 'activation_time' => $this->createMonthlyMoment(25),
+                'icon' => 'home',
             ],
             self::UTILITY_BILLS => [
                 'price' => 800.0,
                 'period' => 'month',
                 'activation_time' => $this->createMonthlyMoment(20),
+                'icon' => 'home',
             ],
             self::INTERNET => [
                 'price' => 179.0,
                 'period' => 'month',
                 'activation_time' => $this->createMonthlyMoment(13),
+                'icon' => 'home',
             ],
             self::INSURANCE_IVAN => [
                 'price' => 69.0,
                 'period' => 'month',
                 'activation_time' => $this->createMonthlyMoment(16),
                 'isAutomated' => true,
+                'icon' => 'bank',
             ],
             self::INSURANCE_SABINA => [
                 'price' => 67.0,
                 'period' => 'month',
                 'activation_time' => $this->createMonthlyMoment(16),
                 'isAutomated' => true,
+                'icon' => 'medicine-box',
             ],
             self::NETFLIX => [
                 'price' => 61.0,
                 'period' => 'month',
                 'activation_time' => $this->createMonthlyMoment(11),
                 'isAutomated' => true,
+                'icon' => 'medicine-box',
             ],
             self::BANK_CHARGES_IVAN_PBZ => [
                 'price' => 24.65,
                 'period' => 'month',
                 'activation_time' => $this->createMonthlyMoment(31),
                 'isAutomated' => true,
+                'icon' => 'bank',
             ],
             self::BANK_CHARGES_SABINA_PBZ => [
                 'price' => 24.65,
                 'period' => 'month',
                 'activation_time' => $this->createMonthlyMoment(31),
                 'isAutomated' => true,
+                'icon' => 'bank',
             ],
             self::BANK_CHARGES_SABINA_ZABA => [
                 'price' => 30,
                 'period' => 'month',
                 'activation_time' => $this->createMonthlyMoment(18),
                 'isAutomated' => true,
+                'icon' => 'bank',
             ],
         ]);
     }
@@ -128,61 +139,73 @@ class RecurringPaymentFixtures extends Fixture
                 'price' => 786.25,
                 'period' => 'year',
                 'activation_time' => $this->createYearlyMoment(15, 8),
+                'icon' => 'car',
             ],
             self::CAR_TECHNICAL_EXAMINATION => [
                 'price' => 0.0,
                 'period' => 'year',
                 'activation_time' => $this->createYearlyMoment(15, 8),
+                'icon' => 'car',
             ],
             self::CAR_SERVICE => [
                 'price' => 1234.0,
                 'period' => 'year',
                 'activation_time' => $this->createYearlyMoment(15, 8),
+                'icon' => 'car',
             ],
             self::CAR_INSURANCE_BASIC => [
                 'price' => 1323.28,
                 'period' => 'year',
                 'activation_time' => $this->createYearlyMoment(15, 8),
+                'icon' => 'car',
             ],
             self::CAR_INSURANCE_KASKO => [
                 'price' => 2595.22,
                 'period' => 'year',
                 'activation_time' => $this->createYearlyMoment(15, 8),
+                'icon' => 'car',
             ],
             self::CAR_PARKING => [
                 'price' => 480.0,
                 'period' => 'year',
                 'activation_time' => $this->createYearlyMoment(2, 10),
+                'icon' => 'car',
             ],
             self::CAR_TIRE_STORAGE_WINTER => [
                 'price' => 200.0,
                 'period' => 'year',
                 'activation_time' => $this->createYearlyMoment(15, 11),
+                'icon' => 'car',
             ],
             self::CAR_TIRE_STORAGE_SUMMER => [
                 'price' => 200.0,
                 'period' => 'year',
                 'activation_time' => $this->createYearlyMoment(15, 11),
+                'icon' => 'car',
             ],
             self::CAR_TIRE_CHANGE_WINTER => [
                 'price' => 276.0,
                 'period' => 'year',
                 'activation_time' => $this->createYearlyMoment(15, 4),
+                'icon' => 'car',
             ],
             self::CAR_TIRE_CHANGE_SUMMER => [
                 'price' => 276.0,
                 'period' => 'year',
                 'activation_time' => $this->createYearlyMoment(15, 4),
+                'icon' => 'car',
             ],
             self::CONTACT_LENSES_SABINA_WINTER => [
                 'price' => 350.0,
                 'period' => 'year',
                 'activation_time' => $this->createYearlyMoment(15, 12),
+                'icon' => 'eye',
             ],
             self::CONTACT_LENSES_SABINA_SUMMER => [
                 'price' => 350.0,
                 'period' => 'year',
                 'activation_time' => $this->createYearlyMoment(15, 6),
+                'icon' => 'eye',
             ],
         ]);
     }

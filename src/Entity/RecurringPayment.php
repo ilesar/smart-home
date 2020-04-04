@@ -62,6 +62,11 @@ class RecurringPayment
      */
     private $isAutomated = false;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $paymentTag;
+
     public function __construct()
     {
         $this->expenses = new ArrayCollection();
@@ -159,6 +164,18 @@ class RecurringPayment
     public function setActivationTime(\DateTimeInterface $activationTime): self
     {
         $this->activationTime = $activationTime;
+
+        return $this;
+    }
+
+    public function getPaymentTag(): ?string
+    {
+        return $this->paymentTag;
+    }
+
+    public function setPaymentTag(?string $paymentTag): self
+    {
+        $this->paymentTag = $paymentTag;
 
         return $this;
     }
