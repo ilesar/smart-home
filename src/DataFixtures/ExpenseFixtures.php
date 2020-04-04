@@ -12,15 +12,15 @@ class ExpenseFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $payment = $this->getReference(RecurringPaymentFixtures::RENT);
-
-        $expense = new Expense();
-        $expense->setDueDate(new DateTimeImmutable());
-        $expense->setRecurringPayment($payment);
-
-        $manager->persist($expense);
-
-        $manager->flush();
+//        $payment = $this->getReference(RecurringPaymentFixtures::RENT);
+//
+//        $expense = new Expense();
+//        $expense->setDueDate(new DateTimeImmutable());
+//        $expense->setRecurringPayment($payment);
+//
+//        $manager->persist($expense);
+//
+//        $manager->flush();
     }
 
     /**
