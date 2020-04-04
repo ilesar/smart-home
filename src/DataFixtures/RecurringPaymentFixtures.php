@@ -26,12 +26,12 @@ class RecurringPaymentFixtures extends Fixture
     public const CAR_INSURANCE_BASIC = 'Auto - Osiguranje';
     public const CAR_INSURANCE_KASKO = 'Auto - Kasko';
     public const CAR_PARKING = 'Auto - Kasko';
-    public const CAR_TIRE_STORAGE_WINTER = 'Auto - Skladištenje guma';
-    public const CAR_TIRE_STORAGE_SUMMER = 'Auto - Skladištenje guma';
-    public const CAR_TIRE_CHANGE_WINTER = 'Auto - Promjena guma';
-    public const CAR_TIRE_CHANGE_SUMMER = 'Auto - Promjena guma';
-    const CONTACT_LENSES_SABINA_WINTER = 'Kontaktne leće - Sabina';
-    const CONTACT_LENSES_SABINA_SUMMER = 'Kontaktne leće - Sabina';
+    public const CAR_TIRE_STORAGE_WINTER = 'Auto - Skladištenje guma (zima)';
+    public const CAR_TIRE_STORAGE_SUMMER = 'Auto - Skladištenje guma (ljeto)';
+    public const CAR_TIRE_CHANGE_WINTER = 'Auto - Promjena guma (zima)';
+    public const CAR_TIRE_CHANGE_SUMMER = 'Auto - Promjena guma (ljeto)';
+    const CONTACT_LENSES_SABINA_WINTER = 'Kontaktne leće - Sabina (zima)';
+    const CONTACT_LENSES_SABINA_SUMMER = 'Kontaktne leće - Sabina (ljeto)';
 
     private $recurringPayments = [];
 
