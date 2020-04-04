@@ -21,6 +21,15 @@ class UpdateRecurringPaymentHydrator extends AbstractRecurringPaymentHydrator
             'price' => function (RecurringPayment $recurringPayment, $attribute, $data, $attributeName) {
                 $recurringPayment->setPrice($attribute);
             },
+            'period' => function (RecurringPayment $recurringPayment, $attribute, $data, $attributeName) {
+                $recurringPayment->setPeriod($attribute);
+            },
+            'activationTime' => function (RecurringPayment $recurringPayment, $attribute, $data, $attributeName) {
+                $recurringPayment->setActivationTime(new \DateTime($attribute));
+            },
+            'isAutomated' => function (RecurringPayment $recurringPayment, $attribute, $data, $attributeName) {
+                $recurringPayment->setIsAutomated($attribute);
+            },
             'createdAt' => function (RecurringPayment $recurringPayment, $attribute, $data, $attributeName) {
                 $recurringPayment->setCreatedAt(new \DateTime($attribute));
             },

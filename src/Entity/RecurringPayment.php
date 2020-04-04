@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\Traits\TimestampableTrait;
+use App\Enum\RecurringPaymentPeriod;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -42,6 +43,24 @@ class RecurringPayment
      * @ORM\OneToMany(targetEntity="App\Entity\Expense", mappedBy="recurringPayment")
      */
     private $expenses;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     */
+    private $period = RecurringPaymentPeriod::MONTH;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @Assert\NotBlank()
+     */
+    private $activationTime;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @Assert\NotBlank()
+     */
+    private $isAutomated = false;
 
     public function __construct()
     {
@@ -104,6 +123,42 @@ class RecurringPayment
                 $expense->setRecurringPayment(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIsAutomated(): ?bool
+    {
+        return $this->isAutomated;
+    }
+
+    public function setIsAutomated(bool $isAutomated): self
+    {
+        $this->isAutomated = $isAutomated;
+
+        return $this;
+    }
+
+    public function getPeriod(): ?string
+    {
+        return $this->period;
+    }
+
+    public function setPeriod(string $period): self
+    {
+        $this->period = $period;
+
+        return $this;
+    }
+
+    public function getActivationTime(): ?\DateTimeInterface
+    {
+        return $this->activationTime;
+    }
+
+    public function setActivationTime(\DateTimeInterface $activationTime): self
+    {
+        $this->activationTime = $activationTime;
 
         return $this;
     }
