@@ -8,12 +8,12 @@ use Doctrine\Persistence\ObjectManager;
 
 class RoomFixtures extends Fixture
 {
-    public const LIVING_ROOM = 'Living room';
-    public const BEDROOM = 'Bedroom';
-    public const KITCHEN = 'Kitchen';
-    public const HALLWAY = 'Hallway';
-    public const BALCONY = 'Balcony';
-    public const BATHROOM = 'Bathroom';
+    public const LIVING_ROOM = 'Dnevna soba';
+    public const BEDROOM = 'Spavaća soba';
+    public const KITCHEN = 'Kuhinja';
+    public const HALLWAY = 'Hodnik';
+    public const BALCONY = 'Balkon';
+    public const BATHROOM = 'Kupaona';
 
     private const ROOM_NAMES = [
         self::LIVING_ROOM,
