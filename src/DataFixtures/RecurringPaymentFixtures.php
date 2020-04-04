@@ -47,6 +47,11 @@ class RecurringPaymentFixtures extends Fixture
             $payment->setActivationTime($paymentData['activation_time']);
             $payment->setPaymentTag($paymentData['icon']);
 
+            if (isset($paymentData['isAutomated'])) {
+                $payment->setIsAutomated($paymentData['isAutomated']);
+
+            }
+
             $manager->persist($payment);
             $this->addReference($paymentName, $payment);
         }

@@ -27,6 +27,9 @@ class CreateRecurringPaymentHydrator extends AbstractRecurringPaymentHydrator
             'activationTime' => function (RecurringPayment $recurringPayment, $attribute, $data, $attributeName) {
                 $recurringPayment->setActivationTime(new \DateTime($attribute));
             },
+            'paymentTag' => function (RecurringPayment $recurringPayment, $attribute, $data, $attributeName) {
+                $recurringPayment->setPaymentTag($attribute);
+            },
             'isAutomated' => function (RecurringPayment $recurringPayment, $attribute, $data, $attributeName) {
                 $recurringPayment->setIsAutomated($attribute);
             },

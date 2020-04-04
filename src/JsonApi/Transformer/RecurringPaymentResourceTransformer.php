@@ -66,6 +66,9 @@ class RecurringPaymentResourceTransformer extends AbstractResource
             'isAutomated' => function (RecurringPayment $recurringPayment) {
                 return $recurringPayment->getIsAutomated();
             },
+            'paymentTag' => function (RecurringPayment $recurringPayment) {
+                return $recurringPayment->getPaymentTag();
+            },
             'createdAt' => function (RecurringPayment $recurringPayment) {
                 return $recurringPayment->getCreatedAt()->format(DATE_ATOM);
             },

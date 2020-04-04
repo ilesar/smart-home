@@ -46,7 +46,6 @@ class RecurringPayment
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
      */
     private $period = RecurringPaymentPeriod::MONTH;
 
@@ -58,7 +57,6 @@ class RecurringPayment
 
     /**
      * @ORM\Column(type="boolean")
-     * @Assert\NotBlank()
      */
     private $isAutomated = false;
 
