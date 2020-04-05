@@ -42,6 +42,11 @@ class Device
      */
     private $configuration;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $deviceType;
+
     public function __construct()
     {
         $this->measurements = new ArrayCollection();
@@ -115,6 +120,18 @@ class Device
     public function setConfiguration(?Configuration $configuration): self
     {
         $this->configuration = $configuration;
+
+        return $this;
+    }
+
+    public function getDeviceType(): ?string
+    {
+        return $this->deviceType;
+    }
+
+    public function setDeviceType(string $deviceType): self
+    {
+        $this->deviceType = $deviceType;
 
         return $this;
     }

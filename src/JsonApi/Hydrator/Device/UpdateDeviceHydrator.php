@@ -18,6 +18,9 @@ class UpdateDeviceHydrator extends AbstractDeviceHydrator
             'name' => function (Device $device, $attribute, $data, $attributeName) {
                 $device->setName($attribute);
             },
+            'deviceType' => function (Device $device, $attribute, $data, $attributeName) {
+                $device->setDeviceType($attribute);
+            },
             'createdAt' => function (Device $device, $attribute, $data, $attributeName) {
                 $device->setCreatedAt(new \DateTime($attribute));
             },

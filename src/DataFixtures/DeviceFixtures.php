@@ -17,17 +17,32 @@ class DeviceFixtures extends Fixture implements DependentFixtureInterface
     public const MOTION_SENSOR = 'Motion sensor';
 
     private const DEVICE_NAMES = [
-        self::TV => RoomFixtures::LIVING_ROOM,
-        self::LAMP => RoomFixtures::BEDROOM,
-        self::TEMP_SENSOR => RoomFixtures::LIVING_ROOM,
-        self::TV_LIGHT => RoomFixtures::LIVING_ROOM,
-        self::MOTION_SENSOR => RoomFixtures::LIVING_ROOM,
+        self::TV => [
+            'room' => RoomFixtures::LIVING_ROOM,
+            'type' => 'desktop',
+        ],
+        self::LAMP => [
+            'room' => RoomFixtures::BEDROOM,
+            'type' => 'bulb',
+        ],
+        self::TEMP_SENSOR => [
+            'room' => RoomFixtures::LIVING_ROOM,
+            'type' => 'alert',
+        ],
+        self::TV_LIGHT => [
+            'room' => RoomFixtures::LIVING_ROOM,
+            'type' => 'bulb',
+        ],
+        self::MOTION_SENSOR => [
+            'room' => RoomFixtures::LIVING_ROOM,
+            'type' => 'heat-map',
+        ],
     ];
 
     public function load(ObjectManager $manager)
     {
-        foreach (self::DEVICE_NAMES as $deviceName => $roomName) {
-            $room = $this->getReference($roomName);
+        foreach (self::DEVICE_NAMES as $deviceName => $roomObject) {
+            $room = $this->getReference($roomObject['room']);
 
             if (!$room instanceof Room) {
                 continue;
@@ -36,6 +51,7 @@ class DeviceFixtures extends Fixture implements DependentFixtureInterface
             $device = new Device();
             $device->setName($deviceName);
             $device->setRoom($room);
+            $device->setDeviceType($roomObject['type']);
 
             $manager->persist($device);
             $this->addReference($deviceName, $device);
