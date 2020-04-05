@@ -50,4 +50,27 @@ class ExpenseController extends Controller
             $expense
         );
     }
+
+    /**
+     * @Route("/{id}", name="devices_edit", methods="PATCH")
+     */
+    public function edit(Expense $expense, ValidatorInterface $validator, DefaultExceptionFactory $exceptionFactory): ResponseInterface
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $expense = $this->jsonApi()->hydrate(new UpdateExpenseHydrator($entityManager, $exceptionFactory), $expense);
+
+        /** @var ConstraintViolationList $errors */
+        $errors = $validator->validate($expense);
+        if ($errors->count() > 0) {
+            return $this->validationErrorResponse($errors);
+        }
+
+        $entityManager->flush();
+
+        return $this->jsonApi()->respond()->ok(
+            new ExpenseDocument(new ExpenseResourceTransformer()),
+            $expense
+        );
+    }
 }
