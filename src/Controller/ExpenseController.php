@@ -26,7 +26,7 @@ use WoohooLabs\Yin\JsonApi\Exception\DefaultExceptionFactory;
 class ExpenseController extends Controller
 {
     /**
-     * @Route("/", name="expenses_index", methods="GET")
+     * @Route("", name="expenses_index", methods="GET")
      */
     public function index(ExpenseRepository $expenseRepository, ResourceCollection $resourceCollection): ResponseInterface
     {

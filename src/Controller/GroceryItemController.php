@@ -23,7 +23,7 @@ use WoohooLabs\Yin\JsonApi\Exception\DefaultExceptionFactory;
 class GroceryItemController extends Controller
 {
     /**
-     * @Route("/", name="grocery_items_index", methods="GET")
+     * @Route("", name="grocery_items_index", methods="GET")
      */
     public function index(GroceryItemRepository $groceryItemRepository, ResourceCollection $resourceCollection, GroceryItemResourceTransformer $groceryItemResourceTransformer): ResponseInterface
     {
@@ -38,7 +38,7 @@ class GroceryItemController extends Controller
     }
 
     /**
-     * @Route("/", name="grocery_items_new", methods="POST")
+     * @Route("", name="grocery_items_new", methods="POST")
      */
     public function new(ValidatorInterface $validator, DefaultExceptionFactory $exceptionFactory, GroceryItemResourceTransformer $groceryItemResourceTransformer): ResponseInterface
     {

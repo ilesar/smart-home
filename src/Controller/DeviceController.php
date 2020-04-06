@@ -24,7 +24,7 @@ use WoohooLabs\Yin\JsonApi\Exception\DefaultExceptionFactory;
 class DeviceController extends Controller
 {
     /**
-     * @Route("/", name="devices_index", methods="GET")
+     * @Route("", name="devices_index", methods="GET")
      */
     public function index(DeviceRepository $deviceRepository, ResourceCollection $resourceCollection): ResponseInterface
     {
@@ -39,7 +39,7 @@ class DeviceController extends Controller
     }
 
     /**
-     * @Route("/", name="devices_new", methods="POST")
+     * @Route("", name="devices_new", methods="POST")
      */
     public function new(ValidatorInterface $validator, DefaultExceptionFactory $exceptionFactory): ResponseInterface
     {

@@ -23,7 +23,7 @@ use WoohooLabs\Yin\JsonApi\Exception\DefaultExceptionFactory;
 class ShoppingListItemController extends Controller
 {
     /**
-     * @Route("/", name="shopping_list_items_index", methods="GET")
+     * @Route("", name="shopping_list_items_index", methods="GET")
      */
     public function index(ShoppingListItemRepository $shoppingListItemRepository, ResourceCollection $resourceCollection, ShoppingListItemResourceTransformer $shoppingListItemResourceTransformer): ResponseInterface
     {
@@ -38,7 +38,7 @@ class ShoppingListItemController extends Controller
     }
 
     /**
-     * @Route("/", name="shopping_list_items_new", methods="POST")
+     * @Route("", name="shopping_list_items_new", methods="POST")
      */
     public function new(ValidatorInterface $validator, DefaultExceptionFactory $exceptionFactory, ShoppingListItemResourceTransformer $shoppingListItemResourceTransformer): ResponseInterface
     {

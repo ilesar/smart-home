@@ -23,7 +23,7 @@ use WoohooLabs\Yin\JsonApi\Exception\DefaultExceptionFactory;
 class ImageController extends Controller
 {
     /**
-     * @Route("/", name="images_index", methods="GET")
+     * @Route("", name="images_index", methods="GET")
      */
     public function index(ImageRepository $imageRepository, ResourceCollection $resourceCollection): ResponseInterface
     {
@@ -38,7 +38,7 @@ class ImageController extends Controller
     }
 
     /**
-     * @Route("/", name="images_new", methods="POST")
+     * @Route("", name="images_new", methods="POST")
      */
     public function new(ValidatorInterface $validator, DefaultExceptionFactory $exceptionFactory): ResponseInterface
     {

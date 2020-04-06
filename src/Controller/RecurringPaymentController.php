@@ -23,7 +23,7 @@ use WoohooLabs\Yin\JsonApi\Exception\DefaultExceptionFactory;
 class RecurringPaymentController extends Controller
 {
     /**
-     * @Route("/", name="recurring_payments_index", methods="GET")
+     * @Route("", name="recurring_payments_index", methods="GET")
      */
     public function index(RecurringPaymentRepository $recurringPaymentRepository, ResourceCollection $resourceCollection): ResponseInterface
     {
@@ -38,7 +38,7 @@ class RecurringPaymentController extends Controller
     }
 
     /**
-     * @Route("/", name="recurring_payments_new", methods="POST")
+     * @Route("", name="recurring_payments_new", methods="POST")
      */
     public function new(ValidatorInterface $validator, DefaultExceptionFactory $exceptionFactory): ResponseInterface
     {
