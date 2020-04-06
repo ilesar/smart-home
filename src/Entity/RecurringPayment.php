@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\DeletableTrait;
 use App\Entity\Traits\TimestampableTrait;
 use App\Enum\RecurringPaymentPeriod;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -18,6 +19,7 @@ use App\Validator\Constraint as CustomAssert;
 class RecurringPayment
 {
     use TimestampableTrait;
+    use DeletableTrait;
 
     /**
      * @ORM\Id()
