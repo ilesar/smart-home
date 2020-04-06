@@ -61,7 +61,7 @@ class RecurringPaymentResourceTransformer extends AbstractResource
                 return $recurringPayment->getPeriod();
             },
             'activationTime' => function (RecurringPayment $recurringPayment) {
-                return $recurringPayment->getUpdatedAt()->format(DATE_ATOM);
+                return $recurringPayment->getActivationTime()->format(DATE_ATOM);
             },
             'isAutomated' => function (RecurringPayment $recurringPayment) {
                 return $recurringPayment->getIsAutomated();
