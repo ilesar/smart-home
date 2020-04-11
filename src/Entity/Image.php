@@ -8,6 +8,7 @@ use App\Entity\Traits\TimestampableTrait;
 use App\Entity\Traits\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
@@ -39,6 +40,21 @@ class Image
      * @ORM\OneToOne(targetEntity="App\Entity\GroceryItem", mappedBy="image", cascade={"persist", "remove"})
      */
     private $groceryItem;
+
+    /**
+     * @var UploadedFile|null
+     */
+    private $uploadedFile;
+
+    public function setUploadedFile(?UploadedFile $uploadedFile): void
+    {
+        $this->uploadedFile = $uploadedFile;
+    }
+
+    public function getUploadedFile(): ?UploadedFile
+    {
+        return $this->uploadedFile;
+    }
 
     public function getId(): ?int
     {

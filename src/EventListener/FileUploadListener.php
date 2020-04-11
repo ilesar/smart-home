@@ -21,7 +21,6 @@ class FileUploadListener
 
     public function prePersist(Image $image): void
     {
-        return;
-//        $this->fileUploadService->uploadFile($image);
+        $this->fileUploadService->uploadFile($image);
     }
 }

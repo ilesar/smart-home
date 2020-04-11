@@ -12,6 +12,7 @@ use App\Repository\ImageRepository;
 use Paknahad\JsonApiBundle\Controller\Controller;
 use Paknahad\JsonApiBundle\Helper\ResourceCollection;
 use Psr\Http\Message\ResponseInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -40,11 +41,13 @@ class ImageController extends Controller
     /**
      * @Route("", name="images_new", methods="POST")
      */
-    public function new(ValidatorInterface $validator, DefaultExceptionFactory $exceptionFactory): ResponseInterface
+    public function new(ValidatorInterface $validator, DefaultExceptionFactory $exceptionFactory, Request $request, ImageResourceTransformer $imageResourceTransformer): ResponseInterface
     {
         $entityManager = $this->getDoctrine()->getManager();
 
-        $image = $this->jsonApi()->hydrate(new CreateImageHydrator($entityManager, $exceptionFactory), new Image());
+        $file = $request->files->get('image');
+        $image = new Image();
+        $image->setUploadedFile($file);
 
         /** @var ConstraintViolationList $errors */
         $errors = $validator->validate($image);
@@ -56,7 +59,7 @@ class ImageController extends Controller
         $entityManager->flush();
 
         return $this->jsonApi()->respond()->ok(
-            new ImageDocument(new ImageResourceTransformer()),
+            new ImageDocument($imageResourceTransformer),
             $image
         );
     }
