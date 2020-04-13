@@ -11,10 +11,11 @@ use Doctrine\Persistence\ObjectManager;
 class DeviceFixtures extends Fixture implements DependentFixtureInterface
 {
     public const TV = 'TV';
-    public const LAMP = 'Xiaomi lamp';
-    public const TEMP_SENSOR = 'Temperature sensor';
-    public const TV_LIGHT = 'Tv light';
-    public const MOTION_SENSOR = 'Motion sensor';
+    public const LAMP = 'Xiaomi Lampa';
+    public const TEMP_SENSOR = 'Temperatura';
+    public const TV_LIGHT = 'TV svijetlo';
+    public const SOFA_LIGHT = 'Svijetlo kod kauča';
+    public const MOTION_SENSOR = 'Senzor pokreta';
 
     private const DEVICE_NAMES = [
         self::TV => [
@@ -30,6 +31,10 @@ class DeviceFixtures extends Fixture implements DependentFixtureInterface
             'type' => 'alert',
         ],
         self::TV_LIGHT => [
+            'room' => RoomFixtures::LIVING_ROOM,
+            'type' => 'bulb',
+        ],
+        self::SOFA_LIGHT => [
             'room' => RoomFixtures::LIVING_ROOM,
             'type' => 'bulb',
         ],

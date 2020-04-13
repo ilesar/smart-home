@@ -10,6 +10,7 @@ use Doctrine\Persistence\ObjectManager;
 class ConfigurationFixtures extends Fixture implements DependentFixtureInterface
 {
     public const TV_LIGHT_CONFIGURATION = 'Tv Light Configuration';
+    public const SOFA_LIGHT_CONFIGURATION = 'Sofa Light Configuration';
 
     public function load(ObjectManager $manager)
     {
@@ -17,11 +18,19 @@ class ConfigurationFixtures extends Fixture implements DependentFixtureInterface
 
         $configuration = new Configuration();
         $configuration->setDevice($device);
-
         $manager->persist($configuration);
+        $this->setReference(self::TV_LIGHT_CONFIGURATION, $configuration);
+
+        $device = $this->getReference(DeviceFixtures::SOFA_LIGHT);
+        $configuration = new Configuration();
+        $configuration->setDevice($device);
+        $manager->persist($configuration);
+        $this->setReference(self::SOFA_LIGHT_CONFIGURATION, $configuration);
+
+
         $manager->flush();
 
-        $this->setReference(self::TV_LIGHT_CONFIGURATION, $configuration);
+
     }
 
     /**

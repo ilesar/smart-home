@@ -24,6 +24,18 @@ class ConfigurationItemFixtures extends Fixture implements DependentFixtureInter
             $manager->persist($configurationItem);
         }
 
+        $configuration = $this->getReference(ConfigurationFixtures::SOFA_LIGHT_CONFIGURATION);
+
+        for ($i = 0; $i < 30; ++$i) {
+            $configurationItem = new ConfigurationItem();
+            $configurationItem->setName(sprintf('LED %s', $i + 1));
+            $configurationItem->setDescription(sprintf('Kontrola boje za LED svijetlo na traci na poziciji %s', $i));
+            $configurationItem->setInputType(ConfigurationItemType::COLOR);
+            $configurationItem->setOutputFormat('%s');
+            $configurationItem->setConfiguration($configuration);
+            $manager->persist($configurationItem);
+        }
+
         $manager->flush();
     }
 
