@@ -17,7 +17,7 @@ class ConfigurationItemFixtures extends Fixture implements DependentFixtureInter
         for ($i = 0; $i < 15; ++$i) {
             $configurationItem = new ConfigurationItem();
             $configurationItem->setName(sprintf('LED #%s color', $i + 1));
-            $configurationItem->setDescription(sprintf('Color of the LED with the index = %s', $i));
+            $configurationItem->setDescription(sprintf('Kontrola boje za LED svijetlo na traci na poziciji %s', $i + 1));
             $configurationItem->setInputType(ConfigurationItemType::COLOR);
             $configurationItem->setOutputFormat('%s');
             $configurationItem->setConfiguration($configuration);
@@ -29,7 +29,7 @@ class ConfigurationItemFixtures extends Fixture implements DependentFixtureInter
         for ($i = 0; $i < 30; ++$i) {
             $configurationItem = new ConfigurationItem();
             $configurationItem->setName(sprintf('LED %s', $i + 1));
-            $configurationItem->setDescription(sprintf('Kontrola boje za LED svijetlo na traci na poziciji %s', $i));
+            $configurationItem->setDescription(sprintf('Kontrola boje za LED svijetlo na traci na poziciji %s', $i + 1));
             $configurationItem->setInputType(ConfigurationItemType::COLOR);
             $configurationItem->setOutputFormat('%s');
             $configurationItem->setConfiguration($configuration);

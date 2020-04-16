@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,16 @@ class ConfigurationItem
      * @ORM\Column(type="string", length=255)
      */
     private $outputFormat;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ConfigurationTemplateItem", mappedBy="configurationItem", orphanRemoval=true)
+     */
+    private $configurationTemplateItems;
+
+    public function __construct()
+    {
+        $this->configurationTemplateItems = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -103,6 +115,37 @@ class ConfigurationItem
     public function setOutputFormat(string $outputFormat): self
     {
         $this->outputFormat = $outputFormat;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ConfigurationTemplateItem[]
+     */
+    public function getConfigurationTemplateItems(): Collection
+    {
+        return $this->configurationTemplateItems;
+    }
+
+    public function addConfigurationTemplateItem(ConfigurationTemplateItem $configurationTemplateItem): self
+    {
+        if (!$this->configurationTemplateItems->contains($configurationTemplateItem)) {
+            $this->configurationTemplateItems[] = $configurationTemplateItem;
+            $configurationTemplateItem->setConfigurationItem($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConfigurationTemplateItem(ConfigurationTemplateItem $configurationTemplateItem): self
+    {
+        if ($this->configurationTemplateItems->contains($configurationTemplateItem)) {
+            $this->configurationTemplateItems->removeElement($configurationTemplateItem);
+            // set the owning side to null (unless already changed)
+            if ($configurationTemplateItem->getConfigurationItem() === $this) {
+                $configurationTemplateItem->setConfigurationItem(null);
+            }
+        }
 
         return $this;
     }

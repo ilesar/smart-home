@@ -21,26 +21,32 @@ class DeviceFixtures extends Fixture implements DependentFixtureInterface
         self::TV => [
             'room' => RoomFixtures::LIVING_ROOM,
             'type' => 'desktop',
+            'deviceId' => 'tv',
         ],
         self::LAMP => [
             'room' => RoomFixtures::BEDROOM,
             'type' => 'bulb',
+            'deviceId' => 'xiaomilamp',
         ],
         self::TEMP_SENSOR => [
             'room' => RoomFixtures::LIVING_ROOM,
             'type' => 'alert',
+            'deviceId' => 'tempsensor',
         ],
         self::TV_LIGHT => [
             'room' => RoomFixtures::LIVING_ROOM,
             'type' => 'bulb',
+            'deviceId' => '15ledstrip',
         ],
         self::SOFA_LIGHT => [
             'room' => RoomFixtures::LIVING_ROOM,
             'type' => 'bulb',
+            'deviceId' => '30ledstrip',
         ],
         self::MOTION_SENSOR => [
             'room' => RoomFixtures::LIVING_ROOM,
             'type' => 'heat-map',
+            'deviceId' => 'motionsensor',
         ],
     ];
 
@@ -57,6 +63,7 @@ class DeviceFixtures extends Fixture implements DependentFixtureInterface
             $device->setName($deviceName);
             $device->setRoom($room);
             $device->setDeviceType($roomObject['type']);
+            $device->setDeviceId($roomObject['deviceId']);
 
             $manager->persist($device);
             $this->addReference($deviceName, $device);

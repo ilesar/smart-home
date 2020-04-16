@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,6 +24,16 @@ class ConfigurationTemplate
      */
     private $configuration;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ConfigurationTemplateItem", mappedBy="template")
+     */
+    private $items;
+
+    public function __construct()
+    {
+        $this->items = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +47,37 @@ class ConfigurationTemplate
     public function setConfiguration(?Configuration $configuration): self
     {
         $this->configuration = $configuration;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ConfigurationTemplateItem[]
+     */
+    public function getItems(): Collection
+    {
+        return $this->items;
+    }
+
+    public function addItem(ConfigurationTemplateItem $item): self
+    {
+        if (!$this->items->contains($item)) {
+            $this->items[] = $item;
+            $item->setTemplate($this);
+        }
+
+        return $this;
+    }
+
+    public function removeItem(ConfigurationTemplateItem $item): self
+    {
+        if ($this->items->contains($item)) {
+            $this->items->removeElement($item);
+            // set the owning side to null (unless already changed)
+            if ($item->getTemplate() === $this) {
+                $item->setTemplate(null);
+            }
+        }
 
         return $this;
     }
