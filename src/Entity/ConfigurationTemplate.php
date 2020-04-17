@@ -24,7 +24,6 @@ class ConfigurationTemplate
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Configuration", inversedBy="templates")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $configuration;
 

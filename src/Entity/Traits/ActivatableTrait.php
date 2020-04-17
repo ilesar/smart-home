@@ -20,7 +20,7 @@ trait ActivatableTrait
     /**
      * @var DateTime
      *
-     * @ORM\Column(name="activated_at", type="datetime")
+     * @ORM\Column(name="activated_at", type="datetime", nullable=true)
      */
     private $activatedAt;
 

@@ -3,7 +3,6 @@
 namespace App\DataFixtures;
 
 use App\Entity\Configuration;
-use App\Entity\ConfigurationItem;
 use App\Entity\Device;
 use App\Entity\Room;
 use Doctrine\Bundle\FixturesBundle\Fixture;
