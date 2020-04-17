@@ -5,6 +5,7 @@ namespace App\JsonApi\Transformer;
 use App\Entity\ConfigurationTemplate;
 use WoohooLabs\Yin\JsonApi\Schema\Link\Link;
 use WoohooLabs\Yin\JsonApi\Schema\Link\ResourceLinks;
+use WoohooLabs\Yin\JsonApi\Schema\Relationship\ToManyRelationship;
 use WoohooLabs\Yin\JsonApi\Schema\Relationship\ToOneRelationship;
 use WoohooLabs\Yin\JsonApi\Schema\Resource\AbstractResource;
 
@@ -78,6 +79,16 @@ class ConfigurationTemplateResourceTransformer extends AbstractResource
                             return $configurationTemplate->getConfiguration();
                         },
                         new ConfigurationResourceTransformer()
+                    )
+                    ->omitDataWhenNotIncluded();
+            },
+            'items' => function (ConfigurationTemplate $configurationTemplate) {
+                return ToManyRelationship::create()
+                    ->setDataAsCallable(
+                        function () use ($configurationTemplate) {
+                            return $configurationTemplate->getItems();
+                        },
+                        new ConfigurationTemplateItemResourceTransformer()
                     )
                     ->omitDataWhenNotIncluded();
             },

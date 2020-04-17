@@ -15,6 +15,9 @@ class CreateConfigurationTemplateHydrator extends AbstractConfigurationTemplateH
     protected function getAttributeHydrator($configurationTemplate): array
     {
         return [
+            'isActive' => function (ConfigurationTemplate $configurationTemplate, $attribute, $data, $attributeName) {
+                $configurationTemplate->setIsActive($attribute);
+            },
         ];
     }
 }

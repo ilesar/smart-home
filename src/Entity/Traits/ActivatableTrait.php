@@ -17,17 +17,10 @@ trait ActivatableTrait
      */
     private $isActive = false;
 
-    /**
-     * @var DateTime
-     *
-     * @ORM\Column(name="activated_at", type="datetime", nullable=true)
-     */
-    private $activatedAt;
 
     public function setIsActive(bool $isActive): void
     {
         $this->isActive = $isActive;
-        $this->activatedAt = new DateTime();
     }
 
     public function getIsActive(): bool

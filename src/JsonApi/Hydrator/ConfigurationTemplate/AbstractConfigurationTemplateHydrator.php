@@ -3,11 +3,13 @@
 namespace App\JsonApi\Hydrator\ConfigurationTemplate;
 
 use App\Entity\ConfigurationTemplate;
-use Paknahad\JsonApiBundle\Exception\InvalidRelationshipValueException;
+use Doctrine\ORM\Query\Expr;
 use Paknahad\JsonApiBundle\Hydrator\AbstractHydrator;
 use Paknahad\JsonApiBundle\Hydrator\ValidatorTrait;
+use Paknahad\JsonApiBundle\Exception\InvalidRelationshipValueException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use WoohooLabs\Yin\JsonApi\Exception\ExceptionFactoryInterface;
+use WoohooLabs\Yin\JsonApi\Hydrator\Relationship\ToManyRelationship;
 use WoohooLabs\Yin\JsonApi\Hydrator\Relationship\ToOneRelationship;
 use WoohooLabs\Yin\JsonApi\Request\JsonApiRequestInterface;
 
@@ -82,6 +84,7 @@ abstract class AbstractConfigurationTemplateHydrator extends AbstractHydrator
             'configuration' => function (ConfigurationTemplate $configurationTemplate, ToOneRelationship $configuration, $data, $relationshipName) {
                 $this->validateRelationType($configuration, ['configurations']);
 
+
                 $association = null;
                 $identifier = $configuration->getResourceIdentifier();
                 if ($identifier) {
@@ -94,6 +97,31 @@ abstract class AbstractConfigurationTemplateHydrator extends AbstractHydrator
                 }
 
                 $configurationTemplate->setConfiguration($association);
+            },
+            'items' => function (ConfigurationTemplate $configurationTemplate, ToManyRelationship $items, $data, $relationshipName) {
+                $this->validateRelationType($items, ['configuration_template_items']);
+
+                if (count($items->getResourceIdentifierIds()) > 0) {
+                    $association = $this->objectManager->getRepository('App\Entity\ConfigurationTemplateItem')
+                        ->createQueryBuilder('i')
+                        ->where((new Expr())->in('i.id', $items->getResourceIdentifierIds()))
+                        ->getQuery()
+                        ->getResult();
+
+                    $this->validateRelationValues($association, $items->getResourceIdentifierIds(), $relationshipName);
+                } else {
+                    $association = [];
+                }
+
+                if ($configurationTemplate->getItems()->count() > 0) {
+                    foreach ($configurationTemplate->getItems() as $item) {
+                        $configurationTemplate->removeItem($item);
+                    }
+                }
+
+                foreach ($association as $item) {
+                    $configurationTemplate->addItem($item);
+                }
             },
         ];
     }

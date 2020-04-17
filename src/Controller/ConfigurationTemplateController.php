@@ -24,7 +24,7 @@ use WoohooLabs\Yin\JsonApi\Exception\DefaultExceptionFactory;
 class ConfigurationTemplateController extends Controller
 {
     /**
-     * @Route("", name="configuration_templates_index", methods="GET")
+     * @Route("/", name="configuration_templates_index", methods="GET")
      */
     public function index(ConfigurationTemplateRepository $configurationTemplateRepository, ResourceCollection $resourceCollection): ResponseInterface
     {
@@ -39,7 +39,7 @@ class ConfigurationTemplateController extends Controller
     }
 
     /**
-     * @Route("", name="configuration_templates_new", methods="POST")
+     * @Route("/", name="configuration_templates_new", methods="POST")
      */
     public function new(ValidatorInterface $validator, DefaultExceptionFactory $exceptionFactory): ResponseInterface
     {

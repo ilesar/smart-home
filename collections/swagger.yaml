@@ -2428,294 +2428,6 @@ paths:
                           $ref: '#/definitions/ConfigurationTemplate_relation'
                       device:
                         $ref: '#/definitions/Device_relation'
-  /configuration/templates/:
-    get:
-      tags:
-        - configuration_templates
-      summary: 'ConfigurationTemplate List'
-      operationId: listConfigurationTemplate
-      produces:
-        - application/json
-      parameters: {  }
-      responses:
-        200:
-          description: 'successful operation'
-          schema:
-            type: object
-            properties:
-              jsonapi:
-                type: object
-                properties:
-                  version:
-                    type: string
-                    example: '1.0'
-              links:
-                type: object
-                properties:
-                  self:
-                    type: string
-                    example: '/configuration/templates?page[number]=1&page[size]=100'
-                  first:
-                    type: string
-                    example: '/configuration/templates?page[number]=1&page[size]=100'
-                  last:
-                    type: string
-                    example: '/configuration/templates?page[number]=1&page[size]=100'
-                  prev:
-                    type: string
-                    example: 'null'
-                  next:
-                    type: string
-                    example: 'null'
-              data:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: integer
-                      format: int64
-                      example: 12
-                    type:
-                      type: string
-                      example: configuration_templates
-                    attributes:
-                      $ref: '#/definitions/ConfigurationTemplate'
-                    relationships:
-                      properties:
-                        configuration:
-                          $ref: '#/definitions/Configuration_relation'
-    post:
-      tags:
-        - configuration_templates
-      summary: 'Add ConfigurationTemplate'
-      operationId: addConfigurationTemplate
-      produces:
-        - application/json
-      parameters:
-        -
-          in: body
-          name: body
-          description: addConfigurationTemplate
-          required: true
-          schema:
-            type: object
-            properties:
-              data:
-                type: object
-                properties:
-                  type:
-                    type: string
-                    example: configuration_templates
-                  attributes:
-                    $ref: '#/definitions/ConfigurationTemplate'
-                  relationships:
-                    properties:
-                      configuration:
-                        $ref: '#/definitions/Configuration_relation'
-      responses:
-        200:
-          description: 'successful operation'
-          schema:
-            type: object
-            properties:
-              jsonapi:
-                type: object
-                properties:
-                  version:
-                    type: string
-                    example: '1.0'
-              links:
-                type: object
-                properties:
-                  self:
-                    type: string
-                    example: /configuration/templates
-              data:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                    format: int64
-                    example: 12
-                  type:
-                    type: string
-                    example: configuration_templates
-                  attributes:
-                    $ref: '#/definitions/ConfigurationTemplate'
-                  relationships:
-                    properties:
-                      configuration:
-                        $ref: '#/definitions/Configuration_relation'
-  '/configuration/templates/{ConfigurationTemplate_id}':
-    patch:
-      tags:
-        - configuration_templates
-      summary: 'Edit ConfigurationTemplate'
-      operationId: editConfigurationTemplate
-      produces:
-        - application/json
-      parameters:
-        -
-          in: body
-          name: body
-          description: editConfigurationTemplate
-          required: true
-          schema:
-            type: object
-            properties:
-              data:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                    format: int64
-                    example: 12
-                  type:
-                    type: string
-                    example: configuration_templates
-                  attributes:
-                    $ref: '#/definitions/ConfigurationTemplate'
-                  relationships:
-                    properties:
-                      configuration:
-                        $ref: '#/definitions/Configuration_relation'
-        -
-          name: ConfigurationTemplate_id
-          in: path
-          required: true
-          type: integer
-          format: int64
-      responses:
-        200:
-          description: 'successful operation'
-          schema:
-            type: object
-            properties:
-              jsonapi:
-                type: object
-                properties:
-                  version:
-                    type: string
-                    example: '1.0'
-              links:
-                type: object
-                properties:
-                  self:
-                    type: string
-                    example: /configuration/templates
-              data:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                    format: int64
-                    example: 12
-                  type:
-                    type: string
-                    example: configuration_templates
-                  attributes:
-                    $ref: '#/definitions/ConfigurationTemplate'
-                  relationships:
-                    properties:
-                      configuration:
-                        $ref: '#/definitions/Configuration_relation'
-    delete:
-      tags:
-        - configuration_templates
-      summary: 'Delete ConfigurationTemplate'
-      operationId: deleteConfigurationTemplate
-      produces:
-        - application/json
-      parameters:
-        -
-          name: ConfigurationTemplate_id
-          in: path
-          required: true
-          type: integer
-          format: int64
-      responses:
-        200:
-          description: 'successful operation'
-          schema:
-            type: object
-            properties:
-              jsonapi:
-                type: object
-                properties:
-                  version:
-                    type: string
-                    example: '1.0'
-              links:
-                type: object
-                properties:
-                  self:
-                    type: string
-                    example: /configuration/templates
-              data:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                    format: int64
-                    example: 12
-                  type:
-                    type: string
-                    example: configuration_templates
-                  attributes:
-                    $ref: '#/definitions/ConfigurationTemplate'
-                  relationships:
-                    properties:
-                      configuration:
-                        $ref: '#/definitions/Configuration_relation'
-    get:
-      tags:
-        - configuration_templates
-      summary: 'Get ConfigurationTemplate'
-      operationId: viewConfigurationTemplate
-      produces:
-        - application/json
-      parameters:
-        -
-          name: ConfigurationTemplate_id
-          in: path
-          required: true
-          type: integer
-          format: int64
-      responses:
-        200:
-          description: 'successful operation'
-          schema:
-            type: object
-            properties:
-              jsonapi:
-                type: object
-                properties:
-                  version:
-                    type: string
-                    example: '1.0'
-              links:
-                type: object
-                properties:
-                  self:
-                    type: string
-                    example: /configuration/templates
-              data:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                    format: int64
-                    example: 12
-                  type:
-                    type: string
-                    example: configuration_templates
-                  attributes:
-                    $ref: '#/definitions/ConfigurationTemplate'
-                  relationships:
-                    properties:
-                      configuration:
-                        $ref: '#/definitions/Configuration_relation'
   /devices/:
     get:
       tags:
@@ -3608,6 +3320,624 @@ paths:
                     $ref: '#/definitions/User'
                   relationships:
                     properties: {  }
+  /configuration/template/items/:
+    get:
+      tags:
+        - configuration_template_items
+      summary: 'ConfigurationTemplateItem List'
+      operationId: listConfigurationTemplateItem
+      produces:
+        - application/json
+      parameters: {  }
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: '/configuration/template/items?page[number]=1&page[size]=100'
+                  first:
+                    type: string
+                    example: '/configuration/template/items?page[number]=1&page[size]=100'
+                  last:
+                    type: string
+                    example: '/configuration/template/items?page[number]=1&page[size]=100'
+                  prev:
+                    type: string
+                    example: 'null'
+                  next:
+                    type: string
+                    example: 'null'
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                      example: 12
+                    type:
+                      type: string
+                      example: configuration_template_items
+                    attributes:
+                      $ref: '#/definitions/ConfigurationTemplateItem'
+                    relationships:
+                      properties:
+                        configurationItem:
+                          $ref: '#/definitions/ConfigurationItem_relation'
+                        template:
+                          $ref: '#/definitions/ConfigurationTemplate_relation'
+    post:
+      tags:
+        - configuration_template_items
+      summary: 'Add ConfigurationTemplateItem'
+      operationId: addConfigurationTemplateItem
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: addConfigurationTemplateItem
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: configuration_template_items
+                  attributes:
+                    $ref: '#/definitions/ConfigurationTemplateItem'
+                  relationships:
+                    properties:
+                      configurationItem:
+                        $ref: '#/definitions/ConfigurationItem_relation'
+                      template:
+                        $ref: '#/definitions/ConfigurationTemplate_relation'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /configuration/template/items
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: configuration_template_items
+                  attributes:
+                    $ref: '#/definitions/ConfigurationTemplateItem'
+                  relationships:
+                    properties:
+                      configurationItem:
+                        $ref: '#/definitions/ConfigurationItem_relation'
+                      template:
+                        $ref: '#/definitions/ConfigurationTemplate_relation'
+  '/configuration/template/items/{ConfigurationTemplateItem_id}':
+    patch:
+      tags:
+        - configuration_template_items
+      summary: 'Edit ConfigurationTemplateItem'
+      operationId: editConfigurationTemplateItem
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: editConfigurationTemplateItem
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: configuration_template_items
+                  attributes:
+                    $ref: '#/definitions/ConfigurationTemplateItem'
+                  relationships:
+                    properties:
+                      configurationItem:
+                        $ref: '#/definitions/ConfigurationItem_relation'
+                      template:
+                        $ref: '#/definitions/ConfigurationTemplate_relation'
+        -
+          name: ConfigurationTemplateItem_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /configuration/template/items
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: configuration_template_items
+                  attributes:
+                    $ref: '#/definitions/ConfigurationTemplateItem'
+                  relationships:
+                    properties:
+                      configurationItem:
+                        $ref: '#/definitions/ConfigurationItem_relation'
+                      template:
+                        $ref: '#/definitions/ConfigurationTemplate_relation'
+    delete:
+      tags:
+        - configuration_template_items
+      summary: 'Delete ConfigurationTemplateItem'
+      operationId: deleteConfigurationTemplateItem
+      produces:
+        - application/json
+      parameters:
+        -
+          name: ConfigurationTemplateItem_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /configuration/template/items
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: configuration_template_items
+                  attributes:
+                    $ref: '#/definitions/ConfigurationTemplateItem'
+                  relationships:
+                    properties:
+                      configurationItem:
+                        $ref: '#/definitions/ConfigurationItem_relation'
+                      template:
+                        $ref: '#/definitions/ConfigurationTemplate_relation'
+    get:
+      tags:
+        - configuration_template_items
+      summary: 'Get ConfigurationTemplateItem'
+      operationId: viewConfigurationTemplateItem
+      produces:
+        - application/json
+      parameters:
+        -
+          name: ConfigurationTemplateItem_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /configuration/template/items
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: configuration_template_items
+                  attributes:
+                    $ref: '#/definitions/ConfigurationTemplateItem'
+                  relationships:
+                    properties:
+                      configurationItem:
+                        $ref: '#/definitions/ConfigurationItem_relation'
+                      template:
+                        $ref: '#/definitions/ConfigurationTemplate_relation'
+  /configuration/templates/:
+    get:
+      tags:
+        - configuration_templates
+      summary: 'ConfigurationTemplate List'
+      operationId: listConfigurationTemplate
+      produces:
+        - application/json
+      parameters: {  }
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: '/configuration/templates?page[number]=1&page[size]=100'
+                  first:
+                    type: string
+                    example: '/configuration/templates?page[number]=1&page[size]=100'
+                  last:
+                    type: string
+                    example: '/configuration/templates?page[number]=1&page[size]=100'
+                  prev:
+                    type: string
+                    example: 'null'
+                  next:
+                    type: string
+                    example: 'null'
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                      example: 12
+                    type:
+                      type: string
+                      example: configuration_templates
+                    attributes:
+                      $ref: '#/definitions/ConfigurationTemplate'
+                    relationships:
+                      properties:
+                        configuration:
+                          $ref: '#/definitions/Configuration_relation'
+                        items:
+                          type: array
+                          items:
+                            $ref: '#/definitions/ConfigurationTemplateItem_relation'
+    post:
+      tags:
+        - configuration_templates
+      summary: 'Add ConfigurationTemplate'
+      operationId: addConfigurationTemplate
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: addConfigurationTemplate
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: configuration_templates
+                  attributes:
+                    $ref: '#/definitions/ConfigurationTemplate'
+                  relationships:
+                    properties:
+                      configuration:
+                        $ref: '#/definitions/Configuration_relation'
+                      items:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ConfigurationTemplateItem_relation'
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /configuration/templates
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: configuration_templates
+                  attributes:
+                    $ref: '#/definitions/ConfigurationTemplate'
+                  relationships:
+                    properties:
+                      configuration:
+                        $ref: '#/definitions/Configuration_relation'
+                      items:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ConfigurationTemplateItem_relation'
+  '/configuration/templates/{ConfigurationTemplate_id}':
+    patch:
+      tags:
+        - configuration_templates
+      summary: 'Edit ConfigurationTemplate'
+      operationId: editConfigurationTemplate
+      produces:
+        - application/json
+      parameters:
+        -
+          in: body
+          name: body
+          description: editConfigurationTemplate
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: configuration_templates
+                  attributes:
+                    $ref: '#/definitions/ConfigurationTemplate'
+                  relationships:
+                    properties:
+                      configuration:
+                        $ref: '#/definitions/Configuration_relation'
+                      items:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ConfigurationTemplateItem_relation'
+        -
+          name: ConfigurationTemplate_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /configuration/templates
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: configuration_templates
+                  attributes:
+                    $ref: '#/definitions/ConfigurationTemplate'
+                  relationships:
+                    properties:
+                      configuration:
+                        $ref: '#/definitions/Configuration_relation'
+                      items:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ConfigurationTemplateItem_relation'
+    delete:
+      tags:
+        - configuration_templates
+      summary: 'Delete ConfigurationTemplate'
+      operationId: deleteConfigurationTemplate
+      produces:
+        - application/json
+      parameters:
+        -
+          name: ConfigurationTemplate_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /configuration/templates
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: configuration_templates
+                  attributes:
+                    $ref: '#/definitions/ConfigurationTemplate'
+                  relationships:
+                    properties:
+                      configuration:
+                        $ref: '#/definitions/Configuration_relation'
+                      items:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ConfigurationTemplateItem_relation'
+    get:
+      tags:
+        - configuration_templates
+      summary: 'Get ConfigurationTemplate'
+      operationId: viewConfigurationTemplate
+      produces:
+        - application/json
+      parameters:
+        -
+          name: ConfigurationTemplate_id
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: 'successful operation'
+          schema:
+            type: object
+            properties:
+              jsonapi:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: '1.0'
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+                    example: /configuration/templates
+              data:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 12
+                  type:
+                    type: string
+                    example: configuration_templates
+                  attributes:
+                    $ref: '#/definitions/ConfigurationTemplate'
+                  relationships:
+                    properties:
+                      configuration:
+                        $ref: '#/definitions/Configuration_relation'
+                      items:
+                        type: array
+                        items:
+                          $ref: '#/definitions/ConfigurationTemplateItem_relation'
 securityDefinitions:
   api_key:
     type: apiKey
@@ -3785,32 +4115,6 @@ definitions:
   Configuration:
     type: object
     properties: {  }
-  ConfigurationItem_relation:
-    type: object
-    properties:
-      type:
-        type: string
-        enum:
-          - configuration_items
-        example: configuration_items
-      id:
-        type: integer
-        minimum: 1
-        description: 'ConfigurationItem ID'
-        example: 69
-  ConfigurationTemplate_relation:
-    type: object
-    properties:
-      type:
-        type: string
-        enum:
-          - configuration_templates
-        example: configuration_templates
-      id:
-        type: integer
-        minimum: 1
-        description: 'ConfigurationTemplate ID'
-        example: 76
   Device_relation:
     type: object
     properties:
@@ -3824,9 +4128,6 @@ definitions:
         minimum: 1
         description: 'Device ID'
         example: 71
-  ConfigurationTemplate:
-    type: object
-    properties: {  }
   Device:
     type: object
     properties:
@@ -3875,19 +4176,6 @@ definitions:
         type: string
       outputFormat:
         type: string
-  Configuration_relation:
-    type: object
-    properties:
-      type:
-        type: string
-        enum:
-          - configurations
-        example: configurations
-      id:
-        type: integer
-        minimum: 1
-        description: 'Configuration ID'
-        example: 69
   User:
     type: object
     properties:
@@ -3904,6 +4192,71 @@ definitions:
       passwordRequestedAt:
         type: string
         format: date-time
+  ConfigurationTemplateItem:
+    type: object
+    properties:
+      value:
+        type: string
+  ConfigurationItem_relation:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - configuration_items
+        example: configuration_items
+      id:
+        type: integer
+        minimum: 1
+        description: 'ConfigurationItem ID'
+        example: 69
+  ConfigurationTemplate_relation:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - configuration_templates
+        example: configuration_templates
+      id:
+        type: integer
+        minimum: 1
+        description: 'ConfigurationTemplate ID'
+        example: 76
+  ConfigurationTemplate:
+    type: object
+    properties:
+      isActive:
+        type: boolean
+      activatedAt:
+        type: string
+        format: date-time
+  Configuration_relation:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - configurations
+        example: configurations
+      id:
+        type: integer
+        minimum: 1
+        description: 'Configuration ID'
+        example: 69
+  ConfigurationTemplateItem_relation:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - configuration_template_items
+        example: configuration_template_items
+      id:
+        type: integer
+        minimum: 1
+        description: 'ConfigurationTemplateItem ID'
+        example: 76
 externalDocs:
   description: 'Find out more about Swagger'
   url: 'http://swagger.io'
