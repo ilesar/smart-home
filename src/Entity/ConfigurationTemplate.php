@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\ActivatableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ConfigurationTemplate
 {
+
+    use ActivatableTrait;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -78,6 +82,18 @@ class ConfigurationTemplate
                 $item->setTemplate(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIsActive(): ?bool
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(bool $isActive): self
+    {
+        $this->isActive = $isActive;
 
         return $this;
     }

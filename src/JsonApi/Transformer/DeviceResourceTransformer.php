@@ -58,6 +58,9 @@ class DeviceResourceTransformer extends AbstractResource
             'deviceType' => function (Device $device) {
                 return $device->getDeviceType();
             },
+            'deviceId' => function (Device $device) {
+                return $device->getDeviceId();
+            },
             'createdAt' => function (Device $device) {
                 return $device->getCreatedAt()->format(DATE_ATOM);
             },
