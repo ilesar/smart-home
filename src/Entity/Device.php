@@ -39,6 +39,7 @@ class Device
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Configuration", inversedBy="device", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $configuration;
 

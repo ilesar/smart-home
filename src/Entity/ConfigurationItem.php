@@ -20,7 +20,6 @@ class ConfigurationItem
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Configuration", inversedBy="items")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $configuration;
 
@@ -28,6 +27,11 @@ class ConfigurationItem
      * @ORM\Column(type="string", length=255)
      */
     private $name;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $defaultValue;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -103,6 +107,18 @@ class ConfigurationItem
     public function setInputType(string $inputType): self
     {
         $this->inputType = $inputType;
+
+        return $this;
+    }
+
+    public function getDefaultValue(): ?string
+    {
+        return $this->defaultValue;
+    }
+
+    public function setDefaultValue(string $defaultValue): self
+    {
+        $this->defaultValue = $defaultValue;
 
         return $this;
     }

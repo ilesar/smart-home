@@ -20,6 +20,7 @@ class Configuration
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ConfigurationItem", mappedBy="configuration", orphanRemoval=true)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $items;
 

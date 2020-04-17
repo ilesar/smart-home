@@ -4,48 +4,32 @@ namespace App\DataFixtures;
 
 use App\Entity\ConfigurationItem;
 use App\Enum\ConfigurationItemType;
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class ConfigurationItemFixtures extends Fixture implements DependentFixtureInterface
+class ConfigurationItemFixtures extends BaseFixture
 {
-    public function load(ObjectManager $manager)
+    public const TV_LIGHT_CONFIGURATION_ITEMS = 'tvligthitems';
+    public const SOFA_LIGHT_CONFIGURATION_ITEMS = 'sofalightitems';
+
+    protected function loadData(ObjectManager $manager)
     {
-        $configuration = $this->getReference(ConfigurationFixtures::TV_LIGHT_CONFIGURATION);
 
-        for ($i = 0; $i < 15; ++$i) {
-            $configurationItem = new ConfigurationItem();
-            $configurationItem->setName(sprintf('LED #%s color', $i + 1));
-            $configurationItem->setDescription(sprintf('Kontrola boje za LED svijetlo na traci na poziciji %s', $i + 1));
+        $this->createMany(ConfigurationItem::class, 15, self::TV_LIGHT_CONFIGURATION_ITEMS, function (ConfigurationItem $configurationItem, $iterator) {
+            $configurationItem->setName(sprintf('LED #%s color', $iterator + 1));
+            $configurationItem->setDescription(sprintf('Kontrola boje za LED svijetlo na traci na poziciji %s', $iterator + 1));
             $configurationItem->setInputType(ConfigurationItemType::COLOR);
+            $configurationItem->setDefaultValue('255');
             $configurationItem->setOutputFormat('%s');
-            $configurationItem->setConfiguration($configuration);
-            $manager->persist($configurationItem);
-        }
+        });
 
-        $configuration = $this->getReference(ConfigurationFixtures::SOFA_LIGHT_CONFIGURATION);
-
-        for ($i = 0; $i < 30; ++$i) {
-            $configurationItem = new ConfigurationItem();
-            $configurationItem->setName(sprintf('LED %s', $i + 1));
-            $configurationItem->setDescription(sprintf('Kontrola boje za LED svijetlo na traci na poziciji %s', $i + 1));
+        $this->createMany(ConfigurationItem::class, 30, self::SOFA_LIGHT_CONFIGURATION_ITEMS, function (ConfigurationItem $configurationItem, $iterator) {
+            $configurationItem->setName(sprintf('LED %s', $iterator + 1));
+            $configurationItem->setDescription(sprintf('Kontrola boje za LED svijetlo na traci na poziciji %s', $iterator + 1));
             $configurationItem->setInputType(ConfigurationItemType::COLOR);
+            $configurationItem->setDefaultValue('255');
             $configurationItem->setOutputFormat('%s');
-            $configurationItem->setConfiguration($configuration);
-            $manager->persist($configurationItem);
-        }
+        });
 
         $manager->flush();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDependencies()
-    {
-        return [
-            ConfigurationFixtures::class,
-        ];
     }
 }

@@ -13,20 +13,20 @@ class MeasurementFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        /** @var Device $motionSensor */
-        $motionSensor = $this->getReference(DeviceFixtures::MOTION_SENSOR);
-
-        for ($i = 0; $i < 10; ++$i) {
-            $measurement = new Measurement();
-            $measurement->setDevice($motionSensor);
-            $measurement->setName($motionSensor->getName());
-            $measurement->setType(MeasurementType::BOOLEAN);
-            $measurement->setValue(1);
-
-            $manager->persist($measurement);
-        }
-
-        $manager->flush();
+//        /** @var Device $motionSensor */
+//        $motionSensor = $this->getReference(DeviceFixtures::MOTION_SENSOR);
+//
+//        for ($i = 0; $i < 10; ++$i) {
+//            $measurement = new Measurement();
+//            $measurement->setDevice($motionSensor);
+//            $measurement->setName($motionSensor->getName());
+//            $measurement->setType(MeasurementType::BOOLEAN);
+//            $measurement->setValue(1);
+//
+//            $manager->persist($measurement);
+//        }
+//
+//        $manager->flush();
     }
 
     /**
