@@ -41,7 +41,6 @@ services:
         arguments:
             $uploadPath: '%grocery.image.path%'
 
-
     App\Grocery\GroceryService:
         arguments:
             $warehouses:
@@ -49,13 +48,6 @@ services:
 #                - '@App\Grocery\Warehouse\LidlWarehouse'
 #                - '@App\Grocery\Warehouse\PlodineWarehouse'
 #                - '@App\Grocery\Warehouse\KauflandWarehouse'
-
-    App\Service\MqttWorkerService:
-        arguments:
-            $subscribers:
-                - '@App\Mqtt\Model\Subscriber\RegistrationSubscriber'
-                - '@App\Mqtt\Model\Subscriber\ConfigurationSubscriber'
-                - '@App\Mqtt\Model\Subscriber\MeasurementSubscriber'
 
     App\Proxy\ProxyService:
         arguments:

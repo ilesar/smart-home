@@ -20,7 +20,8 @@
         "symfony/orm-pack": "^1.0",
         "symfony/panther": "^0.7.1",
         "symfony/validator": "5.0.*",
-        "symfony/yaml": "5.0.*"
+        "symfony/yaml": "5.0.*",
+      "ext-json": "*"
     },
     "require-dev": {
         "codeception/codeception": "^4.0",
