@@ -26,6 +26,7 @@ SET time_zone = "+00:00";
 
 INSERT INTO `user` (`id`, `email`, `roles`, `password`, `is_enabled`, `password_request_token`, `password_requested_at`) VALUES
 (1, 'ivan.lesar.pmf+smarthome@gmail.com', '{}', '$2y$13$R.gL9C5/EA0KlQjQqJ/J4O4f9Oc2rr6SZ2zZQ7c3vyO3ekbXmL362', 0, NULL, NULL);
+(2, 'sabina_mesic@yahoo.com', '{}', '$2y$13$R.gL9C5/EA0KlQjQqJ/J4O4f9Oc2rr6SZ2zZQ7c3vyO3ekbXmL362', 0, NULL, NULL);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
