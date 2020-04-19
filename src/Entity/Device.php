@@ -153,4 +153,13 @@ class Device
 
         return $this;
     }
+
+    public function getActiveTemplate()
+    {
+        foreach ($this->getConfiguration()->getTemplates() as $template) {
+            if (true === $template->getIsActive()) {
+                return $template;
+            }
+        }
+    }
 }
