@@ -13,12 +13,11 @@ class ConfigurationItemFixtures extends BaseFixture
 
     protected function loadData(ObjectManager $manager)
     {
-
         $this->createMany(ConfigurationItem::class, 15, self::TV_LIGHT_CONFIGURATION_ITEMS, function (ConfigurationItem $configurationItem, $iterator) {
             $configurationItem->setName(sprintf('LED #%s color', $iterator + 1));
             $configurationItem->setDescription(sprintf('Kontrola boje za LED svijetlo na traci na poziciji %s', $iterator + 1));
             $configurationItem->setInputType(ConfigurationItemType::COLOR);
-            $configurationItem->setDefaultValue('255');
+            $configurationItem->setDefaultValue('#FFFFFF');
             $configurationItem->setOutputFormat('%s');
         });
 
@@ -26,7 +25,7 @@ class ConfigurationItemFixtures extends BaseFixture
             $configurationItem->setName(sprintf('LED %s', $iterator + 1));
             $configurationItem->setDescription(sprintf('Kontrola boje za LED svijetlo na traci na poziciji %s', $iterator + 1));
             $configurationItem->setInputType(ConfigurationItemType::COLOR);
-            $configurationItem->setDefaultValue('255');
+            $configurationItem->setDefaultValue('#FFFFFF');
             $configurationItem->setOutputFormat('%s');
         });
 

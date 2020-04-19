@@ -9,6 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ConfigurationTemplateRepository")
+ * @ORM\EntityListeners({"App\EventListener\ActiveConfigurationEventListener"})
+ * @ORM\HasLifecycleCallbacks()
  */
 class ConfigurationTemplate
 {
@@ -31,6 +33,11 @@ class ConfigurationTemplate
      * @ORM\OneToMany(targetEntity="App\Entity\ConfigurationTemplateItem", mappedBy="template")
      */
     private $items;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
 
     public function __construct()
     {
@@ -93,6 +100,18 @@ class ConfigurationTemplate
     public function setIsActive(bool $isActive): self
     {
         $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }

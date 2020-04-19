@@ -81,3 +81,9 @@ services:
         arguments: []
         tags:
             - { name: doctrine.orm.entity_listener, lazy: true }
+
+    app.event_listener.active_configuration_event_listener:
+        class: App\EventListener\ActiveConfigurationEventListener
+        arguments: []
+        tags:
+            - { name: doctrine.orm.entity_listener, lazy: true }

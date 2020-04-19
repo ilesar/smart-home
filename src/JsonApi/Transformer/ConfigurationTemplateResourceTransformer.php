@@ -52,6 +52,9 @@ class ConfigurationTemplateResourceTransformer extends AbstractResource
     public function getAttributes($configurationTemplate): array
     {
         return [
+            'name' => function (ConfigurationTemplate $configurationTemplate) {
+                return $configurationTemplate->getName();
+            },
             'isActive' => function (ConfigurationTemplate $configurationTemplate) {
                 return $configurationTemplate->getIsActive();
             },
