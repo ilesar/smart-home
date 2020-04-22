@@ -23,12 +23,13 @@ class Device
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $name;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Room", inversedBy="devices")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $room;
 
@@ -44,7 +45,7 @@ class Device
     private $configuration;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $deviceType;
 

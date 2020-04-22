@@ -2,10 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Configuration;
+use App\Entity\ConfigurationItem;
 use App\Entity\ConfigurationTemplate;
+use App\Entity\ConfigurationTemplateItem;
 use App\Entity\Device;
+use App\Enum\ConfigurationItemType;
 use App\Repository\DeviceRepository;
 use App\Service\MqttService;
+use Doctrine\ORM\EntityManagerInterface;
 use Paknahad\JsonApiBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +24,7 @@ class MqttController extends Controller
     /**
      * @Route("/configuration", name="mqtt_index", methods="POST")
      */
-    public function index(DeviceRepository $deviceRepository, MqttService $mqttService, Request $request)
+    public function index(DeviceRepository $deviceRepository, MqttService $mqttService, Request $request, EntityManagerInterface $entityManager)
     {
         $deviceId = $request->request->get('deviceId');
 
@@ -28,7 +33,50 @@ class MqttController extends Controller
         ]);
 
         if (null === $device) {
-            return new Response('NO DEVICE');
+            $configuration = $request->request->get('configuration');
+            $configurationArray = json_decode($configuration);
+
+            $device = new Device();
+            $device->setDeviceId($deviceId);
+            $configuration = new Configuration();
+            $configurationTemplate = new ConfigurationTemplate();
+            $configurationTemplate->setName('Default');
+            $configurationTemplate->setIsActive(true);
+
+            foreach ($configurationArray as $iterator => $configurationObject) {
+                if (ConfigurationItemType::COLOR === $configurationObject->type) {
+                    $configurationItem = new ConfigurationItem();
+                    $configurationItem->setName(sprintf('LED #%s color', $iterator + 1));
+                    $configurationItem->setDescription(sprintf('Kontrola boje za LED svijetlo na traci na poziciji %s', $iterator + 1));
+                    $configurationItem->setInputType(ConfigurationItemType::COLOR);
+                    $configurationItem->setDefaultValue(vsprintf('#%s%s%s', [
+                        dechex($configurationObject->r),
+                        dechex($configurationObject->g),
+                        dechex($configurationObject->b),
+                    ]));
+
+                    $configurationItem->setOutputFormat('%s');
+
+                    $entityManager->persist($configurationItem);
+                    $configuration->addItem($configurationItem);
+
+                    $configurationTemplateItem = new ConfigurationTemplateItem();
+                    $configurationTemplateItem->setConfigurationItem($configurationItem);
+                    $configurationTemplateItem->setValue($configurationItem->getDefaultValue());
+
+                    $entityManager->persist($configurationTemplateItem);
+                    $configurationTemplate->addItem($configurationTemplateItem);
+                }
+            }
+
+            $entityManager->persist($configurationTemplate);
+
+            $configuration->addTemplate($configurationTemplate);
+            $entityManager->persist($configuration);
+            $device->setConfiguration($configuration);
+            $entityManager->persist($device);
+
+            $entityManager->flush();
         }
 
         $topic = $device->getDeviceId().'/config';
@@ -42,6 +90,7 @@ class MqttController extends Controller
     private function getSerializedActiveTemplateFromDevice(Device $device)
     {
         $template = $device->getActiveTemplate();
+
         return $this->getSerializedConfiguration($template);
     }
 
