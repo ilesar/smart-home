@@ -31,7 +31,7 @@ class MqttController extends Controller
             return new Response('NO DEVICE');
         }
 
-        $topic = $device->getDeviceId();
+        $topic = $device->getDeviceId().'/config';
         $message = $this->getSerializedActiveTemplateFromDevice($device);
 
         $mqttService->sendMessage($topic, $message);

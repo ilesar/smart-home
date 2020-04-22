@@ -74,7 +74,7 @@ class ActiveConfigurationEventListener
         $topic = $template->getConfiguration()->getDevice()->getDeviceId();
         $message = $this->getSerializedConfiguration($template);
 
-        $this->mqttService->sendMessage($topic, $message);
+        $this->mqttService->sendMessage($topic.'/config', $message);
         $this->mqttService->close();
     }
 
