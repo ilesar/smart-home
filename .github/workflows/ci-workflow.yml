@@ -17,10 +17,10 @@ jobs:
         with:
           action: 'install'
   initialize:
-    name: Composer initialize
+    name: Project Setup
     runs-on: self-hosted
     steps:
-      - name: Initialize (temp)
+      - name: Database Init
         uses: nick-zh/composer@php7.4
         with:
           action: 'db:init'
