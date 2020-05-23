@@ -19,6 +19,7 @@ class MqttService
 //            $mqttClient->interrupt();
 //        });
 
+
         $this->mqttClient->connect();
     }
 
