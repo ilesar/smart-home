@@ -13,6 +13,7 @@ class ConfigurationTemplateFixtures extends BaseFixture implements DependentFixt
     public const TV_LIGHT_TEMPLATE_2 = "tvlighttemplate2";
     public const TV_LIGHT_TEMPLATE_3 = "tvlighttemplate3";
     public const SOFA_LIGHT_TEMPLATE = "sofalighttemplate";
+    public const SOFA_LIGHT_TEMPLATE_2 = "sofalighttemplate2";
 
     protected function loadData(ObjectManager $manager)
     {
@@ -68,6 +69,20 @@ class ConfigurationTemplateFixtures extends BaseFixture implements DependentFixt
                     $configurationTemplate->addItem($configurationTemplateItem);
                 }
                 $configurationTemplate->setName('Cold White');
+                $configurationTemplate->setIsActive(false);
+            }
+        );
+
+        $configurationTemplateItems = $this->getMany(ConfigurationTemplateItemFixtures::SOFA_LIGHT_TEMPLATE_ITEMS_2, 30);
+
+        $this->createOne(
+            ConfigurationTemplate::class,
+            self::SOFA_LIGHT_TEMPLATE_2,
+            function (ConfigurationTemplate $configurationTemplate) use ($configurationTemplateItems) {
+                foreach ($configurationTemplateItems as $configurationTemplateItem) {
+                    $configurationTemplate->addItem($configurationTemplateItem);
+                }
+                $configurationTemplate->setName('Neon Blue');
                 $configurationTemplate->setIsActive(true);
             }
         );

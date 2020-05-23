@@ -12,6 +12,7 @@ class ConfigurationTemplateItemFixtures extends BaseFixture
     public const TV_LIGHT_TEMPLATE_ITEMS_2 = 'tvlighttemplateitem2';
     public const TV_LIGHT_TEMPLATE_ITEMS_3 = 'tvlighttemplateitem3';
     public const SOFA_LIGHT_TEMPLATE_ITEMS = 'sofalighttemplateitem';
+    public const SOFA_LIGHT_TEMPLATE_ITEMS_2 = 'sofalighttemplateitem2';
 
     protected function loadData(ObjectManager $manager)
     {
@@ -57,6 +58,16 @@ class ConfigurationTemplateItemFixtures extends BaseFixture
             self::SOFA_LIGHT_TEMPLATE_ITEMS,
             function (ConfigurationTemplateItem $configurationTemplateItem, $iterator) use ($configurationItems) {
                 $configurationTemplateItem->setValue($configurationItems[$iterator]->getDefaultValue());
+                $configurationTemplateItem->setConfigurationItem($configurationItems[$iterator]);
+            }
+        );
+
+        $this->createMany(
+            ConfigurationTemplateItem::class,
+            30,
+            self::SOFA_LIGHT_TEMPLATE_ITEMS_2,
+            function (ConfigurationTemplateItem $configurationTemplateItem, $iterator) use ($configurationItems) {
+                $configurationTemplateItem->setValue('#0000FF');
                 $configurationTemplateItem->setConfigurationItem($configurationItems[$iterator]);
             }
         );

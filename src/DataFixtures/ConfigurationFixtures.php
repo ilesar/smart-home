@@ -43,15 +43,18 @@ class ConfigurationFixtures extends BaseFixture implements DependentFixtureInter
 
         /** @var ConfigurationTemplate $configurationTemplate */
         $configurationTemplate = $this->getOne(ConfigurationTemplateFixtures::SOFA_LIGHT_TEMPLATE);
+        /** @var ConfigurationTemplate $configurationTemplate */
+        $configurationTemplate2 = $this->getOne(ConfigurationTemplateFixtures::SOFA_LIGHT_TEMPLATE_2);
 
         $this->createOne(
             Configuration::class,
             self::SOFA_LIGHT_CONFIGURATION,
-            function (Configuration $configuration) use ($configurationItems, $configurationTemplate) {
+            function (Configuration $configuration) use ($configurationItems, $configurationTemplate, $configurationTemplate2) {
                 foreach ($configurationItems as $configurationItem) {
                     $configuration->addItem($configurationItem);
                 }
                 $configuration->addTemplate($configurationTemplate);
+                $configuration->addTemplate($configurationTemplate2);
             }
         );
 
