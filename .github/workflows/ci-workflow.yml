@@ -15,7 +15,7 @@ jobs:
       - name: Composer Install
         uses: nick-zh/composer@php7.4
         with:
-          action: 'update'
+          action: 'install --ignore-platform-reqs'
   initialize:
     name: Project Setup
     runs-on: self-hosted
