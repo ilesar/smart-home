@@ -8,3 +8,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2.1.1
+      - name: Composer Install
+        uses: nick-zh/composer@php7.4
+        with:
+          action: 'install'
+      - name: Initialize (temp)
+          uses: nick-zh/composer@php7.4
+          with:
+            action: 'db:init'
