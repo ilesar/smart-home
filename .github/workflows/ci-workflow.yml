@@ -13,6 +13,6 @@ jobs:
         with:
           action: 'install'
       - name: Initialize (temp)
-          uses: nick-zh/composer@php7.4
-          with:
-            action: 'db:init'
+        uses: nick-zh/composer@php7.4
+        with:
+          action: 'db:init'
