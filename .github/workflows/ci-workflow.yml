@@ -6,8 +6,8 @@ jobs:
     name: Checkout
     runs-on: self-hosted
     steps:
-      - name: Git checkout
-        run: sudo chown -R $USER:$USER /home/github/actions-runner/_work/smart-home
+      - name: Fix permissions
+        run: echo ${{secrets.DEPLOY_PASSWORD}} | sudo chown -R $USER:$USER /home/ivan/Runners/_work
       - name: Git checkout
         uses: actions/checkout@v2.1.1
       - name: Composer Install
