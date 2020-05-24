@@ -11,11 +11,11 @@ jobs:
       - name: Git checkout
         uses: actions/checkout@v2.1.1
       - name: Composer Install
-          uses: nick-zh/composer@php7.4
-          with:
-            action: 'install --ignore-platform-reqs'
+        uses: nick-zh/composer@php7.4
+        with:
+          action: 'install --ignore-platform-reqs'
       - name: Database Init
-          uses: nick-zh/composer@php7.4
-          with:
-            action: 'db:init'
+        uses: nick-zh/composer@php7.4
+        with:
+          action: 'db:init'
 
