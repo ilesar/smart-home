@@ -2,25 +2,20 @@ name: Continuous Integration
 on: [push]
 
 jobs:
-  checkout:
+   checkout:
     name: Checkout
     runs-on: self-hosted
     steps:
       - name: Git checkout
+        run: sudo chown -R $USER:$USER /home/github/actions-runner/_work/smart-home
+      - name: Git checkout
         uses: actions/checkout@v2.1.1
-  dependencies:
-    name: Install dependencies
-    runs-on: self-hosted
-    steps:
       - name: Composer Install
-        uses: nick-zh/composer@php7.4
-        with:
-          action: 'install --ignore-platform-reqs'
-  initialize:
-    name: Project Setup
-    runs-on: self-hosted
-    steps:
+          uses: nick-zh/composer@php7.4
+          with:
+            action: 'install --ignore-platform-reqs'
       - name: Database Init
-        uses: nick-zh/composer@php7.4
-        with:
-          action: 'db:init'
+          uses: nick-zh/composer@php7.4
+          with:
+            action: 'db:init'
+
