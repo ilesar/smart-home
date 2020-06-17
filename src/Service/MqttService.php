@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use Exception;
 use PhpMqtt\Client\MQTTClient;
 
 class MqttService
@@ -19,13 +20,16 @@ class MqttService
 //            $mqttClient->interrupt();
 //        });
 
-
         $this->mqttClient->connect();
     }
 
     public function sendMessage(string $topic, string $message): void
     {
-        $this->mqttClient->publish($topic, $message);
+        try {
+            $this->mqttClient->publish($topic, $message);
+        } catch (Exception $exception) {
+            echo $exception->getMessage().PHP_EOL;
+        }
     }
 
     public function close(): void
