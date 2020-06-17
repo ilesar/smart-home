@@ -20,7 +20,11 @@ class MqttService
 //            $mqttClient->interrupt();
 //        });
 
-        $this->mqttClient->connect();
+        try {
+            $this->mqttClient->connect();
+        } catch (Exception $exception) {
+            echo $exception->getMessage().PHP_EOL;
+        }
     }
 
     public function sendMessage(string $topic, string $message): void
@@ -34,6 +38,10 @@ class MqttService
 
     public function close(): void
     {
-        $this->mqttClient->close();
+        try {
+            $this->mqttClient->close();
+        } catch (Exception $exception) {
+            echo $exception->getMessage().PHP_EOL;
+        }
     }
 }
