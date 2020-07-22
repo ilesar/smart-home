@@ -21,13 +21,14 @@ class RecurringPaymentControllerCest
                 'attributes' => [
                     'name' => 'Test name',
                     'price' => 100.10,
+                    'activationTime' => '2020-07-23 21:30:32',
                 ],
             ],
         ];
 
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->haveHttpHeader('Accept', 'application/json');
-        $I->sendPOST('/recurring/payments/', $params);
+        $I->sendPOST('/recurring/payments', $params);
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $responseData = $I->grabDataFromResponseByJsonPath('$.data.id');
@@ -51,7 +52,7 @@ class RecurringPaymentControllerCest
 
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->haveHttpHeader('Accept', 'application/json');
-        $I->sendPOST('/recurring/payments/', $params);
+        $I->sendPOST('/recurring/payments', $params);
         $I->seeResponseCodeIs(HttpCode::UNPROCESSABLE_ENTITY);
     }
 
@@ -70,7 +71,7 @@ class RecurringPaymentControllerCest
 
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->haveHttpHeader('Accept', 'application/json');
-        $I->sendPOST('/recurring/payments/', $params);
+        $I->sendPOST('/recurring/payments', $params);
         $I->seeResponseCodeIs(HttpCode::UNPROCESSABLE_ENTITY);
     }
 
@@ -135,6 +136,6 @@ class RecurringPaymentControllerCest
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->haveHttpHeader('Accept', 'application/json');
         $I->sendDELETE('/recurring/payments/2');
-        $I->seeResponseCodeIs(HttpCode::UNPROCESSABLE_ENTITY);
+        $I->seeResponseCodeIs(HttpCode::NO_CONTENT);
     }
 }

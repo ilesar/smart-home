@@ -34,7 +34,7 @@ class ShoppingListItemControllerCest
 
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->haveHttpHeader('Accept', 'application/json');
-        $I->sendPOST('/shopping/list/items/', $params);
+        $I->sendPOST('/shopping/list/items', $params);
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $responseData = $I->grabDataFromResponseByJsonPath('$.data.id');
@@ -58,7 +58,7 @@ class ShoppingListItemControllerCest
 
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->haveHttpHeader('Accept', 'application/json');
-        $I->sendPOST('/shopping/list/items/', $params);
+        $I->sendPOST('/shopping/list/items', $params);
         $I->seeResponseCodeIs(HttpCode::UNPROCESSABLE_ENTITY);
     }
 
@@ -85,7 +85,7 @@ class ShoppingListItemControllerCest
 
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->haveHttpHeader('Accept', 'application/json');
-        $I->sendPOST('/shopping/list/items/', $params);
+        $I->sendPOST('/shopping/list/items', $params);
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $responseData = $I->grabDataFromResponseByJsonPath('$.data.id');
@@ -135,7 +135,7 @@ class ShoppingListItemControllerCest
 
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->haveHttpHeader('Accept', 'application/json');
-        $I->sendPOST('/shopping/list/items/', $params);
+        $I->sendPOST('/shopping/list/items', $params);
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $responseData = $I->grabDataFromResponseByJsonPath('$.data.id');
@@ -180,7 +180,7 @@ class ShoppingListItemControllerCest
 
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->haveHttpHeader('Accept', 'application/json');
-        $I->sendPOST('/shopping/list/items/', $params);
+        $I->sendPOST('/shopping/list/items', $params);
         $I->seeResponseCodeIs(HttpCode::OK);
 
         $responseData = $I->grabDataFromResponseByJsonPath('$.data.id');
